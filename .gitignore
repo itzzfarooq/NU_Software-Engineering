@@ -1,0 +1,4 @@
+.ignore
+resources/extracted_content
+resources/slide_images
+convert_pdfs.py
