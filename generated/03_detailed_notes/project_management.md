@@ -170,3 +170,39 @@ The key takeaway: **Software project management is not just about code — it's 
 - [ ] Can you describe the 3 universal management activities?
 - [ ] Can you explain why intangibility makes software projects challenging?
 - [ ] Can you compare software project management with traditional engineering management?
+
+---
+
+## Common Mistakes
+
+| Mistake | Correction |
+|---------|------------|
+| Thinking PM is just tracking tasks | PM includes planning, risk management, people management, and reporting |
+| Assuming all projects need the same management approach | Different project sizes, complexities, and types need different approaches |
+| Confusing one-off with mass production | Software projects are unique — each has different requirements and constraints |
+
+## Exam Traps
+
+| Trap | Why It's Tricky | Correct Answer |
+|------|----------------|----------------|
+| "Software projects can be managed like construction projects" | Software is intangible, unique, and has variable processes | Software has 3 key distinctions: intangibility, one-off nature, variable process |
+| "A successful project means no defects" | Success includes customer satisfaction, budget, schedule, AND quality | All 4 criteria must be met |
+
+## Active Recall Questions
+
+1. What are the 4 criteria for a successful software project?
+2. What are the 3 key distinctions of software management?
+3. Name the 3 universal management activities.
+4. List 5 factors that influence software project management.
+5. Why does intangibility make software projects challenging?
+
+## Potential Exam Questions
+
+1. Explain the 3 key distinctions of software management from traditional engineering.
+2. List and explain the 4 criteria for project success.
+3. Why are software projects fundamentally different from construction projects?
+4. Discuss the factors that influence how a software project should be managed.
+
+## Topic Summary
+
+Software project management is the art and science of planning, estimating, scheduling, tracking, and controlling software projects. A successful project meets four criteria: customer satisfaction, budget, schedule, and quality. Software management differs from traditional engineering through three key distinctions: intangibility (software is non-physical), one-off nature (each project is unique), and variable process (no single best way). Seven factors influence management: product size, project complexity, structure, customer characteristics, team size and experience, technology maturity, and organizational environment. Three universal management activities appear in every project: planning (defining what and how), risk management (identifying and mitigating threats), and people management (leading, communicating, motivating). Additional activities include progress reporting, proposal writing, negotiation, and change management.

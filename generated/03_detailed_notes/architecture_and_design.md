@@ -352,3 +352,51 @@ Four types of design classes:
 - **Refinement** is progressive elaboration; **Refactoring** is restructuring existing design
 - The **4+1 View Model** provides multiple perspectives for complex system architecture
 - **OO Design Concepts** (abstraction, encapsulation, inheritance, association) build upon modularity and information hiding
+
+---
+
+## Why This Topic Exists
+
+Software design is where quality is established. Before code is written, before tests are run, the design determines whether the system will be maintainable, flexible, and correct. Poor design leads to software that is expensive to change, difficult to debug, and prone to failure. Good design — through abstraction, modularity, information hiding, and functional independence — produces software that can evolve with changing requirements.
+
+## Common Mistakes
+
+| Mistake | Correction |
+|---------|------------|
+| Confusing coupling and cohesion | Coupling = BETWEEN modules (lower is better); Cohesion = WITHIN modules (higher is better) |
+| Thinking content coupling is acceptable | Content coupling is the worst type — one module modifies another's internals |
+| Assuming design patterns are only for coding | Patterns exist at architectural, design, and coding levels |
+| Confusing refinement with refactoring | Refinement = progressive elaboration; Refactoring = restructuring existing design |
+| Thinking OO design eliminates coupling | OO can still have tight coupling through inheritance and shared state |
+
+## Exam Traps
+
+| Trap | Why It's Tricky | Correct Answer |
+|------|----------------|----------------|
+| "Stamp coupling is worse than control coupling" | The order from worst to best is: Content > Common > Control > Stamp > Data | Stamp is better than control |
+| "4+1 View Model means 5 separate documents" | The +1 (scenarios) ties all 4 views together | Views are interconnected through scenarios |
+| "Cohesion types: functional is worst" | Functional cohesion is BEST — all elements contribute to one task | Worst = coincidental; Best = functional |
+
+## Active Recall Questions
+
+1. What are the 5 types of coupling from worst to best?
+2. What are the 7 types of cohesion from worst to best?
+3. What is the difference between refinement and refactoring?
+4. Name the 4+1 views and their audiences.
+5. What are the 3 types of design classes (ECB pattern)?
+6. What are the 4 architectural patterns mentioned in the course?
+7. What is information hiding and why does it matter?
+8. Define functional independence.
+
+## Potential Exam Questions
+
+1. Order the 5 types of coupling from worst to best and explain each.
+2. Order the 7 types of cohesion from worst to best with examples.
+3. Explain the 4+1 View Model and how the +1 view connects the others.
+4. Compare refinement and refactoring with examples.
+5. Why is functional independence desirable? How is it measured?
+6. Explain the ECB pattern with an example system.
+
+## Topic Summary
+
+Software design is the creative, iterative process where requirements are translated into a blueprint for construction. Ten design concepts form the foundation: abstraction, architecture, design patterns, modularity, information hiding, functional independence, refinement, refactoring, OO design, and design classes. Coupling measures interconnection between modules (worst: content; best: data/no coupling). Cohesion measures internal functional strength (worst: coincidental; best: functional). OO design uses encapsulation, inheritance, and polymorphism. Design classes follow the ECB pattern (entity, boundary, control). Architectural patterns include layered, client-server, repository, and MVC. The 4+1 View Model provides logical, process, development, physical, and scenario views. Good design is established through abstraction leading to information hiding, modularity plus information hiding producing functional independence, and coupling/cohesion measuring that independence.

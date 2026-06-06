@@ -321,3 +321,38 @@ From the sample results:
 | 6 | Add Listeners (View Results in Table, Graph Results) |
 | 7 | Run test and analyze results |
 | 8 | Interpret graph statistics and tabular data |
+
+---
+
+## Common Mistakes
+
+| Mistake | Correction |
+|---------|------------|
+| Confusing latency with response time | Latency = time to first byte; Response time = total request time |
+| Assuming higher throughput always means better performance | Throughput depends on request complexity and server capacity |
+| Ignoring error rate in results | Even 99% success can mean 2 failed requests out of 100 |
+
+## Exam Traps
+
+| Trap | Why It's Tricky | Correct Answer |
+|------|----------------|----------------|
+| "200 users means 200 simultaneous requests" | Threads are simulated users, not necessarily simultaneous | JMeter simulates concurrent users through thread groups |
+
+## Active Recall Questions
+
+1. What are the 7 steps to perform load testing with JMeter?
+2. What is the difference between latency and response time?
+3. Name 4 JMeter listeners.
+4. What is throughput?
+5. What is a good target for error rate?
+
+## Potential Exam Questions
+
+1. Describe the steps to set up a load test in JMeter.
+2. Explain how to interpret JMeter graph results.
+3. What metrics should you monitor during load testing?
+4. Compare tabular and graphical result presentation in JMeter.
+
+## Topic Summary
+
+Apache JMeter is an open-source tool for load testing and performance measurement of web applications. Load testing with JMeter follows 7 steps: install Java, download JMeter, extract and run, create Test Plan with Thread Group and HTTP Request samplers, configure server/path/method for each request, add listeners (View Results in Table, Graph Results), run and analyze. HTTP Request samplers define what requests JMeter sends. Listeners collect and display results. Key metrics include response time, throughput, error rate, latency, and resource utilization. The FLEX portal example demonstrates 200 simulated users hitting HomePage and MAIN endpoints, showing 100% success rate, approximately 1 second average response time, and 18 requests per second throughput. Best practices include baseline testing, gradual ramp-up, realistic scenarios, and documenting findings.

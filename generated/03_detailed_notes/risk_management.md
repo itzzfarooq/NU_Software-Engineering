@@ -408,3 +408,47 @@ Each risk should be documented in a **risk card** format:
 - [ ] Can you calculate Risk Exposure using RE = P × C?
 - [ ] Can you create a risk table and risk documentation card?
 - [ ] Can you describe the 4 risk mitigation strategies?
+
+---
+
+## Common Mistakes
+
+| Mistake | Correction |
+|---------|------------|
+| Confusing risk with certainty | A risk is uncertain — if it's guaranteed to happen, it's a plan, not a risk |
+| Thinking reactive is best practice | Proactive is best practice — prevention is cheaper than cure |
+| Forgetting that risk management is iterative | It's a continuous cycle, not a one-time activity |
+| Confusing probability with impact | Probability = likelihood; Impact = consequence if it occurs |
+| Assuming all risks are technical | Risks also include project (schedule/budget) and business (market/viability) categories |
+
+## Exam Traps
+
+| Trap | Why It's Tricky | Correct Answer |
+|------|----------------|----------------|
+| "Risk exposure = probability + cost" | Risk exposure is MULTIPLICATION, not addition | RE = P × C |
+| "Known risks can't be managed proactively" | Known risks are the EASIEST to manage proactively | Known risks are identified and planned for upfront |
+| "Risk identification happens once at the start" | Risk identification is continuous throughout the project | New risks emerge as the project evolves |
+
+## Active Recall Questions
+
+1. What are the two essential components of risk?
+2. What are the 3 major risk categories?
+3. State the 7 principles of risk management.
+4. Calculate RE if P=0.4 and C=$50,000.
+5. What are the 5 steps in the proactive risk management process?
+6. What are the 4 risk mitigation strategies?
+7. What is the difference between reactive and proactive strategies?
+8. What are the 4 risk components used in impact assessment?
+
+## Potential Exam Questions
+
+1. Define risk and explain its two essential components.
+2. Compare reactive and proactive risk strategies with examples.
+3. Calculate the risk exposure for 3 given risks and prioritize them.
+4. Describe the 5-step proactive risk management process.
+5. Explain the 7 risk item checklist categories with examples.
+6. Why is risk management considered a continuous cycle?
+
+## Topic Summary
+
+Risk is defined by two essential components: uncertainty and loss. Risks fall into three categories: project risks (schedule, budget, scope), technical risks (performance, reliability, technology), and business risks (market, strategic, financial). Known, predictable, and unpredictable risks form a spectrum of knowability. Seven principles guide risk management: communication, early identification, analysis, iterative analysis, best information, responsibility, and organization. Reactive strategies fight fires after they occur; proactive strategies prevent fires. The 5-step proactive process is: identify, analyze, plan, track, and control. Risk exposure is calculated as RE = P times C. Risk mitigation strategies include avoidance, reduction, transfer, and acceptance. Risk management is a continuous cycle, not a one-time activity.

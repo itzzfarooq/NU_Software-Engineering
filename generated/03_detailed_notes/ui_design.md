@@ -461,3 +461,43 @@ UI must target the global market. Follow global design standards & facilitate mu
 - **Design Issues** (response time, help, error handling) are addressed by the **Revised Guidelines**
 - **Web App Guidelines** extend general guidelines for web-specific contexts
 - The **iterative spiral process** ensures continuous improvement through prototyping and user evaluation
+
+---
+
+## Common Mistakes
+
+| Mistake | Correction |
+|---------|------------|
+| Confusing the 4 UI design models | User model = profile of end users; Design model = interface realization; Mental model = user's perception; Implementation model = look and feel |
+| Thinking golden rules are optional | They are foundational principles that should guide every UI decision |
+| Ignoring response time in design | Response time directly affects user satisfaction and productivity |
+| Confusing task analysis with interface design | Task analysis comes FIRST — it defines what users need to do; interface design follows |
+
+## Exam Traps
+
+| Trap | Why It's Tricky | Correct Answer |
+|------|----------------|----------------|
+| "Place user in control means give them all options" | It means don't force unnecessary actions — provide flexible interaction | Control = flexibility, not complexity |
+| "Minimize memory load means minimize information displayed" | It means reduce SHORT-TERM memory demand, not reduce content | Use defaults, shortcuts, and progressive disclosure |
+
+## Active Recall Questions
+
+1. What are the 3 Golden Rules of UI design?
+2. Name the 4 UI design models.
+3. What questions does task analysis answer?
+4. List 5 interface design principles.
+5. What is Fitts' Law?
+6. What are typical UI design errors?
+7. What is aesthetic design?
+
+## Potential Exam Questions
+
+1. Explain the 3 Golden Rules with examples.
+2. Compare the 4 UI design models.
+3. Why is task analysis important before interface design?
+4. List and explain 5 interface design principles.
+5. What are common UI design errors and how can they be avoided?
+
+## Topic Summary
+
+UI design is governed by 3 Golden Rules: place the user in control, reduce memory load, and maintain consistency. Four UI design models describe the interface from different perspectives: user model, design model, mental model, and implementation model. Task analysis defines what users need to do before designing how they do it. Interface design follows steps: define objects/actions, model state changes, depict interface states, indicate how users interpret state. Design issues include response time, help systems, error handling, and internationalization. Interface design principles cover anticipation, communication, consistency, controlled interaction, efficiency, focus, Fitts' Law, learnability, and more. Aesthetic design emphasizes whitespace, content emphasis, and logical layout organization. Typical design errors include inconsistency, excessive memorization, lack of help, and poor response time.

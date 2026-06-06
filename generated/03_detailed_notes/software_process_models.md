@@ -218,6 +218,42 @@ This model is based on **software reuse** where systems are assembled from exist
 
 ---
 
+## Common Mistakes
+
+| Mistake | Correction |
+|---------|------------|
+| Thinking Waterfall is always bad | Waterfall is appropriate for large distributed projects with stable requirements |
+| Assuming incremental means no planning | Incremental still requires upfront planning, just less documentation |
+| Confusing reuse-oriented with copy-paste | Reuse-oriented uses COTS/components with formal configuration and adaptation |
+| Thinking all processes are purely plan-driven or purely agile | Most real-world processes combine elements of both |
+
+## Exam Traps
+
+| Trap | Why It's Tricky | Correct Answer |
+|------|----------------|----------------|
+| "Waterfall produces working software early" | It doesn't — working software comes late | Waterfall produces no working software until late in lifecycle |
+| "Incremental development has no documentation" | It has less, not none | Incremental has reduced documentation compared to Waterfall |
+| "Reuse-oriented always saves money" | Requirements compromises and integration challenges can be expensive | It reduces costs BUT may not meet exact requirements |
+
+## Active Recall Questions
+
+1. What are the 4 fundamental process activities?
+2. Name the 5 phases of the Waterfall model.
+3. What are the 3 types of reusable software in the reuse-oriented model?
+4. What is the key problem of incremental development?
+5. When would you choose Waterfall over Incremental?
+6. What are pre-conditions and post-conditions in process descriptions?
+7. What are the 5 stages of the reuse-oriented process?
+8. What does "plan-driven" mean?
+
+## Potential Exam Questions
+
+1. Compare and contrast the Waterfall, Incremental, and Reuse-Oriented process models.
+2. Explain when you would use the Waterfall model and justify your answer.
+3. What are the advantages and disadvantages of incremental development?
+4. Describe the reuse-oriented process with a diagram.
+5. Why is system structure degradation a problem in incremental development?
+
 ## Exam Checklist
 
 - [ ] Know the 4 basic process activities (specification, design/implementation, validation, evolution)
@@ -227,3 +263,7 @@ This model is based on **software reuse** where systems are assembled from exist
 - [ ] Reuse-oriented: 5 stages, 3 types of reusable software, advantages/disadvantages
 - [ ] Plan-driven vs. agile: key differences
 - [ ] Most large systems use elements from all three models
+
+## Topic Summary
+
+Every software process involves four fundamental activities: specification, development, validation, and evolution. The Waterfall model is plan-driven with sequential phases — best for large distributed projects with stable requirements. Incremental development interleaves specification, development, and validation — best for evolving requirements but risks structure degradation without refactoring. The reuse-oriented model assembles systems from existing components or COTS — faster delivery but risks requirements compromises and loss of control. Process descriptions include products, roles, and pre/post-conditions. Most real-world processes combine elements of both plan-driven and agile approaches. There is no single "right" process — the choice depends on project context, team, and requirements stability.

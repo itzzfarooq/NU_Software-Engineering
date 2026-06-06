@@ -224,3 +224,39 @@ The requirements document (also called the Software Requirements Specification â
 - [ ] Understand stakeholder involvement at each stage
 - [ ] Know validation techniques (reviews, prototyping, test-case generation, automated analysis)
 - [ ] Understand what validation checks for (validity, consistency, completeness, realism, verifiability)
+
+---
+
+## Common Mistakes
+
+| Mistake | Correction |
+|---------|------------|
+| Assuming requirements can be fully captured upfront | Requirements evolve â€” especially in agile contexts |
+| Confusing functional with non-functional requirements | Functional = what the system does; Non-functional = quality constraints |
+| Skipping requirements validation | Requirements must be validated with stakeholders before proceeding |
+| Treating requirements as fixed contracts | Requirements should be managed through a change control process |
+
+## Exam Traps
+
+| Trap | Why It's Tricky | Correct Answer |
+|------|----------------|----------------|
+| "Requirements engineering is just writing a requirements document" | It includes elicitation, analysis, specification, validation, AND management | It's a multi-stage process, not a single activity |
+
+## Active Recall Questions
+
+1. What are the 4 activities in requirements engineering?
+2. What is the difference between functional and non-functional requirements?
+3. What is requirements validation?
+4. What is requirements management?
+5. What techniques are used in requirements elicitation?
+
+## Potential Exam Questions
+
+1. Describe the requirements engineering process.
+2. Compare functional and non-functional requirements with examples.
+3. Explain requirements validation and why it's important.
+4. How does requirements management differ from requirements specification?
+
+## Topic Summary
+
+Requirements engineering is the process of establishing what services are required and the constraints on the system. It includes four activities: elicitation (discovering requirements from stakeholders), analysis (conflict resolution and prioritization), specification (documenting requirements), and validation (checking that requirements are correct and complete). Requirements management handles changes to requirements throughout the project. Functional requirements describe what the system should do. Non-functional requirements describe quality constraints (performance, security, reliability). Both types must be validated with stakeholders. Requirements engineering connects to software processes (it is a fundamental activity), testing (requirements define what to test), and quality management (non-functional requirements define quality goals).

@@ -436,6 +436,43 @@ Cost = 22.3 × $8,000 = $178,400
 
 ---
 
+## Common Mistakes
+
+| Mistake | Correction |
+|---------|------------|
+| Using LOC for early estimation | LOC can only be counted after code is written — use FP for early stages |
+| Confusing VAF minimum and maximum | VAF ranges from 0.65 (all GSCs=0) to 1.35 (all GSCs=5) |
+| Forgetting to include all 5 domain types in FP | All 5 types (EI, EO, EQ, ILF, EIF) must be counted |
+| Confusing FP with LOC | FP measures functionality; LOC measures code size |
+| Assuming Wideband Delphi is just averaging | It involves structured discussion and re-estimation rounds |
+
+## Exam Traps
+
+| Trap | Why It's Tricky | Correct Answer |
+|------|----------------|----------------|
+| "VAF = 0.65 + 0.01 × ΣGSC" means VAF is always > 1 | VAF can be < 1 if ΣGSC < 35 | VAF ranges 0.65 to 1.35 |
+| "Three-point estimation uses simple average" | It's a weighted average, not simple average | LOC = (O + 4M + P) / 6 |
+
+## Active Recall Questions
+
+1. What are the 3 pillars of estimation?
+2. List the 6 steps of the Wideband Delphi technique.
+3. What are the 5 information domain types for FP?
+4. State the VAF formula.
+5. What is the three-point LOC formula?
+6. Convert 200 FP to Java LOC using the conversion factor.
+7. What are the limitations of LOC estimation?
+8. How many GSCs are there and what scale are they rated on?
+
+## Potential Exam Questions
+
+1. Describe the Wideband Delphi technique with all 6 steps.
+2. Calculate FP for a system given domain type counts and complexity levels.
+3. Convert FP to LOC to effort to cost using the complete chain.
+4. Compare LOC and FP estimation — when would you use each?
+5. Calculate the three-point estimate given optimistic, most likely, and pessimistic values.
+6. Why is FP preferred over LOC for early-stage estimation?
+
 ## Exam Preparation Checklist
 
 - [ ] Can you explain the 3 pillars of estimation (scope, time, cost)?
@@ -448,3 +485,7 @@ Cost = 22.3 × $8,000 = $178,400
 - [ ] Can you calculate VAF and FP?
 - [ ] Can you convert FP → LOC → Effort → Cost?
 - [ ] Can you solve the e-commerce FP example?
+
+## Topic Summary
+
+Estimation answers the fundamental question of how much a software project will cost and how long it will take. It revolves around three parameters: scope, time, and cost. Wideband Delphi is a structured expert judgment technique with 6 steps that produces convergence through discussion. LOC estimation uses a three-point weighted average formula: LOC = (O + 4M + P) / 6. Function Point estimation measures software size based on functionality delivered using 5 information domain types (EI, EO, EQ, ILF, EIF), weighting factors, and 14 General System Characteristics rated 0-5. VAF = 0.65 + 0.01 * sum(GSC). The complete estimation chain converts FP to LOC to effort to cost. FP is preferred for early estimation because it is language-independent and measures what the system does, not how it is implemented.

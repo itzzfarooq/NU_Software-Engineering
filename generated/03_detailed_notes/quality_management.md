@@ -302,3 +302,41 @@ Quality management is deeply integrated with every phase of software development
 | ISO 9001 Core Processes | Customer Requirements, Management Responsibility, Resource Management, Product Realization, Measurement/Analysis/Improvement, Customer Satisfaction |
 | Quality Management Activities | Planning, Assurance, Control, Improvement |
 | Development Relationship | Quality is integrated into every phase of the software development lifecycle |
+
+---
+
+## Common Mistakes
+
+| Mistake | Correction |
+|---------|------------|
+| Thinking quality = testing | Quality is built through the entire process, not just tested at the end |
+| Assuming all quality attributes can be maximized | Some attributes conflict — trade-offs are necessary |
+| Confusing product standards with process standards | Product = what is produced; Process = how it is produced |
+| Thinking ISO 9001 certification guarantees good software | ISO 9001 certifies the management system, not the product |
+
+## Exam Traps
+
+| Trap | Why It's Tricky | Correct Answer |
+|------|----------------|----------------|
+| "Quality means no bugs" | Quality is broader — includes maintainability, usability, performance, etc. | Quality = meeting user needs across all attributes |
+| "Process-based quality means testing the product" | It means building quality into the PROCESS, then assessing the product | Quality of process determines quality of product |
+
+## Active Recall Questions
+
+1. List 5 software quality attributes.
+2. What is the process-based quality cycle?
+3. What is the difference between product and process standards?
+4. Name the ISO 9001 core processes.
+5. Give an example of a quality conflict.
+
+## Potential Exam Questions
+
+1. Explain the process-based quality cycle.
+2. Compare product standards and process standards with examples.
+3. Describe the ISO 9001 core processes.
+4. Give examples of quality conflicts and explain why trade-offs are necessary.
+5. How does quality management integrate with each phase of software development?
+
+## Topic Summary
+
+Quality management provides independent checks on the software development process. Fifteen quality attributes define software quality, including maintainability, reliability, usability, efficiency, and security. Some attributes conflict, requiring trade-off decisions. The process-based quality cycle follows Plan-Do-Check-Act: define process, develop product, assess quality, improve or standardize. Standards play a critical role: product standards define what is produced (coding, documentation), process standards define how it is produced (development lifecycle). ISO 9001 is an international quality management standard with core processes: customer requirements, management responsibility, resource management, product realization, measurement/analysis/improvement, and customer satisfaction. Quality management activities include planning, assurance, control, and improvement, integrated into every phase of the software development lifecycle.

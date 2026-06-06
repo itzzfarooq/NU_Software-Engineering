@@ -378,6 +378,44 @@ For binary search: M = 14 edges - 13 nodes + 2(1) = **3** independent paths mini
 
 ---
 
+## Common Mistakes
+
+| Mistake | Correction |
+|---------|------------|
+| Thinking testing proves software is correct | Testing proves the presence of bugs, not their absence |
+| Confusing verification with validation | Verification = built right (spec conformance); Validation = built right product (user needs) |
+| Thinking inspections replace testing | They are complementary — inspections are static, testing is dynamic |
+| Assuming more tests = better quality | Test quality matters more than quantity |
+| Confusing unit testing with system testing | Unit = individual components in isolation; System = whole system interactions |
+
+## Exam Traps
+
+| Trap | Why It's Tricky | Correct Answer |
+|------|----------------|----------------|
+| "Testing can prove software is bug-free" | Testing can only reveal bugs, never prove their absence | Testing reveals presence, not absence |
+| "Validation checks against the specification" | That's verification; validation checks against user needs | Validation = right product; Verification = product right |
+| "Cyclomatic complexity = number of test cases needed" | It's the minimum number of independent paths, not test cases | V(G) = minimum independent paths |
+
+## Active Recall Questions
+
+1. What are the two fundamental goals of testing?
+2. What is the difference between verification and validation?
+3. Name the 3 stages of testing.
+4. What are the 3 components of an automated test (JUnit)?
+5. What is path testing and what does it ensure?
+6. State the cyclomatic complexity formula.
+7. What is the difference between inspections and testing?
+8. What are the advantages of inspections over testing?
+
+## Potential Exam Questions
+
+1. Explain the difference between verification and validation with examples.
+2. Compare inspections and testing — when would you use each?
+3. What are the three stages of testing and who performs each?
+4. Draw a flow graph for a given piece of code and calculate its cyclomatic complexity.
+5. Why can testing reveal the presence of errors but not their absence?
+6. Explain the input-output model of program testing (Ie and Oe).
+
 ## Exam Checklist
 
 - [ ] Testing goals: validation vs. defect testing
@@ -395,3 +433,7 @@ For binary search: M = 14 edges - 13 nodes + 2(1) = **3** independent paths mini
 - [ ] Path testing: objective, flow graph, basis path testing steps
 - [ ] Binary search: flow graph nodes 1-14, independent paths
 - [ ] Cyclomatic complexity formula: M = E - N + 2P
+
+## Topic Summary
+
+Testing has two fundamental goals: validation testing (show the system meets requirements) and defect testing (find bugs). Verification asks "are we building the product right?" while validation asks "are we building the right product?" Inspections (static analysis) and testing (dynamic execution) are complementary verification techniques. Testing occurs in three stages: development testing (by the dev team), release testing (by a separate team), and user testing (by users). Development testing includes unit testing (individual components), component testing (integrated units), and system testing (whole system). Path testing ensures every program path is executed at least once. Basis path testing uses cyclomatic complexity (M = E - N + 2P) to determine the minimum number of independent paths. Automated testing (JUnit) uses setup, call, and assertion components. Testing reveals the presence of errors, never their absence.

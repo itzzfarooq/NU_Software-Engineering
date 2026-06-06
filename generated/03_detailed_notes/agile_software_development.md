@@ -310,6 +310,45 @@ These represent 180-degree shifts in thinking:
 
 ---
 
+## Common Mistakes
+
+| Mistake | Correction |
+|---------|------------|
+| Thinking Agile has no planning | Agile plans continuously, just not all upfront |
+| Confusing user stories with task cards | Stories = customer-facing requirements; Tasks = developer-facing implementation steps |
+| Thinking TDD means test last | TDD means test FIRST — write failing test, then code |
+| Assuming Agile means no documentation | Agile produces less documentation, not zero documentation |
+| Thinking plan-driven = Waterfall | Plan-driven can be incremental too |
+
+## Exam Traps
+
+| Trap | Why It's Tricky | Correct Answer |
+|------|----------------|----------------|
+| "Agile eliminates the need for design" | Agile does simple design, not no design | Design evolves each iteration, focused on current stories |
+| "Pair programming reduces productivity" | Studies show it improves quality with similar productivity | Two programmers at one workstation, continuously reviewing |
+| "Refactoring is debugging" | Refactoring improves structure without changing behavior | Refactoring is restructuring, not fixing bugs |
+| "Agile works for all projects" | Agile fits some contexts better than others | Poor fit for safety-critical, large distributed, regulatory systems |
+
+## Active Recall Questions
+
+1. What are the 4 values of the Agile Manifesto?
+2. List all 10 XP practices.
+3. What is the TDD cycle?
+4. What are the 5 principles of agile methods?
+5. Explain the difference between a user story and a task card.
+6. What is refactoring and why is it important?
+7. Name 3 situations where Agile is a poor fit.
+8. What are the 17 differences between Agile and Traditional development?
+
+## Potential Exam Questions
+
+1. Explain the Agile Manifesto and its 4 values. Why does it say "left over right" rather than "instead of"?
+2. Compare plan-driven and agile development with examples.
+3. Describe all 10 XP practices and map each to an agile principle.
+4. Write a user story for a library book reservation system.
+5. Why is refactoring essential in XP? What happens without it?
+6. When would you NOT use agile development? Give 3 reasons.
+
 ## Exam Checklist
 
 - [ ] Agile Manifesto: 4 values (and that right side has value too)
@@ -322,3 +361,7 @@ These represent 180-degree shifts in thinking:
 - [ ] Refactoring: concept, examples, benefits
 - [ ] TDD cycle: Red → Green → Refactor
 - [ ] 17 differences between Agile and Traditional (at least top 8)
+
+## Topic Summary
+
+Agile software development emerged as a response to the limitations of plan-driven approaches in fast-changing business environments. The Agile Manifesto establishes 4 core values (individuals over processes, working software over documentation, customer collaboration over negotiation, responding to change over following a plan) and 12 underlying principles. XP is the most influential agile method with 10 key practices including pair programming, TDD, continuous integration, and refactoring. User stories capture requirements from the customer's perspective, while task cards decompose them into developer-facing work. The TDD cycle follows Red-Green-Refactor. Agile differs from traditional development in 17 fundamental ways, from team structure to design philosophy. Agile fits product development and custom projects with committed customers, but is poor fit for safety-critical and regulatory systems.

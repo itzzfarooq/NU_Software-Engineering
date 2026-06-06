@@ -562,6 +562,33 @@ Schedule (Gantt chart with milestones)
 
 ---
 
+## Common Mistakes
+
+| Mistake | Correction |
+|---------|------------|
+| Confusing total float with free float | Total float = delay without delaying project; Free float = delay without delaying next activity |
+| Forgetting that critical path has zero float | Activities on the critical path ALWAYS have zero float |
+| Assuming adding people always speeds up a project | Brooks's Law: adding people to a late project makes it later |
+| Confusing CWBS with PWBS | CWBS = contract-level (external); PWBS = project-level (internal) |
+
+## Exam Traps
+
+| Trap | Why It's Tricky | Correct Answer |
+|------|----------------|----------------|
+| "Critical path is the shortest path" | It's the LONGEST path — determines minimum project duration | Longest path = shortest possible project duration |
+| "Float = 0 means the activity is late" | Float = 0 means the activity has NO slack — it's on the critical path | It's not late, it's critical |
+
+## Active Recall Questions
+
+1. What is the difference between planning, estimating, and scheduling?
+2. What is the 100% rule for WBS?
+3. State Brooks's Law.
+4. What is the formula for total float?
+5. What are the 3 types of WBS levels?
+6. How do you calculate free float?
+7. What are the rules for creating network diagrams?
+8. What is the difference between CWBS and PWBS?
+
 ## Exam Preparation Checklist
 
 - [ ] Can you explain the difference between planning, estimating, and scheduling?
@@ -577,3 +604,18 @@ Schedule (Gantt chart with milestones)
 - [ ] Can you calculate Total Float and Free Float?
 - [ ] Can you identify the critical path?
 - [ ] Can you solve both example problems completely?
+
+## Potential Exam Questions
+
+1. Explain the difference between planning, estimating, and scheduling with examples.
+2. What is a WBS and why is it important? Describe the 100% rule.
+3. Compare CWBS and PWBS.
+4. Describe Brooks's Law and explain why it is true.
+5. Perform a forward and backward pass on a given network diagram and identify the critical path.
+6. Calculate total float and free float for given activities.
+7. What are common WBS pitfalls and how can they be avoided?
+8. Draw a Gantt chart from a given activity list and dependencies.
+
+## Topic Summary
+
+Project scheduling transforms estimates into a concrete timeline. The Work Breakdown Structure (WBS) decomposes project scope into manageable work packages using the 100% rule. WBS comes in outline and graphical tree formats, with CWBS (contract-level) and PWBS (project-level) variants. The 9-step WBS building process ensures completeness. Scheduling follows 5 steps: identify activities, determine dependencies, estimate resources, assign resources and duration, create charts. Brooks's Law states adding people to a late project makes it later due to communication overhead growing quadratically. Gantt charts show tasks over time. CPM uses deterministic estimates; PERT uses probabilistic estimates. Forward pass calculates ES and EF; backward pass calculates LS and LF. Total Float = LS - ES; Free Float = ES(successor) - EF. Critical path has zero float and determines minimum project duration.
