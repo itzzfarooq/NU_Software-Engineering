@@ -1,191 +1,230 @@
-```
-╔══════════════════════════════════════════════════════════════════════════════╗
-║                              ESTIMATION                                    ║
-╠══════════════════════════════════════════════════════════════════════════════╣
-║  Techniques, models, and metrics for predicting software project effort     ║
-╚══════════════════════════════════════════════════════════════════════════════╝
-
-  │
-  ├── Lines of Code (LOC) ────────────────────────────────────────────────────
-  │   ├── Definition — Count of source lines (physical or logical)
-  │   ├── Types — Delivered, Adapted, Equivalent source instructions
-  │   ├── Pros — Easy to understand, directly measurable, historical data
-  │   ├── Cons — Language dependent, ignores complexity, no quality measure
-  │   ├── Productivity Metrics — LOC per person-month or staff-hour
-  │   └── Cost Models — COCOMO (Basic, Intermediate, Detailed), SLIM
-  │
-  ├── Function Points (FP) ────────────────────────────────────────────────────
-  │   ├── Five Components — EI, EO, EQ, ILF, EIF
-  │   ├── Calculation — UFP x VAF (14 GSCs each rated 0-5)
-  │   ├── Pros — Technology independent, available early, based on functionality
-  │   └── Cons — Subjective assessment, training required, complex calculation
-  │
-  ├── Wideband Delphi ────────────────────────────────────────────────────────
-  │   ├── Process — Experts estimate independently; discuss; re-estimate
-  │   ├── Steps — Select team, distribute, estimate, share, discuss, repeat
-  │   ├── Advantages — Reduces bias, leverages group knowledge, builds consensus
-  │   └── Disadvantages — Time consuming, needs skilled facilitator
-  │
-  ├── Estimation Formulas ────────────────────────────────────────────────────
-  │   ├── COCOMO II — Effort = a x Size^b x EAF
-  │   ├── Basic COCOMO — Effort = a x KLOC^b (constants vary by project type)
-  │   ├── FP Estimation — Productivity, Cost, Effort per FP
-  │   └── Analogy-Based — Compare to similar projects; adjust for differences
-  │
-  ├── Estimation Techniques ──────────────────────────────────────────────────
-  │   ├── Top-Down — Overall size; decompose; quick but less accurate
-  │   ├── Bottom-Up — Individual tasks; sum; accurate but time consuming
-  │   ├── Three-Point — O + 4M + P / 6 (PERT method)
-  │   └── Planning Poker — Story points, Fibonacci sequence, team consensus
-  │
-  └── Estimation Challenges ──────────────────────────────────────────────────
-      ├── Common Problems — Optimism bias, underestimation, uncertainty
-      └── Best Practices — Multiple techniques, historical data, contingency
-```
-
-# Estimation - Mind Map
+# Software Estimation - Mind Map
 
 ```
-Estimation
-├── Lines of Code LOC
-│   ├── Definition
-│   │   ├── Count of source lines
-│   │   ├── Physical or logical lines
-│   │   └── Excludes comments and blanks
-│   ├── Types
-│   │   ├── Delivered source instructions
-│   │   ├── Adapted source instructions
-│   │   └── Equivalent source instructions
-│   ├── Pros
-│   │   ├── Easy to understand
-│   │   ├── Directly measurable
-│   │   └── Historical data available
-│   ├── Cons
-│   │   ├── Language dependent
-│   │   ├── Doesn't account for complexity
-│   │   ├── No quality measure
-│   │   └── Late in development
-│   ├── Productivity Metrics
-│   │   ├── LOC per person-month
-│   │   └── LOC per staff-hour
-│   └── Cost Estimation Models
-│       ├── COCOMO
-│       │   ├── Basic
-│       │   ├── Intermediate
-│       │   └── Detailed
-│       └── SLIM
-├── Function Points FP
-│   ├── Definition
-│   │   ├── Measure of functionality
-│   │   ├── Independent of technology
-│   │   └── Based on user requirements
-│   ├── Five Component Types
-│   │   ├── External inputs EI
-│   │   ├── External outputs EO
-│   │   ├── External inquiries EQ
-│   │   ├── Internal logical files ILF
-│   │   └── External interface files EIF
-│   ├── Calculation
-│   │   ├── Unadjusted Function Points UFP
-│   │   ├── Value Adjustment Factor VAF
-│   │   └── FP = UFP x VAF
-│   ├── VAF Components
-│   │   ├── 14 General System Characteristics
-│   │   ├── Scale 0-5 for each
-│   │   ├── Total influence 0-70
-│   │   └── VAF = 0.65 + 0.01 x sum
-│   ├── Pros
-│   │   ├── Technology independent
-│   │   ├── Available early
-│   │   ├── Based on functionality
-│   │   └── Good for estimation
-│   └── Cons
-│       ├── Subjective assessment
-│       ├── Training required
-│       ├── Complex calculation
-│       └── Less accurate for small projects
-├── Wideband Delphi
-│   ├── Definition
-│   │   ├── Expert judgment technique
-│   │   ├── Group consensus approach
-│   │   └── Anonymous estimation
-│   ├── Process
-│   │   ├── Coordinator organizes
-│   │   ├── Experts estimate independently
-│   │   ├── Group discussion of estimates
-│   │   ├── Re-estimation
-│   │   └── Final consensus
-│   ├── Steps
-│   │   ├── 1. Select experts 3-7 people
-│   │   ├── 2. Coordinator distributes materials
-│   │   ├── 3. Each expert makes estimate
-│   │   ├── 4. Estimates shared anonymously
-│   │   ├── 5. Group discusses differences
-│   │   ├── 6. Re-estimate
-│   │   └── 7. Repeat until consensus
-│   ├── Advantages
-│   │   ├── Reduces bias
-│   │   ├── Leverages group knowledge
-│   │   ├── Builds team consensus
-│   │   └── Identifies assumptions
-│   └── Disadvantages
-│       ├── Time consuming
-│       ├── Requires skilled facilitator
-│       ├── Dominant personalities
-│       └── Groupthink potential
-├── Estimation Formulas
-│   ├── COCOMO II
-│   │   ├── Effort = a x Size^b x EAF
-│   │   ├── Duration = c x Effort^d
-│   │   └── Size in KLOC or FP
-│   ├── Basic COCOMO
-│   │   ├── Effort = a x KLOC^b
-│   │   ├── Time = c x Effort^d
-│   │   └── Model constants by project type
-│   │       ├── Organic: a=2.4 b=1.05
-│   │       ├── Semi-detached: a=3.0 b=1.12
-│   │       └── Embedded: a=3.6 b=1.20
-│   ├── Function Point Estimation
-│   │   ├── Productivity = FP / Person-months
-│   │   ├── Cost = FP x Cost per FP
-│   │   └── Effort = FP x Effort per FP
-│   └── Analogy-Based Estimation
-│       ├── Compare to similar projects
-│       ├── Adjust for differences
-│       └── Expert judgment
-├── Estimation Techniques
-│   ├── Top-Down Estimation
-│   │   ├── Start with overall size
-│   │   ├── Decompose to components
-│   │   ├── Sum components
-│   │   └── Quick but less accurate
-│   ├── Bottom-Up Estimation
-│   │   ├── Estimate individual tasks
-│   │   ├── Sum all tasks
-│   │   └── More accurate but time consuming
-│   ├── Three-Point Estimation
-│   │   ├── Optimistic O
-│   │   ├── Most likely M
-│   │   ├── Pessimistic P
-│   │   ├── Expected = O + 4M + P / 6
-│   │   └── Standard deviation = P - O / 6
-│   └── Planning Poker
-│       ├── Agile estimation technique
-│       ├── Uses story points
-│       ├── Fibonacci sequence
-│       └── Team consensus
-└── Estimation Challenges
-    ├── Common Problems
-    │   ├── Optimism bias
-    │   ├── Underestimation
-    │   ├── Unknown requirements
-    │   ├── Technical uncertainty
-    │   └── Team inexperience
-    └── Best Practices
-        ├── Use multiple techniques
-        ├── Calibrate with historical data
-        ├── Include contingency
-        ├── Update estimates regularly
-        ├── Document assumptions
-        └── Consider risk factors
+                                  SOFTWARE PROJECT ESTIMATION
+                                        │
+            ┌───────────────────────────┼───────────────────────────┐
+            │                           │                           │
+       WHY ESTIMATE?           WHAT IS ESTIMATED?          ESTIMATION TECHNIQUES
+            │                           │                           │
+  ┌─────────┼─────────┐     ┌───────────┼───────────┐     ┌─────────┼─────────┐
+  │         │         │     │           │           │     │         │         │
+STAKEHOLDERS VENDORS  │  SCOPE      TIME       COST     DELPHI  WIDEBAND  ANALOGY
+confidence  budget   │     │           │           │     │      DELPHI      │
+  │         │         │     │           │           │     │         │         │
+  TEAM      PROJECT   │  ┌──┴──┐   ┌───┴───┐   ┌──┴──┐  │  ┌───────┼───────┐
+  knows     MANAGER   │  │LOC  │   │Activity│   │People│  │  │       │       │
+  what/when less work │  │ FP  │   │Network │   │Equip │  │STEP 1  STEP 2  STEP 3
+                      │  │     │   │Diagram │   │License│  │Choose  Kickoff  Indiv.
+                      │  │     │   │        │   │Admin  │  │Team    Meeting  Prep.
+                      │  │     │   │        │   │Train  │  │(3-7)   (WBS,   (Est.
+                      │  │     │   │        │   │       │  │        Assump.) each)
+                      │  │     │   │        │   │       │  │  │       │       │
+                      │  │     │   │        │   │       │  │STEP 4  STEP 5  STEP 6
+                      │  │     │   │        │   │       │  │Estimate Assemble Review
+                      │  │     │   │        │   │       │  │Session  Tasks   Results
+                      │  │     │   │        │   │       │  │(rounds,
+                      │  │     │   │        │   │       │  │converge)
+                      │  │     │   │        │   │       │
+                      │  │     │   │        │   │       │
+            ┌─────────┴──┴──┐  │        │   │       OTHER TECHNIQUES
+            │               │  │        │   │       │
+      SIZE MEASUREMENT      │  │        │   │  ┌─────┼─────┬─────┐
+            │               │  │        │   │  │     │     │     │
+   ┌────────┴────────┐      │  │        │   │Expert Top-  Bottom Parkin.
+   │                 │      │  │        │   │Judge Down   Up    Law
+   │                 │      │  │        │   │
+ ┌─┴──┐          ┌──┴───┐  │  │        │   │
+ │ LOC │          │  FP  │  │  │        │   │
+ └──┬──┘          └──┬───┘  │  │        │   │
+    │                │      │  │        │   │
+    │ 3-Point Formula│      │  │        │   │
+    │ Sopt+4Sm+Spess │      │  │        │   │
+    │ ─────────────  │      │  │        │   │
+    │       6        │      │  │        │   │
+    │                │      │  │        │   │
+    ├────────────────┼──────┼──┼────────┼───┤
+    │                │      │  │        │   │
+    │          ┌─────┴──┐   │  │        │   │
+    │          │  UFP   │   │  │        │   │
+    │          │ ┌──┼──┐│   │  │        │   │
+    │          │ │  │  ││   │  │        │   │
+    │          │EI EO EQ│   │  │        │   │
+    │          │ILF EIF │   │  │        │   │
+    │          └──┬──┬──┘   │  │        │   │
+    │             │  │      │  │        │   │
+    │     ┌───────┘  └──┐   │  │        │   │
+    │     │              │   │  │        │   │
+    │  ┌──┴──┐      ┌────┴──┐│  │        │   │
+    │  │CAF  │      │ 14 Fi ││  │        │   │
+    │  │0.65 │      │(0-5)  ││  │        │   │
+    │  │+0.01│      │F1-F14 ││  │        │   │
+    │  │×ΣFi │      └───┬───┘│  │        │   │
+    │  └──┬──┘          │    │  │        │   │
+    │     └──────┬──────┘    │  │        │   │
+    │            │           │  │        │   │
+    │       ┌────┴────┐      │  │        │   │
+    │       │FP = UFP │      │  │        │   │
+    │       │  × CAF  │      │  │        │   │
+    │       └────┬────┘      │  │        │   │
+    │            │           │  │        │   │
+    │            └─────┬─────┘  │        │   │
+    │                  │        │        │   │
+    │          ┌───────┴──────┐ │        │   │
+    │          │ Effort & Cost │ │        │   │
+    │          │ from FP      │ │        │   │
+    │          └──────────────┘ │        │   │
+    │                           │        │   │
+    │                           │        │   │
+    │                    ┌──────┴─────────┴─┐
+    │                    │  COCOMO MODELS   │
+    │                    └────────┬─────────┘
+    │                             │
+    │          ┌──────────────────┼──────────────────┐
+    │          │                  │                  │
+    │    ┌─────┴─────┐    ┌──────┴──────┐    ┌──────┴──────┐
+    │    │   BASIC   │    │  COCOMO II  │    │            │
+    │    │  COCOMO   │    │   (Modern)  │    │            │
+    │    └─────┬─────┘    └──────┬──────┘    │            │
+    │          │                 │            │            │
+    │    ┌─────┼─────┐    ┌─────┼─────┐      │            │
+    │    │     │     │    │     │     │      │            │
+    │  ORG   SEMI  EMB  APPL  EARLY POST    │            │
+    │  2.4   3.0   3.6 COMP. DESIGN ARCH    │            │
+    │  1.05  1.12  1.20 (Obj. (FP,  (KLOC   │            │
+    │                Points) 7 CD)  17 CD)   │            │
+    │                │         │         │   │            │
+    │                │         │         │   │            │
+    │   ┌────────────┴─────────┴─────────┴───┴──────┐    │
+    │   │         ALGORITHMIC FORMULA              │    │
+    │   │    Effort = A × (Size)^B × M             │    │
+    │   │    TDEV = C × (Effort)^D                 │    │
+    │   │    Staff = Effort / TDEV                 │    │
+    │   │    Cost = Effort × Cost_per_PM           │    │
+    │   └──────────────────────────────────────────┘    │
+    │                         │                         │
+    │                         │                         │
+    │          ┌──────────────┴──────────────┐          │
+    │          │                             │          │
+    │    ┌─────┴──────┐              ┌───────┴──────┐   │
+    │    │SCALE FACTORS│              │ COST DRIVERS │   │
+    │    │(B exponent) │              │  (EAF = M)   │   │
+    │    └─────┬───────┘              └───────┬──────┘   │
+    │          │                             │          │
+    │    ┌─────┼──────┐            ┌─────────┼─────────┐│
+    │    │     │      │            │         │         ││
+    │  PREC  RESL  TEAM           │         │         ││
+    │  DFLEX       PMAT        PRODUCT   PLATFORM  PERSONNEL
+    │                            │         │         │
+    │                        RELY DATA   TIME STOR  ACAP PCAP
+    │                        CPLX RUSE   PVOL       AEXP PEXP
+    │                        DOCU                    LTEX
+    │                                                 │
+    │                                            PROJECT
+    │                                             │
+    │                                          TOOL SITE
+    │                                          SCED
+    │
+    │
+    │                    KEY FORMULAS (Summary)
+    │
+    ├───────────────────────────────────────────────────────
+    │
+    │  LOC 3-POINT:    S = (Sopt + 4Sm + Spess) / 6
+    │
+    │  UFP:            UFP = Σ(count × weight) for EI/EO/EQ/ILF/EIF
+    │
+    │  CAF:            CAF = 0.65 + (0.01 × ΣFi), range [0.65, 1.35]
+    │
+    │  FP:             FP = UFP × CAF
+    │
+    │  BASIC COCOMO:   E = a(KLOC)^b, D = c(E)^d, S = E/D, C = E × $/PM
+    │
+    │  COCOMO II:      PM = 2.94 × (Size)^B × M
+    │                  B = 0.91 + 0.01 × Σ(scale factors)
+    │                  TDEV = 3.67 × (PM)^F, F = 0.28 + 0.2(B - 0.91)
+    │
+    │  COST from FP:   Cost = (FP × (LOC/FP) / (LOC/PM)) × Cost/PM
+    │
+    │  EAF (M):        M = Π(all cost driver multipliers)
+    │
+    │
+    │                    COMMON TRAPS
+    │
+    ├───────────────────────────────────────────────────────
+    │
+    │  - Don't forget the 4x weight on 'most likely' in the 3-point formula
+    │  - CAF range is 0.65 to 1.35, NOT 0 to 1
+    │  - Personnel multipliers < 1.00 mean BETTER capability = LESS effort
+    │  - COCOMO uses KLOC, not raw LOC (32,000 LOC = 32 KLOC)
+    │  - FP is language-independent; LOC is language-dependent
+    │  - Moderator in Wideband Delphi must be NEUTRAL (not PM)
+    │  - ILF = internal files; EIF = external interface files (don't confuse)
+    │  - EI = data in; EO = data out; EQ = inquiry (read-only)
+    │
+    │
+    │               FP INFO DOMAIN WEIGHT TABLE
+    │
+    ├───────────────────────────────────────────────────────
+    │
+    │  Domain       Simple  Average  Complex
+    │  ─────────────────────────────────────
+    │  EI             3       4        6
+    │  EO             4       5        7
+    │  EQ             3       4        6
+    │  ILF            7      10       15
+    │  EIF            5       7       10
+    │
+    │
+    │             BASIC COCOMO PARAMETER TABLE
+    │
+    ├───────────────────────────────────────────────────────
+    │
+    │  Mode          a     b     c     d
+    │  ────────────────────────────────────────
+    │  Organic      2.4  1.05  2.5  0.38
+    │  Semi-Det     3.0  1.12  2.5  0.35
+    │  Embedded     3.6  1.20  2.5  0.32
+    │
+    │
+    │             COCOMO II 5 SCALE FACTORS
+    │
+    ├───────────────────────────────────────────────────────
+    │
+    │  PREC  DFLEX  RESL  TEAM  PMAT
+    │  Each rated VL=1.24 ... VH=0.81/0.82
+    │  B = 0.91 + 0.01 × Σ(ratings)
+    │
+    │
+    │             14 VALUE ADJUSTMENT FACTORS (Fi)
+    │
+    ├───────────────────────────────────────────────────────
+    │
+    │  F1  Data Communications
+    │  F2  Distributed Data Processing
+    │  F3  Performance
+    │  F4  Heavily Used Configuration
+    │  F5  Transaction Rate
+    │  F6  On-Line Data Entry
+    │  F7  End-User Efficiency
+    │  F8  On-Line Update
+    │  F9  Complex Processing
+    │  F10 Reusability
+    │  F11 Installation Ease
+    │  F12 Operational Ease
+    │  F13 Multiple Sites
+    │  F14 Facilitate Change
+    │
+    │  Each rated 0 (none) to 5 (essential)
+    │  ΣFi ranges from 0 to 70
+    │
+    │
+    │       PRODUCTIVITY DATA (Capers Jones)
+    │
+    ├───────────────────────────────────────────────────────
+    │
+    │  Application Type    LOC/PM     Cost/PM
+    │  Low-level           3,200      $9,000
+    │  Middle-level        2,300      $11,000
+    │  High-level          1,200      $14,000
 ```

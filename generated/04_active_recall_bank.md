@@ -2,514 +2,648 @@
 
 ---
 
-## 1. SOFTWARE ENGINEERING INTRODUCTION
+## Topic 1: Introduction to Software Engineering
 
-### Definitions
+**Q1: What is software engineering?**
+A: Software engineering is an engineering discipline concerned with all aspects of software production, from early-stage system specification through maintaining the system after it has gone into use.
 
-1. **What is software engineering?** An engineering discipline concerned with all aspects of software production from early specification through to maintaining the system after it has gone into use.
+**Q2: What are the four fundamental software engineering activities?**
+A: Software specification, software development, software validation, and software evolution.
 
-2. **What is a generic software product?** A stand-alone system marketed and sold to any customer who wishes to buy it (e.g., PC software, CAD tools).
+**Q3: List the essential attributes of good software.**
+A: Maintainability (can evolve to meet changing needs), dependability and security (reliable, safe, secure), efficiency (no wasteful use of resources), and acceptability (understandable, usable, compatible).
 
-3. **What is a custom/bespoke software product?** Software commissioned by a specific customer to meet their own unique needs (e.g., embedded control systems, air traffic control).
+**Q4: Differentiate between generic products and customized products.**
+A: Generic products are stand-alone systems sold to any customer (e.g., PC software). Customized products are commissioned by a specific customer (e.g., air traffic control). For generic, the developer owns the specification; for customized, the customer owns it.
 
-4. **Who owns the specification for a generic product?** The software developer; decisions on changes are made by the developer.
+**Q5: What is the difference between software engineering and computer science?**
+A: Computer science focuses on theory and fundamentals; software engineering is concerned with the practicalities of developing and delivering useful software.
 
-5. **Who owns the specification for a custom product?** The customer; they make decisions on software changes.
+**Q6: What is the difference between software engineering and system engineering?**
+A: System engineering covers all aspects of computer-based systems development (hardware, software, process engineering). Software engineering is part of this broader process.
 
-6. **List the four essential attributes of good software.** Maintainability, dependability/security, efficiency, and acceptability.
+**Q7: What are the key challenges facing software engineering today?**
+A: Coping with increasing diversity (heterogeneity), demands for reduced delivery times, and developing trustworthy software (security and trust).
 
-7. **What is software maintainability?** Software should be written so it can evolve to meet changing customer needs. Change is inevitable in a changing business environment.
+**Q8: What approximate percentage of software costs go to development vs. testing vs. maintenance?**
+A: Roughly 60% development costs, 40% testing costs. For custom software, evolution/maintenance costs often exceed development costs (60-70% of total lifecycle cost).
 
-8. **What is software dependability?** Includes reliability, security, and safety. Dependable software should not cause physical or economic damage in the event of failure.
+**Q9: What does "software dependability" include?**
+A: Reliability, security, and safety. Dependable software should not cause physical or economic damage in the event of failure, and malicious users should not be able to access or damage the system.
 
-9. **What are the four fundamental software engineering activities?** Specification, development, validation, and evolution.
+**Q10: Why is software reuse the dominant approach for web-based systems?**
+A: Systems are assembled from pre-existing software components/systems, reducing development time and cost.
 
-10. **What is the difference between software engineering and computer science?** Computer science focuses on theory and fundamentals; software engineering is concerned with the practicalities of developing and delivering useful software.
+**Q11: List the ACM/IEEE Code of Ethics requirements.**
+A: Act in the best interests of client/employer; ensure software is trustworthy/dependable; respect intellectual property rights; only approve software if confident it is safe/reliable; maintain skills and professionalism.
 
-11. **What is the difference between software engineering and system engineering?** System engineering covers all aspects of computer-based systems including hardware, software, and process engineering. Software engineering is part of this broader discipline.
+**Q12: What does "heterogeneity" mean in software engineering?**
+A: Systems must operate as distributed systems across networks with different types of computers and mobile devices.
 
-12. **Name eight application types of software systems.** Stand-alone, interactive transaction-based, embedded control, batch processing, entertainment, modeling/simulation, data collection, and systems of systems.
+**Q13: What is the difference between a stand-alone application and an interactive transaction-based application?**
+A: Stand-alone runs on a local computer with all necessary functionality. Interactive transaction-based executes on a remote computer and is accessed by users from their own PCs/terminals (e.g., web applications).
 
-13. **What are the general issues affecting modern software?** Heterogeneity, business/social change, security/trust, and scale.
+**Q14: What is legacy software and why is it challenging?**
+A: Old systems that remain in use, often business-critical, based on obsolete technology, with incomplete documentation and unavailable original developers.
 
-14. **What percentage of software costs are development vs. testing?** Roughly 60% development, 40% testing.
+**Q15: What is component-based software engineering (CBSE)?**
+A: Design and development of systems using reusable software components that are independent, reusable units assembled to create larger systems through standard interfaces.
 
-15. **What is the ACM/IEEE Code of Ethics?** A set of eight ethical principles (PUBLIC, CLIENT AND EMPLOYER, PRODUCT, JUDGMENT, MANAGEMENT, PROFESSION, COLLEAGUES, SELF) guiding professional software engineering behavior.
+**Q16: True or False: The same software engineering techniques are appropriate for all types of systems.**
+A: False. Different types of systems require different approaches. Games use prototypes; safety-critical systems require complete, analyzable specifications.
 
-### Comparisons
+**Q17: What are the three software process models introduced in Chapter 1?**
+A: Waterfall model (sequential phases), incremental development (iterative with interleaved activities), and reuse-oriented development (assembling from existing components).
 
-16. **Generic vs. Custom products: Who controls the spec and who decides changes?**
-    - Generic: Developer owns spec, developer decides changes
-    - Custom: Customer owns spec, customer decides changes
-
-17. **Software engineering vs. Programming:** SE involves all aspects of production (specification, design, validation, evolution, management); programming is only the coding activity.
-
-### Applications
-
-18. **A company wants to build an ERP system tailored to its workflows. Is this generic or custom? What are the implications?** Custom. The customer owns the specification and decides on changes. The development process must accommodate evolving requirements from the specific customer.
-
-19. **Why are software costs dominated by maintenance rather than development?** Because software has a long life and must be changed to reflect changing business requirements. For systems with a long life, maintenance costs may be several times development costs.
-
----
-
-## 2. SOFTWARE PROCESSES
-
-### Definitions
-
-20. **What is a software process?** A structured set of activities required to develop a software system, involving specification, design and implementation, validation, and evolution.
-
-21. **What is a software process model?** An abstract representation of a process from a particular perspective.
-
-22. **What is a plan-driven process?** A process where all activities are planned in advance and progress is measured against this plan.
-
-23. **What is an agile process?** A process where planning is incremental and it is easier to change the process to reflect changing customer requirements.
-
-24. **What are the five phases of the waterfall model?** Requirements definition, system/software design, implementation/unit testing, integration/system testing, and operation/maintenance.
-
-25. **What is incremental development?** A process where specification, development, and validation are interleaved rather than sequential.
-
-26. **What is integration and configuration?** A reuse-oriented approach where the system is assembled from existing configurable components (COTS systems).
-
-27. **What are the three types of reusable software?** Stand-alone application systems (COTS), collections of objects for component frameworks (.NET, J2EE), and web services.
-
-28. **What are the five key process stages of reuse-oriented SE?** Requirements specification, software discovery/evaluation, requirements refinement, application system configuration, and component adaptation/integration.
-
-### Comparisons
-
-29. **Waterfall vs. Incremental Development:**
-    - Waterfall: Sequential phases, plan-driven, documentation-heavy, inflexible to change
-    - Incremental: Interleaved activities, rapid delivery, customer feedback, less documentation
-
-30. **Plan-driven vs. Agile:**
-    - Plan-driven: Stages planned in advance, iteration within activities, outputs decided upfront
-    - Agile: Specification/design/implementation/testing interleaved, outputs decided through negotiation
-
-31. **When is the waterfall model appropriate?** When requirements are well-understood and changes will be fairly limited. Mostly used for large multi-site systems engineering projects.
-
-32. **What are the main problems with incremental development?** Process is not visible to managers; system structure tends to degrade as new increments are added without refactoring.
-
-### Applications
-
-33. **You are developing a safety-critical air traffic control system. Which process model and why?** Waterfall, because requirements must be fully understood upfront, a complete analyzable specification is needed, and changes during development are unacceptable in safety-critical domains.
-
-34. **A startup is building a mobile app with rapidly changing requirements. Which process model?** Incremental development (or agile), because rapid delivery, customer feedback, and flexibility to change are critical.
-
-35. **A company needs to build a business system using existing CRM and ERP components. Which process model?** Integration and configuration (reuse-oriented), because the system can be assembled from existing COTS components with configuration.
+**Q18: How has the web changed software engineering?**
+A: Made software services available, enabled highly distributed service-based systems, led to advances in programming languages and software reuse, and enabled cloud computing (pay-per-use).
 
 ---
 
-## 3. AGILE SOFTWARE DEVELOPMENT
+## Topic 2: Software Processes (Waterfall, Incremental, Reuse-Oriented)
 
-### Definitions
+**Q1: What is a software process model?**
+A: An abstract representation of a software process that presents a description from some particular perspective.
 
-36. **State the four values of the Agile Manifesto.** (1) Individuals and interactions over processes and tools; (2) Working software over comprehensive documentation; (3) Customer collaboration over contract negotiation; (4) Responding to change over following a plan.
+**Q2: List the four basic process activities in software development.**
+A: Specification (defining what the system should do), design and implementation (organizing and implementing the system), validation (checking it does what the customer wants), and evolution (changing the system in response to changing needs).
 
-37. **What is Extreme Programming (XP)?** An influential agile method where new versions may be built several times per day, increments are delivered every 2 weeks, and all tests must pass for every build.
+**Q3: What is the waterfall model and when is it appropriate?**
+A: A plan-driven model with separate sequential phases (requirements → design → implementation → testing → maintenance). Appropriate when requirements are well-understood and changes will be limited. Used for large systems engineering projects at several sites.
 
-38. **What is a user story?** A requirements expression written on cards that the development team breaks down into implementation tasks. Used for incremental planning and scheduling.
+**Q4: What is the main drawback of the waterfall model?**
+A: Inflexible partitioning into distinct stages makes it difficult to respond to changing customer requirements.
 
-39. **What is refactoring?** Continuously improving code structure without changing behavior, making changes easier when they need to be implemented.
+**Q5: What are the phases of the waterfall model?**
+A: Requirements analysis and definition, system and software design, implementation and unit testing, integration and system testing, operation and maintenance.
 
-40. **What is Test-Driven Development (TDD)?** Writing automated unit tests for new functionality before the functionality itself is implemented (red-green-refactor cycle).
+**Q6: List three benefits of incremental development.**
+A: (1) Reduced cost of accommodating changing requirements. (2) Easier customer feedback on demonstrations. (3) More rapid delivery and deployment of useful software.
 
-41. **What is pair programming?** Developers work in pairs, checking each other's work and providing support to always do a good job.
+**Q7: What are two problems with incremental development?**
+A: (1) The process is not visible — managers need regular deliverables to measure progress. (2) System structure degrades as new increments are added unless refactoring is performed.
 
-42. **What is collective ownership?** All developers work on all areas of the system; no islands of expertise develop; anyone can change anything.
+**Q8: What is integration and configuration (reuse-oriented development)?**
+A: Systems are assembled from existing configurable components or application systems (COTS), with reused elements configured to adapt behavior to user requirements.
 
-43. **What is continuous integration?** As soon as work on a task is complete, it is integrated into the whole system. All unit tests must pass after integration.
+**Q9: What are three types of reusable software?**
+A: (1) Stand-alone application systems (COTS). (2) Collections of objects for component frameworks (.NET, J2EE). (3) Web services for remote invocation.
 
-44. **What is sustainable pace?** Large amounts of overtime are not acceptable because they reduce code quality and medium-term productivity.
+**Q10: What are the key process stages in reuse-oriented development?**
+A: Requirements specification, software discovery and evaluation, requirements refinement, application system configuration, component adaptation and integration.
 
-45. **What is an on-site customer?** A representative of the end-user available full-time to the XP team, responsible for bringing requirements for implementation.
+**Q11: State two advantages and two disadvantages of reuse-oriented development.**
+A: Advantages: Reduced costs/risks (less developed from scratch), faster delivery. Disadvantages: Requirements compromises inevitable, loss of control over evolution of reused elements.
 
-### Comparisons
+**Q12: What is the difference between plan-driven and agile processes?**
+A: Plan-driven: all activities planned in advance, progress measured against plan. Agile: planning is incremental, easier to change process to reflect changing requirements.
 
-46. **Plan-driven vs. Agile development — five key differences:**
-    - Planning: Upfront vs. incremental
-    - Documentation: Comprehensive vs. minimal (working code focus)
-    - Requirements: Stable, fixed vs. Changing, negotiated
-    - Delivery: Single delivery vs. frequent incremental delivery
-    - Customer role: At start/end vs. throughout development
+**Q13: What are the four design activities?**
+A: Architectural design (overall structure), interface design (user interactions), component design (system components), database design (system database).
 
-47. **XP vs. traditional development:**
-    - XP: Small releases, test-first, pair programming, collective ownership, refactoring
-    - Traditional: Design upfront, individual coding, separate testing phase, documentation-heavy
+**Q14: What is validation testing?**
+A: The process of demonstrating that a system meets its requirements and is fit for purpose. It may take 30-50% of total development cost.
 
-### Applications
+**Q15: List the testing stages in order.**
+A: Module/unit testing → Integration testing → System testing → Acceptance testing.
 
-48. **An organization has strict regulatory requirements demanding complete documentation. Can they use pure agile? Why or why not?** No. Plan-driven approaches are needed for regulatory compliance. A hybrid approach combining plan-driven documentation with agile iterations may work.
+**Q16: What are the three types of software maintenance?**
+A: Corrective maintenance (fixing bugs), adaptive maintenance (adapting to new environments), perfective maintenance (adding new features).
 
-49. **How do user stories differ from traditional requirements specifications?** User stories are brief, customer-written narratives on cards; they are broken into tasks by developers and serve as basis for estimates. Traditional specs are detailed, formal documents created upfront.
+**Q17: What is refactoring?**
+A: Changing software to improve its structure without changing its functionality.
 
----
+**Q18: What are the six SPICE capability levels?**
+A: Level 0 — Incomplete, Level 1 — Performed, Level 2 — Managed, Level 3 — Defined, Level 4 — Quantitatively managed, Level 5 — Optimizing.
 
-## 4. SOFTWARE TESTING
+**Q19: What is the difference between software evolution and software servicing?**
+A: Evolution involves changing the system to meet new requirements. Servicing involves keeping the system operational (fixing problems as they arise).
 
-### Definitions
+**Q20: What are the design principles guiding the design process?**
+A: Separation of concerns, modularity, abstraction, information hiding, reuse, coupling and cohesion.
 
-50. **What is software testing?** Executing a program with artificial data and checking results for errors, anomalies, or information about non-functional attributes. Can reveal the presence of errors but NOT their absence.
-
-51. **What is verification?** "Are we building the product right?" — the software should conform to its specification.
-
-52. **What is validation?** "Are we building the right product?" — the software should do what the user really requires.
-
-53. **What is the difference between validation testing and defect testing?**
-    - Validation testing: Expects system to perform correctly using test cases reflecting expected use
-    - Defect testing: Test cases designed to expose defects; can be deliberately obscure
-
-54. **What is a software inspection?** Static analysis where people examine the source representation to discover anomalies without executing the system.
-
-55. **What are the three stages of testing?** Development testing, release testing, and user testing (alpha/beta).
-
-56. **What is unit testing?** Testing individual components in isolation. It is a defect testing process.
-
-57. **What is component testing?** Testing several individual units integrated into composite components, focusing on component interfaces.
-
-58. **What is system testing?** Testing some or all components integrated together as a whole, focusing on component interactions.
-
-59. **What are the three parts of an automated unit test?** Setup (initialize with test case inputs/expected outputs), call (invoke the method to be tested), and assertion (compare result with expected result).
-
-60. **What is basis path testing?** A white-box testing technique where you draw a control flow graph, find a basis set of independent paths, and generate test cases to exercise each path.
-
-61. **What is McCabe's cyclomatic complexity?** A metric for the number of independent paths through a program, calculated as V(G) = number of predicate nodes + 1 (or E - N + 2).
-
-### Comparisons
-
-62. **Inspections vs. Testing:**
-    - Inspections: Static, no execution needed, can be applied to any representation, catch errors that mask other errors
-    - Testing: Dynamic, requires execution, cannot check non-functional characteristics like performance
-
-63. **Validation vs. Defect Testing:**
-    - Validation: Shows system works as expected (successful = correct operation)
-    - Defect: Finds faults (successful = system performs incorrectly, exposing a defect)
-
-64. **Unit Testing vs. System Testing:**
-    - Unit: Individual modules, isolation, tests functionality of methods
-    - System: All components integrated, tests interactions between components
-
-### Applications
-
-65. **Why can't testing prove the absence of defects?** Testing can only show the presence of errors, not their absence. Even after many successful tests, untested scenarios may still contain defects.
-
-66. **How do you design test cases for an object class?** Test all operations, set and interrogate all object attributes, and exercise the object in all possible states. Inheritance makes this harder because information is not localized.
-
-67. **Draw the flow graph for a program with a while loop containing an if-else inside. Calculate the cyclomatic complexity.** The while is one predicate node, the if-else is another. V(G) = 2 + 1 = 3 independent paths.
+**Q21: What is the difference between coupling and cohesion?**
+A: Coupling measures interdependencies between modules (prefer LOW coupling). Cohesion measures how well elements of a module work together as a functional unit (prefer HIGH cohesion).
 
 ---
 
-## 5. PROJECT MANAGEMENT
+## Topic 3: Agile Software Development (XP, Scrum, Agile Principles)
 
-### Definitions
+**Q1: What are the four values of the Agile Manifesto?**
+A: (1) Individuals and interactions over processes and tools. (2) Working software over comprehensive documentation. (3) Customer collaboration over contract negotiation. (4) Responding to change over following a plan.
 
-68. **What are the four success criteria for software projects?** Deliver on time, keep costs within budget, deliver software meeting customer expectations, and maintain a coherent development team.
+**Q2: List the five principles of agile methods.**
+A: Customer involvement, incremental delivery, people not process, embrace change, maintain simplicity.
 
-69. **What makes software project management unique?** The product is intangible, many projects are "one-off," and software processes are variable and organization-specific.
+**Q3: What is Extreme Programming (XP) and its key practices?**
+A: An agile method using extreme approaches: incremental planning (story cards), small releases, simple design, test-first development, refactoring, pair programming, collective ownership, continuous integration, sustainable pace, on-site customer.
 
-70. **What are the three universal management activities?** Project planning, risk management, and people management.
+**Q4: How often are increments delivered in XP?**
+A: New versions may be built several times per day; increments are delivered to customers every 2 weeks.
 
-71. **What is a Work Breakdown Structure (WBS)?** A hierarchical decomposition of the project scope into manageable tasks.
+**Q5: What is test-first development?**
+A: An automated unit test framework is used to write tests for new functionality BEFORE that functionality is implemented. Tests must pass before code is accepted.
 
-### Applications
+**Q6: What is refactoring in XP?**
+A: Constant code improvement to keep code simple and maintainable. Developers continuously look for improvements and make them even without immediate need.
 
-72. **Why can't you simply add more people to a late software project to make it on time?** Adding people increases communication overhead. Productivity is not proportional to the number of people. Brooks' Law: adding people to a late project makes it later.
+**Q7: What is pair programming?**
+A: Two developers work together at one workstation. One drives (types code), the other watches (finds errors/improvements). They check each other's work.
 
-73. **Why is the intangibility of software a challenge for project managers?** Managers cannot see progress by looking at the artifact being constructed, making it difficult to measure progress objectively.
+**Q8: What is continuous integration?**
+A: As soon as work on a task is complete, it is integrated into the whole system. All unit tests must pass after any integration.
 
----
+**Q9: What is the difference between Scrum and XP?**
+A: Scrum focuses on managing the development process (project management). XP focuses on technical practices (testing, refactoring, programming). They are complementary.
 
-## 6. RISK MANAGEMENT
+**Q10: What is a Scrum Sprint?**
+A: A time-boxed period of 2-4 weeks during which a potentially shippable product increment is created.
 
-### Definitions
+**Q11: What are the three Scrum roles?**
+A: Scrum Master (facilitates team process, protects team from interference), Product Owner (represents customer, manages backlog, decides priorities), Scrum Team (self-organizing, cross-functional, 5-7 people).
 
-74. **What is a risk?** A potential problem — an uncertain event that, if it occurs, has a negative impact on the project.
+**Q12: What is a burndown chart?**
+A: A chart showing work remaining over time. If it does not point downward, the team is behind schedule.
 
-75. **What are the two characteristics of risk?** Uncertainty (may or may not happen) and Loss (unwanted consequences if it occurs).
+**Q13: What is a Sprint Retrospective?**
+A: Meeting at end of each sprint where the team reflects on what went well and what could be improved.
 
-76. **What are the three categories of risk?** Project risks (threaten schedule/resources), product risks (threaten quality/performance), business risks (threaten viability of the organization).
+**Q14: What are three problems with scaling agile methods?**
+A: (1) Hard to maintain pair programming and collective ownership in large teams. (2) Communication overhead in large projects. (3) Large systems depend on legacy components developed with plan-driven approaches.
 
-77. **What is risk exposure?** RE = P × C, where P is the probability of occurrence and C is the cost/consequence if the risk occurs.
+**Q15: What are the two strategies for scaling agile?**
+A: Scale up — use agile for the whole system, adapting methods. Scale out — use agile for components but plan-driven approach for system integration.
 
-78. **What are the four risk management process steps?** Risk identification, risk analysis, risk planning, and risk monitoring.
+**Q16: List the Scrum principles.**
+A: Controlled chaos (team decides how to work), commitment (team commits to time-box goals), information radiator (visible status), time-boxing (fixed deadlines), emergent requirements, people not process.
 
-79. **What is reactive risk management?** The project team reacts to risks when they occur; "fix on failure" approach; crisis management.
+**Q17: When is agile not suitable?**
+A: Complex non-functional requirements, critical systems requiring extensive documentation, systems developed by separate teams, outsourced development (needs defined contract).
 
-80. **What is proactive risk management?** Formal risk analysis is performed; the organization corrects root causes of risk; contingency plans are established upfront.
+**Q18: What is the planning game in XP?**
+A: A team-based estimation process: split stories into tasks, each member estimates, compare and discuss differences, allocate work to pairs.
 
-81. **What are the seven principles of risk management?** (1) Maintain a global perspective, (2) Take a forward-looking view, (3) Encourage open communication, (4) Integrate risk management, (5) Emphasize continuous process, (6) Develop a shared product vision, (7) Encourage teamwork.
+**Q19: What is a user story?**
+A: A short description of a feature from the user's perspective, typically following the format: "As a [role], I want [goal] in order to [reason]."
 
-82. **What are the four risk components?** Performance risk, cost risk, support risk, and schedule risk.
-
-83. **What are the three risk response strategies?** Avoidance strategies (reduce probability), minimization strategies (reduce impact), and contingency plans (deal with risk if it arises).
-
-84. **What is a risk table?** A table with columns: Risk Summary, Risk Category, Probability, Impact (1-4: catastrophic to negligible), and RMMM (Risk Mitigation, Monitoring, and Management plan).
-
-### Comparisons
-
-85. **Reactive vs. Proactive Risk Management:**
-    - Reactive: Responds when risks occur, crisis management, no upfront planning
-    - Proactive: Formal analysis upfront, contingency plans, corrects root causes
-
-86. **Known vs. Predictable vs. Unpredictable risks:**
-    - Known: Uncovered from careful evaluation of project plan
-    - Predictable: Extrapolated from past project experience
-    - Unpredictable: Occur but are extremely difficult to identify in advance
-
-### Applications
-
-87. **Calculate the risk exposure: Only 70% of planned reusable components will integrate. 60 components planned, each 100 LOC, cost $14/LOC. Probability: 80%.** Risk: 18 components must be custom-developed. Cost = 18 × 100 × $14 = $25,200. RE = 0.80 × $25,200 = $20,160.
-
-88. **Identify the risk type: "A key developer leaves the project."** Project risk (schedule/resources affected). Category: People risk. Strategy: Reorganize team with more overlap of work.
-
----
-
-## 7. ESTIMATION
-
-### Definitions
-
-89. **What is software project estimation?** Defining project scope (WBS), estimating time, and estimating cost (resources, licensing, training).
-
-90. **What is the LOC metric?** Lines of Code — counts every line of source code except blanks and comments.
-
-91. **What is a function point (FP)?** A measure based on program characteristics: external inputs, external outputs, external inquiries, internal logical files, and external interface files.
-
-92. **What is UFC (Unadjusted Function Count)?** UFC = Σ (count of each information domain element × its complexity weight).
-
-93. **What is VAF (Value Adjustment Factor)?** VAF = 0.65 + (0.01 × ΣFi), where Fi are ratings (0-5) for 14 General System Characteristics. Range: 0.65 to 1.35.
-
-94. **What is the FP formula?** FP = UFC × VAF.
-
-95. **What is Wideband Delphi?** A consensus-based estimation process: choose team → kickoff meeting → individual preparation → estimation session (multiple rounds until convergence) → assemble tasks → review results.
-
-96. **What is a person-month (pm)?** The metric for expressing effort — the amount of time personnel devote to a project. 1 pm = one person working full-time for one month.
-
-### Comparisons
-
-97. **LOC vs. Function Points:**
-    - LOC: Simple to count, language-dependent, measures size
-    - FP: Language-independent, focuses on functionality, more complex to calculate
-
-### Applications
-
-98. **LOC Estimation Example:** A CAD system has 7 modules: 5300 + 6800 + 2300 + 3350 + 8400 + 4950 + 2100 = 33,200 LOC. Productivity: 620 LOC/pm, cost: $8000/pm.
-    - Cost/LOC = $8000/620 = $12.90 ≈ $13
-    - Effort = 33,200/620 = 53.5 person-months
-    - Project cost = 33,200 × $13 = $431,600
-
-99. **FP Estimation Example:** EI=10 (avg, weight 4), EO=15 (avg, weight 5), EQ=8 (simple, weight 3), ILF=6 (complex, weight 15), EIF=3 (avg, weight 7). ΣFi = 45.
-    - UFC = (10×4) + (15×5) + (8×3) + (6×15) + (3×7) = 40+75+24+45+21 = 205
-    - VAF = 0.65 + (0.01 × 45) = 1.10
-    - FP = 205 × 1.10 = 225.5 ≈ 226 FP
-    - If Java (46 LOC/FP): LOC = 226 × 46 = 10,396
-    - If productivity = 500 LOC/pm: Effort = 10,396/500 = 20.8 person-months
-    - Cost = 20.8 × $8,000 = $166,400
-
-100. **Wideband Delphi Example:** Three estimators give Round 1 estimates of 20, 16, 29 days (total 65). After 3 rounds of discussion, estimates converge to 18, 19, 20 (total 57). The final estimate is the average: (18+19+20)/3 = 19 days.
+**Q20: What is sustainable pace?**
+A: Large amounts of overtime are not acceptable as it reduces code quality and medium-term productivity. A software project is a marathon, not a sprint.
 
 ---
 
-## 8. PROJECT SCHEDULING
+## Topic 4: Agile vs Traditional (17 Differences)
 
-### Definitions
+**Q1: How does team structure differ between traditional and agile?**
+A: Traditional: hierarchical (analyst, designer, coder, tester, architect, team lead, QA manager, PM). Agile: whole team, self-organizing, customer is a team member.
 
-101. **What is project scheduling?** Splitting the project into tasks, estimating time/resources, organizing tasks concurrently, and minimizing dependencies to avoid delays.
+**Q2: How are requirements captured in traditional vs agile?**
+A: Traditional: requirements captured and written by analyst/PM, verified from customer. Agile: user stories written by customers on index cards.
 
-102. **What is a Gantt chart (bar chart)?** A graphical chart showing project schedule against calendar time, with tasks as horizontal bars.
+**Q3: How do development iterations differ?**
+A: Traditional: 2-3 month iterations, first iteration is detailed design/plan. Agile: short cycles of 1-4 weeks, each producing working software.
 
-103. **What is an activity network diagram?** A diagram modeling project activities and their relationships as a network, using Activity-on-Arrow or Activity-on-Node notation.
+**Q4: How do acceptance tests differ?**
+A: Traditional: initial contracted requirements used as acceptance tests at end. Agile: acceptance tests written by BAs, QA, testers during iteration; once passed, never allowed to fail again.
 
-104. **What is the Critical Path Method (CPM)?** A technique identifying the longest path through the network — the critical path determines minimum project duration.
+**Q5: How does programming style differ?**
+A: Traditional: each coder assigned task by team lead/PM, QA team checks errors. Agile: pair programming — two programmers at same workstation.
 
-105. **What is PERT?** Program Evaluation and Review Technique — similar to CPM but uses probabilistic time estimates.
+**Q6: How does testing differ?**
+A: Traditional: test cases at prototype approval, then code written, QA tests for errors. Agile: Test-Driven Development — write failing unit test first, then write code to make it pass.
 
-106. **What is Total Float?** The amount of time an activity can be delayed from its ES date without delaying the project finish date. TF = LF - EF or TF = LS - ES.
+**Q7: How does ownership differ?**
+A: Traditional: manager is solely responsible for the whole project. Agile: collective ownership — no individual responsible for one module; everyone works on everything.
 
-107. **What is Free Float?** The amount of time an activity can be delayed without affecting the early start of the following activity. FF = MIN(ES_successor) - ES_activity - Duration.
+**Q8: How does integration differ?**
+A: Traditional: integration at end of module/project by QA team. Agile: continuous integration — code checked in and integrated several times per day.
 
-108. **What are the rules for activity network diagrams?** Flow left to right, no activity begins until all predecessors done, every activity must have an ID, no looping, every activity ID > predecessor ID.
+**Q9: How does development pace differ?**
+A: Traditional: 80/20 principle — high speed early, moderate in middle, speed up at end. Agile: sustainable pace — no overtime; team maintains constant pace.
 
-### Applications
+**Q10: How does workspace differ?**
+A: Traditional: separate rooms/cubicles, tasks assigned by PM or software. Agile: open workspace — team works together in open room with status charts, task breakdowns visible.
 
-109. **Activity Network Example:**
-    Activities: A(3), B(4, pred=A), C(2, pred=A), D(5, pred=B), E(1, pred=C), F(2, pred=C), G(4, pred=D,E), H(3, pred=F,G).
+**Q11: How does design/architecture differ?**
+A: Traditional: design and architect the whole project at beginning. Agile: simple design — focus only on current iteration stories, migrate design iteration to iteration.
 
-    - Paths: A-B-D-G-H = 19 days, A-C-E-G-H = 13 days, A-C-F-H = 10 days
-    - Critical Path: A → B → D → G → H = 19 days (longest path)
-    - Activities on critical path have TF = 0: A, B, D, G, H
-    - Activity C: TF = LS - ES = 9 - 3 = 6 days
-    - Activity E: TF = 11 - 5 = 6 days
-    - Activity F: TF = 14 - 5 = 9 days
+**Q12: How does refactoring differ?**
+A: Traditional: done at end of project, initiated by QA. Agile: continuous refactoring — done every hour/half hour to keep code clean, simple, expressive.
 
-110. **Why does adding people to a late project make it later?** Communication overhead increases quadratically with team size. More people means more coordination, more meetings, and more integration issues.
+**Q13: How does documentation differ?**
+A: Traditional: intensive documentation of diagrams and specifications. Agile: light documentation — produce no document unless its need is immediate and significant.
 
----
+**Q14: How does task allocation differ?**
+A: Traditional: PM/team lead assigns tasks to team. Agile: task selection — team decides/selects how much work they commit to complete.
 
-## 9. ARCHITECTURE DESIGN
+**Q15: How does progress monitoring differ?**
+A: Traditional: monitored by how many tasks are developed. Agile: burndown chart — shows work remaining each day in hours/days.
 
-### Definitions
+**Q16: How do status meetings differ?**
+A: Traditional: weekly meetings, everyone reports to PM. Agile: daily standup — each member reports: (1) what done since last meeting, (2) what aiming to do, (3) any blocks.
 
-111. **What is software design?** The creative process of translating requirements into a blueprint for constructing software, starting at high abstraction and iteratively refining.
-
-112. **What is abstraction?** A view of a problem that extracts essential information relevant to a particular purpose and ignores the remainder.
-
-113. **What is modularity?** Separately named and addressable components (modules) integrated to satisfy requirements, following the divide-and-conquer principle.
-
-114. **What is information hiding?** Designing modules so algorithms and local data are inaccessible to other modules, enforcing access constraints to implementation details.
-
-115. **What is functional independence?** Modules that have a single-minded function and minimal interaction with other modules, measured by coupling and cohesion.
-
-116. **What is coupling?** A measure of interconnection among modules, depending on interface complexity, shared data references, and calling mechanisms.
-
-117. **What is cohesion?** A measure of the relative functional strength of a module — how focused its responsibilities are.
-
-118. **What are the five types of coupling (worst to best)?** Content, common, control, stamp, and data coupling.
-
-119. **What are the seven types of cohesion (best to worst)?** Functional, sequential, communicational, procedural, temporal, logical, and coincidental.
-
-120. **What is refinement?** The elaboration of details — a process of progressive detail that helps postpone decisions until later in design.
-
-121. **What is refactoring?** Restructuring the design to separate concerns and remove duplication, reorganizing the class hierarchy.
-
-122. **What is the 4+1 View Model?** Philippe Kruchten's model with 5 views: Logical (functionality for end users), Development (implementation), Process (system behavior/communication), Physical (system engineer's view), and Scenarios (use cases connecting all views).
-
-123. **What are the four types of design classes?** Boundary classes (system-actor interface), Entity classes (long-lived persistent data), Control classes (mediate between boundary and entity), and Interface classes (user/system interfaces).
-
-124. **What are architectural patterns?** Common solutions to recurring design problems that define overall software structure (e.g., layered, client-server, repository, MVC).
-
-### Comparisons
-
-125. **Coupling types — content vs. data:**
-    - Content coupling (worst): One module modifies/relies on internal workings of another
-    - Data coupling (best): Modules communicate via simple data items (parameters)
-
-126. **Cohesion types — functional vs. coincidental:**
-    - Functional (best): All elements contribute to a single well-defined task
-    - Coincidental (worst): Elements are unrelated, grouped by chance
-
-127. **Refinement vs. Refactoring:**
-    - Refinement: Elaboration of details during initial design (top-down decomposition)
-    - Refactoring: Restructuring existing code to improve structure without changing behavior
-
-### Applications
-
-128. **Module A passes a flag to Module B that controls B's execution logic. What type of coupling?** Control coupling — one module passes execution control (a flag) to another.
-
-129. **A module groups three operations: generate report, send email, and print. They all run at startup. What type of cohesion?** Temporal cohesion — elements are grouped because they are processed at the same time.
-
-130. **When would you choose a layered architecture pattern?** When the system can be decomposed into functional layers with well-defined interfaces, such as UI layer → business logic layer → data access layer. Each layer only communicates with adjacent layers.
-
-131. **When would you use MVC (Model-View-Controller)?** When you need separation of concerns for user interfaces: Model (data), View (presentation), Controller (input handling). Common in web applications.
+**Q17: How is project status shown?**
+A: Traditional: shown by number of tasks completed. Agile: status board — two sheets labeled "What's Working Well" and "What's Not Working, or Could Work Better."
 
 ---
 
-## 10. UI DESIGN
+## Topic 5: Architecture & Design
 
-### Definitions
+**Q1: What are the three characteristics of good design (Vitruvian)?**
+A: Firmness (no bugs inhibiting function), Commodity (suitable for intended purpose), Delight (pleasurable user experience).
 
-132. **What are Theo Mandel's three golden rules of UI design?** (1) Place the user in control, (2) Reduce user's memory load, (3) Make the interface consistent.
+**Q2: List the 10 design concepts.**
+A: Abstraction, Architecture, Design Patterns, Modularity, Information Hiding, Functional Independence, Refinement, Refactoring, OO Design Concepts, Design Classes.
 
-133. **What is the user model in UI design?** A profile of all end users (age, gender, abilities, education, preferences).
+**Q3: What is the 4+1 View Model?**
+A: Logical view (end users — functionality), Development view (programmers — packaging/layering), Process view (system integrators — performance/scalability), Physical view (system engineers — topology/deployment), Scenarios (center — use cases tie views together).
 
-134. **What is the mental model (system perception)?** The user's mental image of what the interface is.
+**Q4: What is separation of concerns?**
+A: Breaking a system into distinct features that overlap as little as possible, reducing complexity.
 
-135. **What is the implementation model?** The interface "look and feel" coupled with supporting information describing interface syntax and semantics.
+**Q5: What is information hiding?**
+A: Designing modules so that algorithms and local data are inaccessible to other modules, enforcing access constraints and hiding design decisions.
 
-136. **What is task analysis?** Understanding what work the user performs, what tasks support the work, what problem-domain objects are manipulated, and the workflow sequence.
+**Q6: Describe the Layers architectural pattern.**
+A: System divided into layers, each performing specific function. Layers arranged hierarchically — each layer uses services of layer below, provides services to layer above. Top layer = UI, bottom layer = system utilities.
 
-137. **What are the four steps of UI analysis & design?** Interface analysis & modeling, interface design, interface construction (prototyping), and interface validation. It is iterative (spiral model).
+**Q7: Describe the Model-View-Controller (MVC) pattern.**
+A: Model — manages data and business logic, independent of UI. View — displays data, sends user actions to controller. Controller — handles user input, updates model, selects view.
 
-### Comparisons
+**Q8: Describe the Client-Server pattern.**
+A: System divided into servers (offer services) and clients (request services). Server always on, listens for requests. Client initiates communication via network.
 
-138. **User model vs. Mental model:**
-    - User model: What we know about users (objective profile)
-    - Mental model: What users think the system is (subjective perception)
-    - Effective design: User mental model and implementation model coincide
+**Q9: What is SOA (Service-Oriented Architecture)?**
+A: Architectural style supporting service orientation. Services are discrete units of functionality accessed remotely. Principles: loose coupling, reusability, composability, statelessness.
 
-### Applications
+**Q10: What are the principles of SOA?**
+A: Loose coupling (minimal dependencies), reusability (services reusable across applications), composability (services composed into larger services), statelessness (no state maintained between requests).
 
-139. **A user must enter state as a free-text field. Apply golden rules.** Replace with a dropdown (Reduce memory load). Label clearly "Select State" (Consistency). Allow user to see options without memorizing (Control).
+**Q11: What is Microservices Architecture?**
+A: Application structured as a collection of loosely coupled, independently deployable small services. Each performs a specific business function. Communicate via HTTP/REST or message queues.
 
-140. **Why should Ctrl+S always mean Save?** Consistency principle — past interactive models create user expectations. Redefining established shortcuts causes errors and frustration.
+**Q12: What is the Repository pattern?**
+A: A central data store (repository) shared among several components. Components access data store through well-defined interfaces. Data store is passive; components are active.
 
----
+**Q13: Describe the Pipe-and-Filter pattern.**
+A: Each processing step encapsulated in a filter component. Data passed between adjacent components via pipes. No shared state between filters. Filters are independent, reusable, replaceable.
 
-## 11. QUALITY MANAGEMENT
+**Q14: What is the Broker pattern?**
+A: A broker acts as mediator between client and server. It forwards requests, provides interface repository, hides communication details, locates servers.
 
-### Definitions
+**Q15: List the quality attributes affected by architectural design.**
+A: Performance, scalability, extensibility, modifiability, testability, reusability, security, data integrity.
 
-141. **What is software quality?** The degree to which software possesses attributes satisfying customer expectations: reliability, efficiency, integrity, usability, maintainability, flexibility, testability, portability, reusability, interoperability.
+**Q16: What are the three types of architectural views?**
+A: Module views (static organization), Component-and-Connector views (runtime behavior), Allocation views (software-to-hardware mapping).
 
-142. **What is a product standard?** Standards for the software product itself (documentation standards, coding standards).
+**Q17: What is the Three-Tier Architecture?**
+A: Extension of client-server. Three tiers: Presentation (UI), Application (business logic), Data (database). Each tier can be scaled independently.
 
-143. **What is a process standard?** Standards for the development process (development lifecycle standards).
+**Q18: What is the Blackboard pattern?**
+A: Three components: Knowledge Sources, Blackboard (central data store), Controller. Knowledge sources interact with blackboard; controller waits for changes and acts on them.
 
-144. **What is ISO 9001?** A quality management system standard specifying requirements for certification.
+**Q19: What are design patterns?**
+A: A reusable solution to a common design problem within a specific context. Documented with: pattern name, problem description, solution description, consequences.
 
-145. **What is process-based quality?** Quality achieved through quality processes, not just inspection of the final product.
-
-### Applications
-
-146. **Give an example of a quality trade-off.** Efficiency vs. maintainability: highly optimized code is often harder to read and maintain. Speed vs. security: additional security checks add processing overhead.
-
----
-
-## 12. TESTING TOOLS & PATH TESTING
-
-### Definitions
-
-147. **What is JMeter?** A tool for load testing — creating test plans, thread groups, samplers, and listeners for performance testing.
-
-148. **What is statement coverage?** Ensuring every statement in the program is executed at least once.
-
-149. **What is branch coverage?** Ensuring every branch (true/false) of every decision is taken at least once.
-
-150. **What is path coverage?** Ensuring every possible path through the program is executed at least once.
-
-151. **What is a program flow graph?** A graph where nodes represent program decisions/statements and arcs represent flow of control.
-
-### Applications
-
-152. **For a program with 3 predicate nodes, how many independent paths exist in the basis set?** V(G) = 3 + 1 = 4 independent paths.
-
-153. **Given the binary search flow graph with nodes 1-14, identify four independent paths:**
-    - Path 1: 1-2-3-4-5-6-7-8-9-10-14 (key found on first iteration)
-    - Path 2: 1-2-3-4-5-14 (key not found immediately)
-    - Path 3: 1-2-3-4-5-6-7-11-12-5-... (search right half)
-    - Path 4: 1-2-3-4-5-6-7-11-13-5-... (search left half)
+**Q20: What questions should an architect answer in the first stage?**
+A: (1) Who is the primary user? (2) What is the primary functionality? (3) What are the expected quality attributes? (4) What design principles will the system adhere to?
 
 ---
 
-## CROSS-TOPIC TRADEOFF QUESTIONS
+## Topic 6: UI Design
 
-154. **When would you NOT use agile development?** When requirements are fixed and well-understood upfront, when regulatory documentation is mandatory, when safety-critical systems require complete specification and verification, or when the team is distributed with poor communication infrastructure.
+**Q1: What are the three golden rules of UI design?**
+A: (1) Place the user in control. (2) Reduce the user's memory load. (3) Make the interface consistent.
 
-155. **Trade-off: High cohesion vs. Low coupling — why are both desirable?** High cohesion means each module does one thing well (easier to understand and maintain). Low coupling means modules are independent (changes in one don't ripple to others). Together they make the system modular, testable, and maintainable.
+**Q2: What does "place the user in control" mean?**
+A: Define interactive modes with easy switching, allow flexible interaction (mouse, keyboard, voice), allow undo/redo, allow customization, hide technical internals, design for direct interaction.
 
-156. **Trade-off: Documentation vs. Working software (Agile value).** Too little documentation makes maintenance and handover difficult. Too much documentation wastes time and becomes outdated. Agile values working software but doesn't eliminate documentation — it prioritizes enough documentation for the team's needs.
+**Q3: What does "reduce the user's memory load" mean?**
+A: Use lists/checkboxes instead of text entry, establish meaningful defaults, define intuitive shortcuts, use real-world metaphors, disclose information progressively.
 
-157. **Trade-off: Early delivery vs. Quality (risk management).** Shipping early may satisfy the market but increase defect-related costs later. Risk management helps balance: identify high-impact risks, mitigate them, and deliver incrementally with quality gates.
+**Q4: What does "make the interface consistent" mean?**
+A: Put tasks in meaningful context, maintain consistency across application family, don't change user expectations (Ctrl+S must remain save).
 
-158. **Trade-off: Waterfall's documentation discipline vs. Agile's flexibility.** Waterfall provides clear audit trails and traceability (good for regulated industries). Agile provides rapid feedback and adaptation (good for uncertain requirements). Many organizations use hybrid approaches.
+**Q5: What are the four UI design models?**
+A: User model (end-user profile), Design model (design realization), Mental model (user's perception), Implementation model (look and feel + documentation).
 
-159. **When is reuse-oriented development risky?** Requirements compromises are inevitable (system may not meet real user needs), loss of control over evolution of reused elements, and potential integration issues with COTS components.
+**Q6: What are the three user types based on skill?**
+A: Novice, knowledgeable intermittent users, knowledgeable frequent users.
 
-160. **Trade-off: LOC estimation simplicity vs. FP estimation accuracy.** LOC is easy to count but language-dependent and doesn't reflect functionality. FP is language-independent and functionality-focused but requires more effort and expertise to calculate.
+**Q7: What are the four steps in the UI design process?**
+A: Interface analysis, interface design, interface implementation (prototyping), interface validation. Iterative using the spiral model.
+
+**Q8: What is Fitt's Law?**
+A: The time to acquire a target is a function of the distance to the target and the size of the target.
+
+**Q9: List five common UI design errors.**
+A: Lack of consistency, too much memorization, no guidance/help, no context sensitivity, poor response time.
+
+**Q10: What is latency reduction in UI design?**
+A: Interface should multitask rather than keep user waiting. Display progress bars, animations to keep user focused during operations.
+
+**Q11: What should a good error message include?**
+A: Describe the problem simply, provide valuable advice, list negative consequences, be visually distinctive (color coding).
+
+**Q12: What is the goal of user analysis?**
+A: Understand who will use the system, their skill levels, business perception, user diversity, so the mental image and design model converge.
+
+**Q13: What is the difference between length and variability of response time?**
+A: Length — longer response times cause frustration. Variability — varying response times cause confusion (user wonders if something went wrong).
+
+**Q14: List the revised UI design guidelines for web apps.**
+A: Learnability, maintain work product integrity (autosave), readability, track state (cookies), visible navigation.
+
+**Q15: What is the UI design workflow?**
+A: Derive info from requirements → develop rough layout sketch → map user objectives to actions → create storyboard → refine layouts → develop activity diagram → develop state diagram → describe layout for each state → refine and review.
 
 ---
 
-## QUICK-FIRE DEFINITION RECALL (Bonus Set)
+## Topic 7: Testing
 
-161. **Software process model** — Abstract representation of a process from a particular perspective
-162. **Cyclomatic complexity** — Number of independent paths = predicate nodes + 1
-163. **Risk exposure formula** — RE = P × C
-164. **VAF formula** — VAF = 0.65 + (0.01 × ΣFi)
-165. **UFC formula** — UFC = Σ(count × weight) for 5 information domain types
-166. **FP formula** — FP = UFC × VAF
-167. **Total Float formula** — TF = LF - EF or TF = LS - ES
-168. **Expected LOC (PERT)** — (Optimistic + 4×MostLikely + Pessimistic) / 6
-169. **Content coupling** — One module relies on/modifies internal workings of another (worst)
-170. **Functional cohesion** — All elements contribute to one well-defined task (best)
-171. **Agile Manifesto value** — Individuals over processes, Working software over documentation, Collaboration over negotiation, Change over plan
-172. **Verification question** — "Are we building the product right?"
-173. **Validation question** — "Are we building the right product?"
-174. **COTS** — Commercial Off-The-Shelf software components
-175. **Refactoring** — Improving code structure without changing behavior
+**Q1: What is the fundamental limitation of testing?**
+A: Testing can reveal the presence of errors, NOT their absence.
+
+**Q2: What is the difference between validation and verification?**
+A: Verification: "Are we building the product right?" (conforms to specification). Validation: "Are we building the right product?" (does what the user really requires).
+
+**Q3: What is the difference between validation testing and defect testing?**
+A: Validation testing: demonstrate system meets requirements (test cases reflect expected use). Defect testing: discover situations where behavior is incorrect (deliberately obscure test cases).
+
+**Q4: What are the three stages of development testing?**
+A: Unit testing (individual components), Component testing (integrated units, focus on interfaces), System testing (some/all components integrated, focus on interactions).
+
+**Q5: What is test-driven development (TDD)?**
+A: Approach where tests are developed BEFORE code. Steps: write test → run test (fails) → implement code → run test (passes) → refactor → next increment.
+
+**Q6: What are four benefits of TDD?**
+A: Code coverage (all code tested), regression testing (incremental test suite), simplified debugging (problem localized in recent code), system documentation (tests describe what code does).
+
+**Q7: What is the difference between alpha testing and beta testing?**
+A: Alpha testing: potential users test at the developer's location. Beta testing: release tested at potential users' sites, exposing system to larger/more representative users.
+
+**Q8: What is acceptance testing?**
+A: Customer formally accepts the system from suppliers as part of handover. For custom software, based on pre-agreed contract tests.
+
+**Q9: What is the difference between unit testing and integration testing?**
+A: Unit testing tests individual components in isolation. Integration testing tests interactions between components.
+
+**Q10: What are the three automated test components?**
+A: Setup (initialize system with inputs/expected outputs), Call (call object/method to test), Assertion (compare result with expected result).
+
+**Q11: What is regression testing?**
+A: Re-running all existing tests after code changes to ensure new changes have not introduced new bugs.
+
+**Q12: What are inspections in testing?**
+A: Static verification — people examine source representation (requirements, design, code) without executing the system to discover anomalies and defects.
+
+**Q13: What are the advantages of inspections over testing?**
+A: (1) Errors don't mask other errors (static process). (2) Incomplete versions can be inspected. (3) Can assess broader quality attributes (standards compliance, portability).
+
+**Q14: What is basis path testing?**
+A: Steps: (1) Draw control flow graph to determine program paths. (2) Find a basis set of independent paths. (3) Generate test cases to exercise each path.
+
+**Q15: What is error guessing?**
+A: Using knowledge of the system, platform, and domain to derive test cases likely to cause errors (e.g., zero input, huge numbers, alphabetic characters in numeric fields).
+
+**Q16: What are the three reliability metrics?**
+A: Mean Time to Failure (MTTF), Failure intensity, Probability of Failure on Demand (POFOD).
+
+**Q17: What is an operational profile?**
+A: A specification of how a system is used — defines types of user interactions, their frequency, and expected response time.
+
+**Q18: What is penetration testing?**
+A: Security testing where testers examine the system to find security weaknesses and exploit them to gain access.
+
+**Q19: What is the difference between release testing and system testing during development?**
+A: System testing during development is primarily defect testing by the development team. Release testing is primarily validation by a separate team.
+
+**Q20: What is the testing process model?**
+A: Design test cases → Prepare test data → Run program with test data → Compare results to test cases → Test reports.
+
+---
+
+## Topic 8: Quality Management
+
+**Q1: What is quality management?**
+A: An independent check on the software development process that checks project deliverables for consistency with organizational standards and goals.
+
+**Q2: Why should the quality team be independent from the development team?**
+A: To take an objective view of the software and report on quality without being influenced by development issues.
+
+**Q3: List the software quality attributes.**
+A: Safety, Security, Reliability, Resilience, Robustness, Understandability, Testability, Adaptability, Modularity, Complexity, Portability, Usability, Reusability, Efficiency, Learnability.
+
+**Q4: Why is it impossible to optimize for all quality attributes?**
+A: Quality conflicts exist — e.g., improving robustness may lead to loss of performance. The quality plan must define the most important attributes.
+
+**Q5: What are product standards vs process standards?**
+A: Product standards apply to the software product (document structure, coding standards). Process standards define the processes to follow (specification, design, validation processes).
+
+**Q6: What is ISO 9001?**
+A: An international standard that applies to organizations that design, develop, and maintain products. A framework for developing software standards.
+
+**Q7: What are the ISO 9001 core processes?**
+A: Business acquisition, Design and development, Business management, Supplier management, Production and delivery, Test, Service and support, Configuration management, Inventory management.
+
+**Q8: What is the process-based quality model?**
+A: Define process → Develop product → Assess product quality → Quality OK? → Yes: Standardize process / No: Improve process.
+
+**Q9: What is the importance of standards?**
+A: (1) Encapsulation of best practice — avoids repeating mistakes. (2) Framework for defining quality. (3) Provides continuity — new staff can understand the organization through standards.
+
+**Q10: What is ISO 9001 certification?**
+A: An external body certifies that an organization's quality manual conforms to ISO 9000 standards.
+
+---
+
+## Topic 9: Project Management (WBS, Planning, Scheduling, CPM)
+
+**Q1: What is the difference between plan, estimate, and schedule?**
+A: Plan: Identify activities (no specific dates). Estimate: Determine size/duration of activities. Schedule: Add specific start/end dates, relationships, and resources.
+
+**Q2: What is a Work Breakdown Structure (WBS)?**
+A: A deliverable-oriented decomposition of a project into smaller, manageable components organized in a hierarchy. Lowest level = work packages that can be estimated, scheduled, and tracked.
+
+**Q3: What are the goals of a WBS?**
+A: Give visibility to important/risky work efforts, illustrate correlation between activities and deliverables, show clear ownership, enable effective delegation, ensure nothing is forgotten.
+
+**Q4: What is a work package?**
+A: A group of related tasks at the same level within a WBS, measurable and definable, used for estimates and schedule monitoring.
+
+**Q5: What are the common pitfalls in creating a WBS?**
+A: Wrong level of work package detail, focusing on activities instead of deliverables, treating WBS as a plan/schedule, ignoring change control, treating WBS as an organizational hierarchy.
+
+**Q6: What is a WBS dictionary?**
+A: Companion document describing each WBS element — includes statement of work, associated activities, milestones, responsible organization, start/end dates, resources.
+
+**Q7: What are the four common elements in the project life cycle?**
+A: Defining (goals, specifications, tasks, responsibilities), Planning (schedule, budget, resources, risks, staff), Executing (status reports, quality, changes, reviews), Closing (train customer, transfer documents, release resources).
+
+**Q8: What is CPM (Critical Path Method)?**
+A: A scheduling technique that determines the longest path through the network, identifies tasks that cannot be delayed, and calculates slack/float time.
+
+**Q9: What is the critical path?**
+A: The longest path through the activity network. Tasks on this path have zero slack/float — any delay delays the entire project.
+
+**Q10: What is early start (ES) and early finish (EF)?**
+A: ES = earliest time an activity can start (forward pass). EF = ES + duration.
+
+**Q11: What is late start (LS) and late finish (LF)?**
+A: LF = latest time an activity can finish without delaying project. LS = LF - duration (backward pass).
+
+**Q12: What is total float (slack) and free float?**
+A: Total Float = LF - EF or LS - ES (delay without delaying project). Free Float = min(ES_successors) - ES_activity - Duration (delay without affecting next activity's early start).
+
+**Q13: What is resource leveling?**
+A: Resolving resource conflicts and balancing resource usage. May extend project duration and increase cost.
+
+**Q14: What are the three types of estimates and their accuracy ranges?**
+A: Rough Order of Magnitude (-25% to +75%), Budget Estimate (-10% to +25%), Definitive Estimate (-5% to +10%).
+
+**Q15: What is Earned Value Management (EVM)?**
+A: Measures: Planned Value (PV), Earned Value (EV), Actual Cost (AC). Schedule Variance (SV) = EV - PV. Cost Variance (CV) = EV - AC.
+
+**Q16: What is the Wideband Delphi technique?**
+A: Consensus-based estimation: (1) Choose team (3-7 members + moderator). (2) Kickoff meeting. (3) Individual preparation. (4) Multi-round estimation session with convergence. (5) Assemble tasks. (6) Review results.
+
+**Q17: What are the rules for creating an activity network diagram?**
+A: Flow left to right; activity cannot begin until all predecessors done; arrows can overlap; every activity must have an ID; no looping; ID > preceding activity ID.
+
+**Q18: What is a Gantt chart?**
+A: A bar chart showing tasks over calendar time, with horizontal bars representing each activity's duration.
+
+---
+
+## Topic 10: Estimation (LOC, FP, COCOMO)
+
+**Q1: What are the two main measures used for project size estimation?**
+A: Lines of Code (LOC) and Function Points (FP).
+
+**Q2: What is the three-point LOC estimation formula?**
+A: Expected LOC = (S_optimistic + 4 x S_most_likely + S_pessimistic) / 6
+
+**Q3: What are the advantages and disadvantages of LOC?**
+A: Advantages: Easy to count and calculate. Disadvantages: Highly dependent on programming language, not a good metric for estimation across languages.
+
+**Q4: What are the five information domain values in Function Point Analysis?**
+A: External Inputs (EI), External Outputs (EO), External Inquiries (EQ), Internal Logical Files (ILF), External Interface Files (EIF).
+
+**Q5: What is the Function Point formula?**
+A: FP = UFP x CAF, where CAF = 0.65 + (0.01 x sum of Fi) and Fi are 14 complexity adjustment factors rated 0-5.
+
+**Q6: What is the range of CAF?**
+A: Minimum 0.65 (when sum Fi = 0) to maximum 1.35 (when sum Fi = 70).
+
+**Q7: What are the weighting factors for Simple, Average, and Complex?**
+A: EI: 3,4,6. EO: 4,5,7. EQ: 3,4,6. ILF: 7,10,15. EIF: 5,7,10.
+
+**Q8: Name three advantages of FP over LOC.**
+A: (1) Independent of programming language. (2) Better for estimation (functional size). (3) Measures what the user needs, not implementation details.
+
+**Q9: What is COCOMO?**
+A: Constructive Cost Model — an algorithmic cost model that estimates effort, development time, and staff size based on project size (KLOC) and project mode.
+
+**Q10: What are the three COCOMO project modes?**
+A: Organic (familiar team, small, simple), Semi-detached (mixed), Embedded (highly complex, unfamiliar team).
+
+**Q11: What are the COCOMO basic effort equations?**
+A: Effort = a x (KLOC)^b where:
+- Organic: a=2.4, b=1.05
+- Semi-detached: a=3.0, b=1.12
+- Embedded: a=3.6, b=1.20
+
+**Q12: What is the COCOMO development time equation?**
+A: Time = c x (Effort)^d where:
+- All modes: c=2.5
+- Organic: d=0.38
+- Semi-detached: d=0.35
+- Embedded: d=0.32
+
+**Q13: What is average staff size in COCOMO?**
+A: S = Effort / Development Time
+
+**Q14: What are the three COCOMO II models?**
+A: Application Composition (early prototype stage), Early Design (requirements understood, basic architecture), Post-Architecture (detailed design available).
+
+**Q15: What are the COCOMO II scale factors?**
+A: Precedentedness (PREC), Development Flexibility (DFLEX), Architecture/Risk Resolution (RESL), Team Cohesion (TEAM), Process Maturity (PMAT).
+
+**Q16: How do you compute the COCOMO II exponent B?**
+A: B = 0.91 + 0.01 x (sum of five scale factors)
+
+**Q17: What are the four categories of COCOMO II cost drivers?**
+A: Product factors (RELY, DATA, CPLX, RUSE, DOCU), Platform factors (TIME, STOR, PVOL), Personnel factors (ACAP, PCAP, AEXP, PEXP, LTEX), Project factors (TOOL, SITE, SCED).
+
+**Q18: What is the relationship between FP and LOC?**
+A: They can be converted using language-specific ratios. Example: 1 FP = 60 lines of Java code (varies by language).
+
+**Q19: How do you calculate cost per LOC?**
+A: Cost per LOC = Cost per person-month / (LOC per person-month)
+
+**Q20: What are the seven cost estimation strategies?**
+A: Algorithmic cost modeling, expert judgment, estimation by analogy, Parkinson's Law, price-to-win, top-down estimation, bottom-up estimation.
+
+---
+
+## Topic 11: Risk Management
+
+**Q1: What is risk in software engineering?**
+A: A potential problem — an uncertainty that may or may not occur, but if it does, has a negative impact on the project.
+
+**Q2: What are the two characteristics of risk?**
+A: Uncertainty (the risk may or may not happen — no 100% risks) and Loss (if the risk becomes reality, unwanted consequences occur).
+
+**Q3: What is the Risk Exposure formula?**
+A: RE = P x C where P = probability of occurrence, C = cost to the project if the risk occurs.
+
+**Q4: Give an example of calculating Risk Exposure.**
+A: If 18 components need custom development, each 100 LOC at $14/LOC, impact = $25,200. Probability = 80%. RE = 0.80 x $25,200 = $20,200.
+
+**Q5: What is reactive risk management?**
+A: Project team reacts to risks when they occur. May involve mitigation (planning resources for firefighting), fix-on-failure, or crisis management.
+
+**Q6: What is proactive risk management?**
+A: Formal risk analysis is performed, organization corrects root causes of risk (TQM, statistical SQA), develops skill to manage change.
+
+**Q7: List the seven principles of risk management.**
+A: (1) Maintain global perspective. (2) Take forward-looking view. (3) Encourage open communication. (4) Integrate risk into software process. (5) Emphasize continuous process. (6) Develop shared product vision. (7) Encourage teamwork.
+
+**Q8: What are the three categories of risk?**
+A: Project risks (affect schedule/resources), Product risks (affect quality/performance), Business risks (affect organization developing or procuring software).
+
+**Q9: List the risk management process steps.**
+A: Risk identification → Risk analysis → Risk planning → Risk monitoring. Also: track and control (5-part paradigm).
+
+**Q10: What are the seven risk identification categories?**
+A: Product size, business impact, customer characteristics, process definition, development environment, technology to be built, staff size and experience.
+
+**Q11: What are known, predictable, and unpredictable risks?**
+A: Known: uncovered by careful evaluation (e.g., unrealistic deadlines). Predictable: extrapolated from past experience (e.g., staff turnover). Unpredictable: extremely difficult to identify in advance.
+
+**Q12: What are the four risk components?**
+A: Performance risk (meeting requirements), Cost risk (staying within budget), Support risk (ease of correction/adaptation), Schedule risk (on-time delivery).
+
+**Q13: What is a risk table?**
+A: Columns: Risk Summary, Risk Category, Probability, Impact (1-5 scale, 1=low, 5=catastrophic), RMMM reference. Sorted by probability and impact.
+
+**Q14: What are the four impact levels?**
+A: Negligible, marginal, critical, catastrophic.
+
+**Q15: What is the difference between risk mitigation, monitoring, and management (RMMM)?**
+A: Mitigation — how to avoid the risk (proactive steps). Monitoring — what factors to track to determine if risk is becoming more/less likely. Management — contingency plans if risk becomes reality.
+
+**Q16: What is the difference between a problem and a risk?**
+A: A problem has already occurred. A risk is something that is unpredictable — it might happen and it might not.
+
+**Q17: What are the sub-categories of business risks?**
+A: Market risk (building product no one wants), Strategic risk (product no longer fits business strategy), Sales risk (sales force doesn't understand how to sell), Management risk (losing senior management support), Budget risk (losing budgetary commitment).
+
+**Q18: What are the risk projection steps?**
+A: (1) Establish scale for likelihood. (2) Delineate consequences. (3) Estimate impact on project/product. (4) Note overall accuracy.
+
+**Q19: What questions should be asked to assess project risk?**
+A: Are top software/customer managers committed? Are end-users enthusiastically committed? Are requirements fully understood? Is scope stable? Does the team have the right skills? Are requirements stable?
+
+**Q20: What are example risk strategies?**
+A: Staff turnover → reorganize for overlap. Defective components → replace with bought-in reliable components. Requirements changes → traceability, information hiding. Budget cuts → briefing documents on project importance.

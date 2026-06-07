@@ -1,259 +1,300 @@
-# Software Engineering Introduction — Detailed Exam Notes
+# Detailed Notes: Introduction to Software Engineering
 
-## What Is Software Engineering, Really?
+## Topic Overview
 
-Every economy depends on software. Your phone, your bank, your university's enrollment system, the traffic lights on your way to class — all software-controlled. Software engineering is the discipline that makes building these systems possible, predictable, and economically viable. Without it, we'd still be writing personal programs that work on one machine and break on another. With it, we build systems that millions rely on every day.
-
-The key insight: **software costs more to maintain than to develop**. For systems with a long lifespan, maintenance costs can be several times the original development cost. This single fact drives almost every software engineering practice — if building software is cheap but changing it is expensive, then every decision we make during development must account for future change.
+Software engineering is the systematic application of engineering principles to the design, development, operation, and maintenance of software. It addresses the critical need for reliable, cost-effective software in a world where virtually all developed economies depend on software-controlled systems. This chapter establishes the foundational concepts, principles, and challenges that underpin the entire discipline of software engineering.
 
 ---
 
-## Why Does Software Engineering Exist?
+## Why This Topic Exists
 
-Software projects fail. Not occasionally — frequently. The two main reasons:
-
-1. **Increasing complexity** — systems are larger, more distributed, and more interconnected than ever. New techniques help us build bigger systems, but the demands grow faster than our ability.
-
-2. **Failure to use engineering methods** — it's easy to write programs without software engineering. Many companies drifted into software development without formal methods. Their software is more expensive and less reliable than it should be.
-
-> **Key Insight:** Software engineering exists because personal programming techniques don't scale to professional, team-based, long-lived systems.
+Software engineering exists because building software is fundamentally different from writing small programs. As systems grow in complexity, scale, and criticality, ad-hoc programming approaches become insufficient — leading to project failures, cost overruns, and unreliable systems. The discipline emerged to answer a critical question: **How can we produce high-quality, dependable software systems economically and on time?** Without software engineering, modern society could not trust the systems that control air traffic, medical devices, banking, power grids, and communications.
 
 ---
 
-## What Is Software?
+## Core Concepts & Definitions
 
-Software has two components:
+### Software Engineering Definition
 
-| Component | Description |
-|-----------|-------------|
-| **Computer programs** | The executable code that runs on hardware |
-| **Associated documentation** | Requirements docs, design docs, user manuals, API references |
+**Software engineering** is an engineering discipline concerned with all aspects of software production — from the early stages of system specification through to maintaining the system after it has gone into use.
 
-Software products come in two flavors:
+Key aspects of this definition:
+- **Engineering discipline**: Using appropriate theories and methods to solve problems, bearing in mind organizational and financial constraints.
+- **All aspects of software production**: Not just the technical process of development, but also project management, tool development, methodology creation, and quality assurance.
 
-| Type | Description | Example | Specification Owner |
-|------|-------------|---------|-------------------|
-| **Generic products** | Stand-alone systems marketed and sold to any buyer | MS Word, Photoshop, CAD software | Developer owns spec; developer decides changes |
-| **Customized (bespoke) products** | Commissioned by a specific customer for their specific needs | Air traffic control, embedded systems, hospital management | Customer owns spec; customer decides changes |
+### Software vs. Programming
 
-> **Exam Tip:** Know who owns the specification for generic vs. customized products. This is a classic MCQ question.
+| Aspect | Computer Science | Software Engineering |
+|--------|-----------------|---------------------|
+| Focus | Theory and fundamentals | Practicalities of delivering useful software |
+| Scope | Algorithms, data structures, computation | Full lifecycle: specification through maintenance |
+| Output | Proofs, models, prototypes | Reliable, maintainable, shippable products |
+| Constraints | Logical correctness | Budget, schedule, customer needs, team skills |
 
----
+### Software Costs Statistics (Critical for Exams)
 
-## Attributes of Good Software
+- **Software costs often dominate computer system costs** — on a PC, software costs are typically greater than hardware costs.
+- **Maintenance costs exceed development costs**: For systems with a long life, maintenance costs may be **several times** development costs.
+- **Cost breakdown**: Roughly **60% development costs**, **40% testing costs**.
+- For custom software, **evolution costs often exceed development costs**.
+- Software engineering is fundamentally about **cost-effective** software development.
 
-Five essential attributes define whether software is "good":
+### Project Failure Factors
 
-| Attribute | What It Means | Why It Matters |
-|-----------|---------------|----------------|
-| **Maintainability** | Software can evolve to meet changing needs | Change is inevitable; if software can't change, it becomes obsolete |
-| **Dependability** | Includes reliability, security, safety — software shouldn't cause physical/economic damage or be vulnerable to malicious users | Users must trust the software with their data and safety |
-| **Efficiency** | Doesn't wastefully use memory, processor cycles, or resources | Performance, responsiveness, memory utilization |
-| **Usability** | Easy to learn, use, and understand | If users can't use it, the software fails regardless of technical quality |
-| **Acceptability** | Must be understandable, usable, and compatible with other systems the user has | Software that doesn't fit the user's ecosystem gets rejected |
+| Factor | Explanation |
+|--------|-------------|
+| **Increasing system complexity** | As techniques improve, demands escalate — systems must be built faster, larger, and with capabilities previously thought impossible |
+| **Failure to use software engineering methods** | Many companies drift into software development without adopting proper engineering practices, resulting in expensive and unreliable software |
+| **Changing requirements** | Business environments evolve rapidly; systems that cannot adapt become legacy burdens |
+| **Poor specification** | Unclear or incomplete requirements lead to costly rework |
+| **Inadequate testing** | Skipping validation activities to meet deadlines leads to defects in production |
 
-> **Instructor Emphasis:** Maintainability is arguably the most important because maintenance is the most expensive phase. A system that can't be maintained is a system with an expiration date.
+### Essential Attributes of Good Software
 
----
-
-## Software Engineering — The Formal Definition
-
-> "Software engineering is an engineering discipline that is concerned with all aspects of software production from the early stages of system specification through to maintaining the system after it has gone into use."
-
-Breaking this down:
-
-- **Engineering discipline** — uses appropriate theories and methods to solve problems, while respecting organizational and financial constraints
-- **All aspects of software production** — not just coding. Includes project management, tool development, methods, and support processes
-- **From specification to maintenance** — covers the entire lifecycle, not just the development phase
-
-### How SE Differs from Related Fields
-
-| Field | Focus | SE's Relationship |
-|-------|-------|-------------------|
-| **Computer Science** | Theory and fundamentals | SE applies CS theory to practical software development |
-| **System Engineering** | All aspects of computer-based systems (hardware, software, process) | SE is part of the broader system engineering process |
+| Attribute | Description | Why It Matters |
+|-----------|-------------|----------------|
+| **Maintainability** | Software must be written to evolve with changing customer needs | Software change is inevitable in a changing business environment |
+| **Dependability & Security** | Includes reliability, security, and safety; should not cause physical/economic damage in failure; malicious users must be blocked | Trust is essential as software becomes intertwined with every aspect of life |
+| **Efficiency** | Should not waste system resources (memory, processor cycles); includes responsiveness, processing time, memory utilization | Poor efficiency degrades user experience and increases infrastructure costs |
+| **Acceptability** | Must be understandable, usable, and compatible with other systems users rely on | Software that users reject fails regardless of technical quality |
 
 ---
 
-## The Four Fundamental Activities
+## Key Models / Frameworks
 
-Every software process — regardless of methodology — involves four activities:
+### Fundamental Software Process Activities
 
-| Activity | What Happens | Who's Involved |
-|----------|-------------|----------------|
-| **Specification** | Define what the system should do and the constraints on its operation | Customers and engineers together |
-| **Development** | Design and program the system | Development team |
-| **Validation** | Check that the software meets what the customer requires | Testing team, QA, customers |
-| **Evolution** | Modify the software in response to changing requirements | Maintenance team, with customer input |
+These four activities form the backbone of every software engineering approach:
 
 ```
-Specification ──▶ Development ──▶ Validation ──▶ Evolution
-                                                    │
-                                                    └──▶ (Back to Specification — the cycle continues)
+  +---------------------+
+  |    SPECIFICATION    |  <-- What should the software do?
+  +----------+----------+
+             |
+             v
+  +---------------------+
+  |   DEVELOPMENT       |  <-- Design and implementation
+  | (Design + Coding)   |
+  +----------+----------+
+             |
+             v
+  +---------------------+
+  |    VALIDATION       |  <-- Does it meet specification?
+  +----------+----------+
+             |
+             v
+  +---------------------+
+  |     EVOLUTION       |  <-- Ongoing change over lifetime
+  +---------------------+
 ```
 
-> **Key Insight:** These activities are not strictly sequential. In practice, they overlap and iterate. But understanding them as distinct activities helps organize the work.
+**Specification** activities: Requirements elicitation, analysis, validation.
+**Design** activities: Architectural design, detailed design, interface design.
+**Implementation** activities: Coding, unit testing, integration.
+**Validation** activities: System testing, acceptance testing.
+
+### Application Types (Software Diversity)
+
+| Type | Description | Example |
+|------|-------------|---------|
+| Stand-alone applications | Run on local computer; no network required | PC graphics programs, project management tools |
+| Interactive transaction-based | Execute on remote computer, accessed by users | Web applications, e-commerce |
+| Embedded control systems | Control and manage hardware devices | Insulin pump, car engine control (most numerous type) |
+| Batch processing systems | Process data in large batches | Payroll systems, billing |
+| Entertainment systems | Personal use, entertainment | Video games, streaming apps |
+| Modeling & simulation | Model physical processes with interacting objects | Weather prediction, scientific simulation |
+| Data collection systems | Collect data from sensors for processing | Weather station data collection |
+| Systems of systems | Composed of multiple other software systems | Air traffic control, smart city infrastructure |
+
+### Key Insight for Exams
+
+**There is no universal set of software techniques applicable to all systems.** The methods and tools used depend on:
+1. Type of application being developed
+2. Requirements of the customer
+3. Background of the development team
+
+Example: Games should use a series of prototypes; safety-critical systems require complete, analyzable specifications.
 
 ---
 
-## Application Types — The Software Spectrum
+## Detailed Explanations
 
-Software systems come in many forms. Each type has different engineering challenges:
+### The Story of Why Software Engineering Matters
 
-| # | Application Type | Description | Example |
-|---|-----------------|-------------|---------|
-| 1 | **Stand-alone applications** | Run on a local computer, no network needed | MS Word, Photoshop |
-| 2 | **Interactive transaction-based** | Execute on remote server, accessed from user's device | E-commerce, banking apps |
-| 3 | **Embedded control systems** | Control and manage hardware devices | Car engine control, microwave |
-| 4 | **Batch processing systems** | Process data in large batches, input → output | Payroll, billing systems |
-| 5 | **Entertainment systems** | Primarily for personal entertainment | Games, streaming apps |
-| 6 | **Systems for modeling & simulation** | Model physical processes with interacting objects | Weather simulation, engineering models |
-| 7 | **Data collection systems** | Collect data from environment using sensors | IoT sensors, monitoring systems |
-| 8 | **Systems of systems** | Composed of multiple other software systems | Smart city infrastructure |
+Imagine you are asked to write a program that calculates the average of three numbers. You can do that in an hour, alone, with no planning, no tests, no documentation, and it will work fine.
 
-> **Exam Tip:** Know at least 5-6 application types with examples. MCQ questions often ask "which type of system is X?"
+Now imagine you are asked to build the software that controls a hospital's patient records system — handling thousands of patients, dozens of clinics, legal confidentiality requirements, and integration with existing lab systems. If you approach this the same way as the three-number average program, the result will be a disaster: security breaches, lost data, unusable interfaces, and millions of dollars wasted.
 
----
+**This is why software engineering exists.** It provides the methods, tools, and discipline needed to build large, complex, critical systems that people can depend on.
 
-## General Issues Affecting Software
+### The Cost Trap
 
-Four challenges shape modern software engineering:
+A common misconception is that "writing code" is the expensive part of software. In reality:
 
-| Challenge | Description | Impact on SE |
-|-----------|-------------|-------------|
-| **Heterogeneity** | Systems must operate across diverse networks with different computer and mobile device types | Requires portable, interoperable designs |
-| **Business & social change** | Emerging economies and new technologies force rapid software adaptation | Need for agile, responsive development |
-| **Security & trust** | Software is intertwined with all aspects of life; users must trust it | Security-by-design, encryption, access control |
-| **Scale** | Software ranges from tiny embedded devices to Internet-scale cloud systems | Different engineering approaches for different scales |
+- For a typical business system, **70-80% of total lifetime costs** occur after the initial release — in maintenance, bug fixes, feature additions, and adaptation to new platforms.
+- If you skip software engineering practices (specifications, design, testing) in a rush to "just code it," you save a little time upfront but create massive costs later when the system is brittle, undocumented, and impossible to change without breaking things.
+- **Result**: The cheapest way to build software is actually to do it properly from the start using software engineering methods.
 
----
+### The Diversity Problem
 
-## Software Engineering Fundamentals
+No single methodology works for every project. Consider:
 
-Four principles apply to **all** types of software systems:
+- A **video game**: Needs rapid prototyping, creative iteration, frequent feedback from test players. A rigid waterfall process would kill innovation and delay market entry.
+- An **aircraft flight control system**: Needs exhaustive specification, formal verification, meticulous testing. Agile prototyping without documentation would be dangerously irresponsible.
+- An **e-commerce website**: Needs incremental delivery, rapid response to market changes, continuous deployment. It must balance the chaos of agile with the reliability needs of payment processing.
 
-1. **Managed development process** — systems should be developed using a controlled, understood process (different processes for different types, but always a process)
-2. **Dependability and performance** — critical for all systems, regardless of type
-3. **Requirements management** — understanding and controlling what the software should do
-4. **Software reuse** — when appropriate, reuse existing software rather than writing new code from scratch
+Software engineers must be able to **select the right approach for the context**.
 
-> **Instructor Emphasis:** These fundamentals are universal. Whether you're building a game or a medical device, these four principles always apply.
+### The Web's Transformation
 
----
+The web fundamentally changed software engineering in two ways:
 
-## Web-Based Software Engineering
+1. **Software as a Service**: Instead of selling software as a product, companies now deliver functionality over the web (cloud computing). Users pay according to use rather than buying a license.
+2. **Reuse-dominated development**: Web-based systems are built by assembling pre-existing components and services rather than writing from scratch.
 
-The web changed everything about how we build software:
-
-| Aspect | Traditional | Web-Based |
-|--------|-------------|-----------|
-| **Platform** | Local machine | Distributed, cloud-based |
-| **Distribution** | Physical media or local network | Internet |
-| **Reuse** | Component libraries | Web services, APIs, microservices |
-| **Development approach** | Often plan-driven | Almost always incremental/agile |
-| **Delivery** | Periodic releases | Continuous deployment |
-
-Key web SE concepts:
-- **Software reuse** is the dominant approach — assemble from pre-existing components
-- **Incremental and agile development** — impractical to specify everything upfront for web systems
-
----
-
-## Ethical and Professional Responsibilities
-
-Software engineers have responsibilities to:
-
-| Responsibility | To Whom |
-|----------------|---------|
-| **Public** | Act consistently with the public interest |
-| **Client & Employer** | Act in their best interest, consistent with public interest |
-| **Product** | Ensure products meet the highest professional standards |
-| **Judgment** | Maintain integrity and independence |
-| **Management** | Promote ethical approaches to development |
-| **Profession** | Advance the integrity and reputation of the profession |
-| **Colleagues** | Be fair and supportive |
-| **Self** | Participate in lifelong learning |
-
-### ACM/IEEE Code of Ethics — 8 Principles
-
-| # | Principle | One-Line Summary |
-|---|-----------|-----------------|
-| 1 | **PUBLIC** | Act in the public interest |
-| 2 | **CLIENT AND EMPLOYER** | Serve client/employer, but not at public's expense |
-| 3 | **PRODUCT** | Ensure products meet professional standards |
-| 4 | **JUDGMENT** | Maintain professional judgment integrity |
-| 5 | **MANAGEMENT** | Lead ethically |
-| 6 | **PROFESSION** | Advance the profession |
-| 7 | **COLLEAGUES** | Be fair and supportive to peers |
-| 8 | **SELF** | Continuous learning |
-
-> **Exam Tip:** You don't need to memorize all 8 word-for-word, but know the key ones: PUBLIC, CLIENT/EMPLOYER, PRODUCT, JUDGMENT. These appear in MCQ and short-answer questions.
+However, the fundamental principles of software engineering remain the same — specification, development, validation, evolution — even if the techniques differ.
 
 ---
 
 ## Relationships to Other Topics
 
-This introductory topic connects to everything else in the course:
-
-- **Software Processes** (Topic 2) — the four activities (specification, development, validation, evolution) are implemented through specific process models
-- **Agile** (Topic 3) — agile methods are one approach to carrying out the four activities
-- **Testing** (Topic 4) — validation is one of the four activities; testing is how we perform it
-- **Quality Management** (Topic 11) — the attributes of good software (maintainability, dependability, etc.) are the quality goals we design for
-- **Estimation** (Topic 7) — understanding that maintenance costs exceed development costs drives estimation practices
-- **Ethics** — the ACM/IEEE code appears in multiple contexts throughout the course
-
----
-
-## Common Mistakes
-
-| Mistake | Correction |
-|---------|------------|
-| Thinking SE is just programming | SE covers the entire lifecycle — specification, design, testing, maintenance, project management |
-| Confusing generic and custom software specification ownership | Generic = developer owns; Custom = customer owns |
-| Thinking the four activities are strictly sequential | They overlap and iterate in practice |
-| Assuming all software has the same engineering needs | Different application types require different approaches |
+| Related Topic | Connection |
+|---------------|------------|
+| **Software Processes (Ch. 2)** | The four fundamental activities (specification, development, validation, evolution) are elaborated into specific process models (waterfall, incremental, agile) |
+| **Requirements Engineering (Ch. 4-8)** | Software specification is the foundation of requirements engineering — eliciting, analyzing, and documenting what stakeholders need |
+| **Software Design (Ch. 7, 16-17)** | Design and implementation activities are expanded into architectural design, detailed design, and interface design |
+| **Software Testing (Ch. 8)** | Validation activities encompass all levels of testing from unit to system to acceptance testing |
+| **Software Evolution (Ch. 9)** | The evolution activity addresses legacy systems, maintenance, and software change management |
+| **Software Reuse (Ch. 16, 19)** | Reuse-oriented development is a recurring theme, from component-based development to service-oriented architectures and cloud computing |
+| **Professional Ethics (Ch. 1)** | The ACM/IEEE Code of Ethics provides the professional framework within which all software engineering activities must operate |
+| **Critical Systems (Ch. 10-12)** | Dependability and security (essential attributes) are explored in depth for safety-critical and mission-critical systems |
 
 ---
 
-## Exam Traps
+## Examples
 
-| Trap | Why It's Tricky | Correct Answer |
-|------|----------------|----------------|
-| "Software engineering is the same as computer science" | CS focuses on theory; SE focuses on practical delivery | SE is an engineering discipline applied to software production |
-| "Generic products have customer-owned specs" | Students confuse who initiates the product | Developer owns the spec for generic products |
-| "Maintenance is the cheapest phase" | Feels intuitive since it's "just fixing bugs" | Maintenance is the most expensive phase, often 2-3x development cost |
-| "All software requires the same development approach" | One-size-fits-all thinking | Different types need different methods (games vs. safety-critical systems) |
+### Case Study 1: Insulin Pump (Mixed-Criticality System)
+
+An embedded system that controls insulin delivery for diabetic patients.
+
+- **Type**: Embedded control system
+- **Criticality**: Safety-critical — failure may cause patient death
+- **Key attributes required**: Dependability, security, real-time responsiveness
+- **Challenge**: Must respond to sensor inputs immediately (real-time constraint) while maintaining patient safety
+- **Why SE matters here**: A programming error literally kills someone. This is the textbook case for rigorous specification, formal validation, and exhaustive testing.
+
+### Case Study 2: Mentcare (Medical Information System)
+
+A system supporting management of patients with mental health problems.
+
+- **Type**: Interactive transaction-based system (with data collection)
+- **Key attributes required**: Confidentiality, availability, usability
+- **Challenge**: Used in diverse contexts (hospitals, clinics, homes) — must work in different environments with different network connectivity
+- **Why SE matters here**: Patient records are legally protected. The system must be available when doctors need it, secure against unauthorized access, and usable by staff with varying technical skills.
+
+### Case Study 3: Wilderness Weather Station (WildWeathers)
+
+A system collecting weather data from remote stations and making it available on the web.
+
+- **Type**: Data collection system + web-based information system
+- **Architecture flow**:
+  - Remote Weather Station collects sensor data
+  - Data sent to System Server via Internet
+  - System Server processes and stores data
+  - Data sent to Information Distribution System
+  - Information Distribution System sends data to Web Browser
+  - Web Browser displays data to users
+- **Key attributes required**: Reliability (24/7 operation), scalability (large data volumes), availability
+- **Why SE matters here**: Remote stations are unattended — the system must be robust enough to handle hardware failures, network interruptions, and extreme weather conditions without human intervention.
+
+---
+
+## Common Mistakes / Exam Traps
+
+1. **Confusing software engineering with programming**: "Software engineering is just writing code for large projects." **Wrong.** SE encompasses specification, validation, evolution, project management, and process — not just coding.
+
+2. **Assuming one methodology fits all**: "Agile is always better than waterfall." **Wrong.** The right approach depends on application type, customer requirements, and development team context. Safety-critical systems may need formal methods; games need prototyping.
+
+3. **Forgetting that maintenance is the majority of cost**: Students often think development is the expensive part. **The exam will test you on this: maintenance costs exceed development costs for long-lived systems.**
+
+4. **Mixing up generic vs. customized products**: Remember who owns the specification:
+   - **Generic**: Developer owns the spec and makes change decisions
+   - **Customized**: Customer owns the spec and makes change decisions
+
+5. **Omitting attributes of good software**: The four attributes are **maintainability, dependability & security, efficiency, and acceptability**. Missing one on an exam question loses marks. Note that "usability" is part of acceptability, not a separate attribute.
+
+6. **Thinking web-based SE is completely different**: The fundamental principles (specification, development, validation, evolution) apply equally to web-based systems. The web changes *how* we do these activities (more reuse, incremental delivery) but not *whether* we do them.
+
+7. **Confusing software engineering with system engineering**: System engineering covers hardware, software, and process engineering. Software engineering is a **subset** of system engineering.
+
+8. **Neglecting the "why" of cost-effective development**: The exam may ask why SE saves money. Answer: It reduces the enormous maintenance costs that arise from poorly structured, undocumented, untested code.
 
 ---
 
 ## Active Recall Questions
 
-1. Define software engineering in one sentence.
-2. What are the two components of "software"?
-3. List the five essential attributes of good software.
-4. What is the difference between generic and customized software products?
-5. Who owns the specification for generic products? For customized products?
-6. Name the four fundamental software engineering activities.
-7. Why is software maintenance more expensive than development?
-8. List eight application types of software systems.
-9. What are the four general issues affecting software?
-10. Name the four software engineering fundamentals.
-11. What is the difference between software engineering and computer science?
-12. List four principles from the ACM/IEEE Code of Ethics.
+1. What are the four fundamental software process activities?
+2. List the four essential attributes of good software and give a one-sentence description of each.
+3. What percentage of software costs are typically development costs vs. testing costs?
+4. For a long-lived software system, which costs more — development or maintenance?
+5. What is the difference between a generic software product and a customized product?
+6. Who owns the specification for a generic product? Who owns it for a customized product?
+7. What is the difference between software engineering and computer science?
+8. What is the difference between software engineering and system engineering?
+9. Why can't we say that one software engineering method is universally better than another?
+10. How has the web changed software engineering?
+11. Name the three case studies introduced in Chapter 1 and classify each by application type.
+12. What are the key challenges facing software engineering today?
+13. What does it mean that software dependability includes reliability, security, and safety?
+14. What are the two main reasons software projects fail (per the textbook)?
+15. What is the difference between "software specification" and "software validation"?
 
 ---
 
 ## Potential Exam Questions
 
-1. **Short answer:** Explain why software maintenance is typically more expensive than initial development.
-2. **Comparison:** Differentiate between generic and customized software products, including who owns the specification in each case.
-3. **List:** Name and briefly describe the four fundamental activities of a software process.
-4. **Essay:** Why is software engineering necessary? Discuss with reference to project failure and increasing complexity.
-5. **Application:** A hospital wants to build a patient management system. What type of application is this, and what special considerations apply?
-6. **Ethics:** A client asks you to hide a security vulnerability in their software. Which ACM/IEEE principles apply?
+**Short Answer (2-4 marks)**
+
+1. Define software engineering and explain how it differs from programming.
+2. List the four fundamental activities in the software process. Describe each in one sentence.
+3. Explain why maintenance costs often exceed development costs for software systems.
+4. What are the essential attributes of good software? Provide a brief description of each.
+5. Distinguish between generic software products and customized (bespoke) software products.
+6. What is the role of a code of ethics in software engineering?
+
+**Medium Answer (5-8 marks)**
+
+7. "There is no universal set of software techniques applicable to all types of system." Explain this statement with examples of different application types and the approaches suited to each.
+8. Describe the three case studies from Chapter 1 (Insulin Pump, Mentcare, WildWeathers). For each, identify the application type and the most critical software attributes required.
+9. What challenges does software engineering face today? Discuss diversity, trust, heterogeneity, and the speed of business/technological change.
+10. Explain how the web has impacted software engineering. In what ways do the fundamental principles still apply?
+
+**Essay (10+ marks)**
+
+11. "Software engineering exists because modern software systems are fundamentally different from small programs." Discuss this claim, referencing:
+    - The costs of software development vs. maintenance
+    - Project failure factors
+    - Software diversity and the need for different approaches
+    - The essential attributes of good software
+    - Real-world case studies
+
+12. A hospital wants to build a new patient record system. Using concepts from Chapter 1, explain:
+    - Which software process activities will be involved
+    - Which essential attributes are most critical for this system and why
+    - Whether a generic or customized approach is appropriate
+    - Which ethical considerations (from the ACM/IEEE Code) apply
+
+13. Compare and contrast the software engineering approach for an embedded control system (like the Insulin Pump) versus a web-based information system (like the WildWeathers). Discuss how the four fundamental process activities, essential attributes, and development methods would differ.
 
 ---
 
 ## Topic Summary
 
-Software engineering is the engineering discipline concerned with all aspects of software production — from specification through maintenance. It exists because personal programming techniques don't scale to professional, team-based systems. Good software is maintainable, dependable, efficient, usable, and acceptable. Every software process involves four activities: specification, development, validation, and evolution. Software comes in many application types, each with different engineering challenges. The field is shaped by four general issues: heterogeneity, business change, security, and scale. Four fundamentals apply universally: managed processes, dependability/performance, requirements management, and software reuse. The ACM/IEEE Code of Ethics provides eight principles for professional conduct. Understanding this foundation is essential because every other topic in this course builds on these concepts.
+- **Software engineering** is the disciplined, systematic approach to building and maintaining software systems — encompassing specification, development, validation, and evolution.
+- **Software costs** are dominated by maintenance, not initial development. Cost-effective development requires proper SE methods.
+- **Good software** must be maintainable, dependable & secure, efficient, and acceptable to its users.
+- **Project failure** arises from increasing complexity and failure to use SE methods.
+- **Software diversity** means no single methodology works for all systems; the approach must match the application type.
+- **Web-based SE** emphasizes reuse and incremental delivery but shares the same fundamental principles.
+- **Ethics** (ACM/IEEE Code) require software engineers to act in client interests, ensure trustworthiness, respect intellectual property, approve only safe/reliable software, and maintain professional skills.
+- **Four case studies** (Insulin Pump, Mentcare, WildWeathers) exemplify different application types, criticality levels, and SE challenges.

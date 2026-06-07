@@ -1,454 +1,407 @@
-# Risk Management — Detailed Notes
-
-## The Story of Risk
-
-Imagine you're building a bridge. You know the river might flood, the steel might be defective, and the contractor might quit mid-project. These are **risks** — uncertain events that, if they occur, cause loss. Now imagine building software: the requirements might change, the technology might fail, key developers might leave, and the customer might not pay. Software risk management is the **systematic discipline** of anticipating these threats and preparing for them before they materialize.
+# Risk Management — Detailed Study Notes
 
 ---
 
-## What is Risk? — The Conceptual Foundation
+## Topic Overview
 
-Risk is defined by **two essential components**:
-
-> **Risk = Uncertainty + Loss**
-
-- **Uncertainty**: The event *might* happen — we don't know for certain
-- **Loss**: If the event happens, something bad results — financial loss, schedule delay, quality degradation, or project failure
-
-A risk is **not** a certainty. If something is guaranteed to happen, it's not a risk — it's a **plan**. A risk is an event that *may or may not* occur, but *if it does*, it causes harm.
-
-### Risk Characteristics
-
-| Characteristic | Description |
-|----------------|-------------|
-| **Uncertainty** | The event may or may not occur |
-| **Potential Loss** | If it occurs, it causes negative impact |
-| **Probability** | There is some measurable or estimable likelihood |
-| **Timing** | The event occurs at some point during the project lifecycle |
-| **Impact Magnitude** | The severity of loss varies — from minor to catastrophic |
-
-### Probability Levels
-
-Risk probability is typically categorized into levels:
-
-| Level | Probability Range | Description |
-|-------|-------------------|-------------|
-| Very Low | < 10% | Highly unlikely to occur |
-| Low | 10% – 25% | Unlikely but possible |
-| Medium | 25% – 50% | Even chance of occurring |
-| High | 50% – 75% | More likely to occur than not |
-| Very High | > 75% | Almost certain to occur |
+Risk Management is a proactive discipline within software engineering that identifies, analyzes, and prepares for uncertainties that could negatively impact a project's schedule, budget, quality, or viability. It shifts the team from a reactive "fire-fighting" posture to a forward-looking stance where potential problems are anticipated and mitigated before they strike.
 
 ---
 
-## Risk Categorization — Organizing the Unknown
+## Why This Topic Exists
 
-Risks are not all the same. They come from different sources and affect different aspects of the project. The standard taxonomy organizes risks into **three major categories**, each with sub-categories:
+Software projects are inherently uncertain. Requirements change, staff leave, technology fails, and deadlines shift. Without risk management, teams operate blindly, reacting to crises as they occur -- which is expensive, stressful, and often leads to project failure. Risk management exists to:
 
-### 1. Project Risks
-These threaten the **project plan** itself — the ability to deliver on time, within budget, and with required quality.
-
-| Sub-category | Description |
-|--------------|-------------|
-| **Schedule risk** | Threats that delay delivery milestones |
-| **Resource risk** | Threats related to people, tools, or infrastructure availability |
-| **Budget risk** | Threats that cause cost overruns |
-| **Scope risk** | Threats from uncontrolled scope changes (scope creep) |
-
-### 2. Technical Risks
-These threaten the **quality and performance** of the software being built.
-
-| Sub-category | Description |
-|--------------|-------------|
-| **Performance risk** | The product may not meet performance requirements |
-| **Reliability risk** | The product may fail unpredictably in production |
-| **Complexity risk** | Technical complexity may exceed team capability |
-| **Technology risk** | New or unproven technology may not work as expected |
-| **Integration risk** | Components may not work together properly |
-
-### 3. Business Risks
-These threaten the **business value and viability** of the project.
-
-| Sub-category | Description |
-|--------------|-------------|
-| **Market risk** | The product may not meet market needs |
-| **Strategic risk** | The project may not align with organizational strategy |
-| **Financial risk** | The project may not provide expected ROI |
-| **Competitive risk** | Competitors may launch superior products first |
+- Reduce the likelihood of unpleasant surprises
+- Provide contingency plans so the team is never caught off-guard
+- Allocate limited resources (time, money, people) to the most threatening issues
+- Improve communication among stakeholders about what could go wrong
+- Increase the probability of project success
 
 ---
 
-## Known, Predictable, and Unpredictable Risks
+## Core Concepts & Definitions
 
-Not all risks are equally knowable. They fall into a spectrum:
+| Concept | Definition |
+|---|---|
+| **Risk** | An uncertain event or condition that, if it occurs, has a negative effect on project objectives |
+| **Problem** | An event that has already occurred (different from risk) |
+| **Constraint** | A certainty (NOT a risk) -- e.g., a fixed deadline |
+| **Uncertainty** | The risk may or may not happen; there are no 100% risks |
+| **Loss** | The unwanted consequence if the risk becomes real |
+| **Risk Exposure (RE)** | RE = P x C where P = probability, C = cost of impact |
+| **Risk Management** | The art of managing risks to achieve a WIN-WIN outcome between team and customer |
+| **RMMM** | Risk Mitigation, Monitoring, and Management -- the plan for handling each risk |
+
+### Two Characteristics of Risk
+
+1. **Uncertainty** -- The risk may or may not happen (0% < P < 100%)
+2. **Loss** -- If realized, there are negative consequences
+
+### Risk Probability Scales
+
+| Descriptor | Range |
+|---|---|
+| Very Low | < 10% |
+| Low | 10% -- 25% |
+| Moderate | 25% -- 50% |
+| High | 50% -- 75% |
+| Very High | > 75% |
+
+### Sub-Types by Knowability
 
 | Type | Description | Example |
-|------|-------------|---------|
-| **Known Risks** | Risks that can be identified and analyzed upfront through experience, data, or reasoning | "We know that using a new database engine introduces migration risk" |
-| **Predictable Risks** | Risks that can be anticipated based on patterns, history, or project characteristics | "Historical data shows that projects with >50% new requirements experience 30% schedule overrun" |
-| **Unpredictable Risks** | Risks that cannot be anticipated — the "unknown unknowns" | A completely unexpected API deprecation by a vendor, a natural disaster |
-
-> **Key Insight:** Known and predictable risks can be managed proactively. Unpredictable risks require **contingency planning** and **risk reserves** — you can't plan for what you can't see, but you can plan for the *impact* of surprises.
+|---|---|---|
+| **Known risks** | Uncovered after careful evaluation of project plan, business/technical environment | Unrealistic delivery date |
+| **Predictable risks** | Extrapolated from past project experience | Past staff turnover patterns |
+| **Unpredictable risks** | Extremely difficult to identify in advance | A once-in-a-decade hardware failure |
 
 ---
 
-## 7 Principles of Risk Management
+## Reactive vs Proactive Strategies
 
-These principles guide the entire risk management discipline:
+| Dimension | Reactive | Proactive |
+|---|---|---|
+| **Philosophy** | "Don't worry, I'll think of something" | Formal risk analysis performed upfront |
+| **Timing** | Nothing is done until something goes wrong | Risks identified, analyzed, and planned for in advance |
+| **Approach** | Fix on failure; crisis management | Root cause correction; contingency plans |
+| **Practices** | Resources found and applied when risk strikes | TQM concepts, statistical SQA, examining risk sources beyond software |
+| **Outcome** | Chaotic, expensive, schedule slips | Controlled, predictable, lower stress |
 
-| # | Principle | Description |
-|---|-----------|-------------|
-| 1 | **Communication** | Risk information must be shared openly among all stakeholders |
-| 2 | **Early identification** | Risks should be identified as early as possible in the project lifecycle |
-| 3 | **Analysis of risk** | Each risk must be analyzed for probability and impact |
-| 4 | **Iterative analysis** | Risk analysis is not a one-time activity — it must be repeated as the project evolves |
-| 5 | **Best information** | Risk decisions must be based on the best available data, not guesswork |
-| 6 | **Responsibility** | Every risk must have an assigned owner responsible for monitoring and mitigation |
-| 7 | **Organization** | Risk management must be an organized, systematic process — not ad hoc |
+### Reactive Approaches (from worst to less-bad)
 
----
+1. **Crisis management** -- Failure does not respond to applied resources; project is in jeopardy
+2. **Fix on failure** -- Resources are found and applied when the risk strikes
+3. **Mitigation** -- Plan for additional resources in anticipation of fire fighting
 
-## Reactive vs. Proactive Risk Strategies
+### Proactive Steps
 
-The fundamental question is: **do you wait for problems to happen, or do you prepare for them?**
-
-| Aspect | Reactive Strategy | Proactive Strategy |
-|--------|-------------------|-------------------|
-| **When** | After the risk event occurs | Before the risk event occurs |
-| **Approach** | "Fight fires" as they arise | Anticipate and prevent fires |
-| **Cost** | Often expensive (damage control) | Often cheaper (prevention) |
-| **Effectiveness** | Low — you're always behind | High — you stay ahead |
-| **Analogy** | Repairing a car after it breaks down | Performing regular maintenance |
-| **Project Impact** | Schedule delays, budget overruns | Controlled, predictable delivery |
-
-> **Exam Point:** Most organizations are reactive, but **best practice is proactive**. The 5-step proactive process below is the recommended approach.
+1. Identify possible risks (what can go wrong?)
+2. Analyze each risk (probability + impact)
+3. Rank risks by probability and impact (Negligible < Marginal < Critical < Catastrophic)
+4. Develop contingency plans for high-probability, high-impact risks
 
 ---
 
-## The 5-Step Proactive Risk Management Process
+## Seven Principles of Risk Management
 
-This is the systematic process for managing risk proactively:
+| # | Principle | Meaning |
+|---|---|---|
+| 1 | **Maintain a global perspective** | View software risks within the context of the system and business problem |
+| 2 | **Take a forward-looking view** | Think about future risks; establish contingency plans now |
+| 3 | **Encourage open communication** | If someone states a risk, do not discount it |
+| 4 | **Integrate** | Risk consideration must be woven into the software process itself |
+| 5 | **Emphasize a continuous process** | Stay vigilant throughout; modify risks as more is known |
+| 6 | **Develop a shared product vision** | All stakeholders sharing the same vision leads to better risk ID |
+| 7 | **Encourage teamwork** | Pool the talents, skills, and knowledge of all stakeholders |
+
+Memory aid: **G F I E C D T** (Global, Forward-looking, Integrate, Emphasize continuous, Communicate, Develop vision, Teamwork)
+
+---
+
+## Risk Management Paradigm (Cycle)
 
 ```
-Step 1: RISK IDENTIFICATION
-    ↓
-Step 2: RISK ANALYSIS
-    ↓ (probability, impact)
-Step 3: RISK PLANNING
-    ↓ (mitigation strategies)
-Step 4: RISK TRACKING
-    ↓ (monitoring indicators)
-Step 5: RISK CONTROL
-    ↓ (adjusting plans, taking action)
-    → (loops back to identification)
+                    +-----------+
+                    |  IDENTIFY |
+                    +-----+-----+
+                          |
+                          v
+                    +-----------+
+                    |  ANALYZE  |
+                    +-----+-----+
+                          |
+                          v
+                    +-----------+
+                    |   PLAN    |
+                    +-----+-----+
+                          |
+                          v
+                    +-----------+
+                    |   TRACK   |
+                    +-----+-----+
+                          |
+                          v
+                    +-----------+
+                    |  CONTROL  |
+                    +-----+-----+
+                          |
+             (back to IDENTIFY)
 ```
 
-### Step 1: Risk Identification
-- What can go wrong?
-- Use brainstorming, checklists, questionnaires, historical data
-- Identify **both** known and predictable risks
-
-### Step 2: Risk Analysis
-- How likely is each risk? (probability)
-- What is the impact if it occurs? (consequence)
-- Prioritize risks by risk exposure
-
-### Step 3: Risk Planning
-- What will we do about each risk?
-- Develop mitigation, monitoring, and contingency plans
-
-### Step 4: Risk Tracking
-- Monitor risk indicators continuously
-- Are risks becoming more or less likely?
-- Are new risks emerging?
-
-### Step 5: Risk Control
-- Execute mitigation plans when triggers occur
-- Adjust plans based on new information
-- Reassess risk priorities
+The paradigm is a continuous cycle, not a one-time activity.
 
 ---
 
-## The Risk Management Paradigm — A Continuous Cycle
+## Risk Identification
 
-The risk management paradigm is a **continuous cycle** — not a linear process with a beginning and end:
+### Systematic Process
 
-```
-    ┌──────────────────────┐
-    │                      │
-    ▼                      │
- IDENTIFY → ANALYZE → PLAN ┤
-                │           │
-                ▼           │
-              TRACK → CONTROL
-```
+Risk identification is a **systematic attempt** to specify threats to the project plan. It identifies both:
 
-The key insight: **risk management is iterative**. As the project progresses, you continuously identify new risks, analyze them, plan responses, track indicators, and control outcomes. This cycle repeats throughout the entire project lifecycle.
+- **Generic risks** -- threats to every software project
+- **Product-specific risks** -- identified by those with clear understanding of the technology, people, and environment specific to the software to be built. Requires examination of the project plan and statement of scope.
 
----
+### Seven Risk Categories
 
-## Risk Identification — Detailed Techniques
+| Category | Description | Key Questions |
+|---|---|---|
+| **Product size** | Risks associated with the overall size of the software | Estimated LOC/FP? % deviation from past products? Number of users? |
+| **Business impact** | Risks from management or marketplace constraints | Effect on company revenue? Senior management visibility? Cost of late delivery? |
+| **Customer characteristics** | Risks from customer sophistication and communication | Worked with customer before? Solid idea of requirements? Willing to participate in reviews? |
+| **Process definition** | Risks from how well the software process is defined/followed | Common process framework established? CASE tools used? Formal technical reviews? |
+| **Development environment** | Risks from availability/quality of tools | Are tools integrated? Are document formats established? |
+| **Technology to be built** | Risks from complexity and newness of technology | New to organization? New algorithms? Unproven hardware? Specialized UI? |
+| **Staff size and experience** | Risks from team composition | Best people available? Right skills? Staff turnover low? Adequate training? |
 
-### Generic vs. Product-Specific Identification
+### Risk Item Checklist
 
-| Approach | Description |
-|----------|-------------|
-| **Generic Identification** | Uses a standardized checklist of common risks applicable to any software project (e.g., "requirements may change," "technology may not work") |
-| **Product-Specific Identification** | Focuses on risks unique to the specific project being developed (e.g., "this particular API integration may fail due to undocumented rate limits") |
+A risk item checklist can be organized as:
 
-> **Best Practice:** Use **both** approaches. Start with generic checklists, then layer on product-specific risks.
+1. A list of characteristics relevant to each risk subcategory
+2. A questionnaire that leads to an estimate on the impact of each risk
+3. A list containing a set of risk components/drivers and their probability of occurrence
 
-### The Risk Item Checklist
+### Questionnaire for Assessing Overall Project Risk
 
-A structured checklist covering **7 risk categories**:
+The degree of project risk is directly proportional to the number of **negative responses**.
 
-| # | Category | Example Risks |
-|---|----------|---------------|
-| 1 | **Product size** | Project is larger than estimated; scope creep increases size |
-| 2 | **Business impact** | Organizational priorities change; funding is cut; market shifts |
-| 3 | **Customer characteristics** | Customer is indecisive; requirements are ambiguous; stakeholder conflict |
-| 4 | **Process definition** | Development process is inadequate; methodology doesn't fit project |
-| 5 | **Development environment** | Tool limitations; infrastructure failures; integration challenges |
-| 6 | **Technology** | New/unproven technology; platform compatibility; performance limitations |
-| 7 | **Staffing** | Key人员 turnover; skill gaps; team conflicts; insufficient training |
-
-### The Project Risk Questionnaire — 11 Critical Questions
-
-This questionnaire is used to systematically identify risks at the **project level**. Each question targets a specific risk area:
-
-| # | Question | Risk Area |
-|---|----------|-----------|
-| 1 | Has the customer approved the requirements? | Requirements stability |
-| 2 | Are requirements stable or changing? | Scope risk |
-| 3 | Are requirements understood by all team members? | Communication risk |
-| 4 | Are there any technical risks? | Technology risk |
-| 5 | Is the project schedule realistic? | Schedule risk |
-| 6 | Is the project team experienced? | Staffing risk |
-| 7 | Are there adequate resources? | Resource risk |
-| 8 | Is the development environment adequate? | Infrastructure risk |
-| 9 | Are there any external dependencies? | Dependency risk |
-| 10 | Is the project budget sufficient? | Financial risk |
-| 11 | Are quality standards clearly defined? | Quality risk |
-
-> **Exam Tip:** These 11 questions are frequently tested. Understand what each question is really asking about.
+1. Have top software and customer managers formally committed to support the project?
+2. Are end-users enthusiastically committed to the project?
+3. Are requirements fully understood by the team and customers?
+4. Have customers been involved fully in requirements definition?
+5. Do end-users have realistic expectations?
+6. Is project scope stable?
+7. Does the team have the right mix of skills?
+8. Are project requirements stable?
+9. Does the team have experience with the technology?
+10. Is the number of people adequate?
+11. Do all constituencies agree on the importance and requirements?
 
 ---
 
-## Risk Components and Risk Exposure
-
-### Risk Components
-
-There are four key components of risk that affect a project:
-
-| Component | Description |
-|-----------|-------------|
-| **Performance** | Will the product meet functional and non-functional requirements? |
-| **Cost** | Will the project stay within budget? |
-| **Support** | Will the product be maintainable and supportable after delivery? |
-| **Schedule** | Will the project meet its deadlines? |
-
-These components are used in the **risk impact assessment** (below).
-
-### Risk Impact Assessment Matrix
-
-The impact matrix combines **probability** with **impact severity** to prioritize risks:
-
-|  | Low Impact | Medium Impact | High Impact |
-|--|-----------|--------------|-------------|
-| **High Probability** | Medium Risk | High Risk | **Very High Risk** |
-| **Medium Probability** | Low Risk | Medium Risk | High Risk |
-| **Low Probability** | Very Low Risk | Low Risk | Medium Risk |
-
-Impact is assessed across the four components (performance, cost, support, schedule) for each risk.
-
----
-
-## Risk Projection — The Quantitative Engine
-
-Risk projection (also called **risk estimation**) translates qualitative risk assessment into quantitative measures. It involves **4 steps**:
-
-### Step 1: Establish a Risk Table
-Create a structured table listing all identified risks.
-
-### Step 2: Assess Probability and Impact
-For each risk, estimate the probability (P) and consequence/impact (C).
-
-### Step 3: Calculate Risk Exposure
-Apply the formula: **RE = P × C**
-
-### Step 4: Sort and Prioritize
-Sort risks by Risk Exposure (highest first) to determine which require immediate attention.
-
-### The Risk Table Structure
-
-| Risk ID | Risk Description | Probability (P) | Consequence (C) | Risk Exposure (RE) | Priority |
-|---------|-----------------|-----------------|-----------------|--------------------| ---------|
-| R1 | Key developer leaves | 0.5 | $50,000 | $25,000 | High |
-| R2 | Requirements change significantly | 0.7 | $30,000 | $21,000 | High |
-| R3 | Technology fails integration test | 0.3 | $40,000 | $12,000 | Medium |
+## Risk Projection (Estimation)
 
 ### Risk Exposure Formula
 
 ```
-RE = P × C
+RE = P x C
 ```
 
 Where:
-- **RE** = Risk Exposure (the expected loss)
-- **P** = Probability of the risk occurring (0 to 1)
-- **C** = Cost/Consequence if the risk occurs
+- **RE** = Risk Exposure
+- **P** = Probability of occurrence (0.0 to 1.0)
+- **C** = Cost to the project should the risk occur
 
 ### Worked Example
 
-**Risk:** A new software tool may not integrate with existing systems.
+- **Risk identified**: Only 70% of planned reusable components will integrate; remaining must be custom-built.
+- **Probability**: 80% (0.80)
+- **Impact**: 18 components x 100 LOC each x $14/LOC = $25,200
+- **RE** = 0.80 x $25,200 = **$20,200**
 
-- **Probability (P):** 0.4 (40% chance)
-- **Consequence (C):** $80,000 (cost of rework and delays)
-- **Risk Exposure (RE):** 0.4 × $80,000 = **$32,000**
+### Four Risk Projection Steps
 
-This means the **expected loss** from this risk is $32,000. If the mitigation plan costs less than $32,000, it's economically justified.
+1. Establish a scale reflecting the perceived likelihood of a risk
+2. Delineate the consequences of the risk
+3. Estimate the impact of the risk on the project and product
+4. Note the overall accuracy of the projection to avoid misunderstandings
+
+### Risk Components and Drivers
+
+| Component | Definition |
+|---|---|
+| **Performance risk** | Uncertainty the product will meet requirements and be fit for use |
+| **Cost risk** | Uncertainty the project budget will be maintained |
+| **Support risk** | Uncertainty the software will be easy to correct, adapt, and enhance |
+| **Schedule risk** | Uncertainty the schedule will be maintained and delivery on time |
+
+### Impact Assessment Levels
+
+| Level | Performance | Cost | Schedule | Support |
+|---|---|---|---|---|
+| **Catastrophic** | Mission failure | > $500K overrun | Unachievable | Nonresponsive software |
+| **Critical** | Mission success questionable | $100K--$500K | Possible slippage | Minor modification delays |
+| **Marginal** | Secondary mission degradation | $1K--$100K | Realistic, achievable | Responsive software support |
+| **Negligible** | Inconvenience only | < $1K | Early achievable | Easily supportable |
+
+### Risk Table Structure
+
+| Risk Summary | Risk Category | Probability | Impact (1-5) | RMMM |
+|---|---|---|---|---|
+| Short description | One of 7 categories | % or scale value | 1 (low) to 5 (catastrophic) | Pointer to RMMM plan |
+
+Process:
+1. Estimate probability of occurrence
+2. Estimate impact on a scale of 1 to 5 (1 = low, 5 = catastrophic)
+3. Sort the table by probability and impact (descending)
+4. Establish a threshold -- risks above the threshold go into the RMMM plan
+
+### Post-Table Steps
+
+a) All stakeholders review the table to verify no risk was overlooked
+b) Risk is re-evaluated at the end of each project milestone
+c) Overall risk exposure is recalculated
 
 ---
 
-## Risk Mitigation, Monitoring, and Management (MMM)
+## Risk Mitigation, Monitoring, and Management (RMMM)
 
-### Risk Mitigation
-The proactive effort to **reduce or eliminate** risk before it occurs:
-- **Avoidance** — eliminate the risk entirely (e.g., use proven technology instead of new)
-- **Reduction** — decrease probability or impact (e.g., add testing, use prototypes)
-- **Transfer** — shift risk to another party (e.g., outsource risky components, buy insurance)
-- **Acceptance** — acknowledge the risk and prepare contingency plans
+### Risk Mitigation (Avoidance)
 
-### Risk Monitoring
-Continuous tracking of risk indicators throughout the project:
-- Monitor **risk triggers** — early warning signs that a risk is becoming more likely
-- Regular risk review meetings
-- Update risk assessments as project conditions change
-- Track mitigation plan effectiveness
+- **Goal**: Reduce the probability and/or impact of a risk before it occurs
+- High priority risks get detailed mitigation strategies
+- Low priority risks get brief strategies
+- Risk mitigation is **expensive** but cost-effective compared to crisis management
+- Best mitigation is **advance planning**: talk to customers, communicate early, document clearly
+- Mitigation is a continuous process, not a one-time event
 
-### Risk Management
-The overall coordination of mitigation and monitoring:
-- Assign **risk owners** responsible for each risk
-- Integrate risk management into project planning
-- Report risk status to stakeholders
-- Make decisions about risk response strategies
+### Risk Monitoring (Tracking)
+
+- **Goal**: Track identified risks, monitor residual risks, identify new risks, evaluate process effectiveness
+- Monitoring should be **ongoing** throughout the project lifecycle
+- Responsibilities:
+  - Who monitors each risk?
+  - How often are risks reviewed?
+  - What metrics track risk status?
+  - How is status communicated to stakeholders?
+
+### Risk Management (Contingency)
+
+- **Goal**: Have contingency plans ready if risk becomes reality
+- Regular RMMM meetings to track risks
+- Document every risk in the RMMM Plan
+
+### Recording Risk Information (Template)
+
+| Field | Example |
+|---|---|
+| Project | Embedded software for XYZ system |
+| Risk type | Schedule risk |
+| Priority (1-5) | 4 |
+| Risk factor | Project completion depends on tests requiring hardware component under development; delivery may be delayed |
+| Probability | 60% |
+| Impact | Project completion delayed for each day hardware is unavailable |
+| Monitoring approach | Scheduled milestone reviews with hardware group |
+| Contingency plan | Modify testing strategy to use software simulation |
+| Estimated resources | 6 additional person-months beginning in July |
 
 ---
 
-## Risk Documentation Card
+## Risk Refinement
 
-Each risk should be documented in a **risk card** format:
+- At the start of a project, broad risks and their causes can be identified
+- As the project proceeds, some causes disappear and new ones appear
+- Risk refinement identifies the **exact causes and severity** of a risk
+- Example: "A new graphics library will not be delivered on schedule"
+  - **Why?** What is the root cause?
+  - **Effect?** What happens because of this cause?
+  - This refinement helps move from vague concern to actionable mitigation
+
+---
+
+## Risk Retention
+
+- Risks with **low probability, low exposure, or minimal loss** are retained
+- If a risk falls **below the threshold**, retain and track it (do not ignore it)
+- If a retained risk grows **beyond the threshold**, develop a mitigation plan
+
+---
+
+## Relationships Between Concepts
 
 ```
-┌─────────────────────────────────────────────┐
-│ RISK ID: R-001                              │
-│─────────────────────────────────────────────│
-│ Description: Key database developer may     │
-│ leave the project mid-development.          │
-│─────────────────────────────────────────────│
-│ Category: Staffing                           │
-│ Probability: 0.3 (30%)                      │
-│ Impact: $45,000                             │
-│ Risk Exposure: $13,500                      │
-│─────────────────────────────────────────────│
-│ Mitigation Plan:                            │
-│ • Cross-train second developer on database  │
-│ • Document all database design decisions    │
-│ • Maintain relationship with database       │
-│   consultancy for emergency backup          │
-│─────────────────────────────────────────────│
-│ Risk Owner: Project Manager                 │
-│ Status: Active                              │
-│ Last Reviewed: [Date]                       │
-└─────────────────────────────────────────────┘
+Risk Identification ──> Risk Projection (P x C) ──> Risk Table ──> RMMM Plan
+        │                                                              │
+        └── Refinement (refine causes)                                 │
+                                                                       │
+                                                            Risk Monitoring
+                                                                   │
+                                                            Risk Retention
+                                                              (if low risk)
 ```
 
----
-
-## Summary: The Risk Management Flow
-
-```
-1. IDENTIFY risks (checklists, questionnaires, brainstorming)
-      ↓
-2. ANALYZE risks (probability, impact, RE = P × C)
-      ↓
-3. PLAN responses (mitigate, monitor, manage)
-      ↓
-4. TRACK indicators (triggers, reviews, updates)
-      ↓
-5. CONTROL outcomes (execute plans, adjust, reassess)
-      ↓
-   (Return to Step 1 — continuous cycle)
-```
+- **Risk ID** feeds into **Risk Projection** (estimation of P and C)
+- **Projection** populates the **Risk Table** (sorted by severity)
+- The **Risk Table** drives the **RMMM Plan** (mitigation strategies)
+- **Risk Monitoring** tracks all risks throughout the lifecycle
+- When risks are refined, their P and C may change, updating the table
+- Low-priority risks are **retained** (tracked but not actively mitigated)
 
 ---
 
-## Quick Reference: Key Formulas and Tables
+## Common Mistakes / Exam Traps
 
-| Formula/Concept | Value/Description |
-|----------------|-------------------|
-| **RE = P × C** | Risk Exposure = Probability × Consequence |
-| **P range** | 0.0 to 1.0 (0% to 100%) |
-| **7 Risk Categories** | Product size, Business impact, Customer characteristics, Process definition, Development environment, Technology, Staffing |
-| **4 Risk Components** | Performance, Cost, Support, Schedule |
-| **5-Step Process** | Identify → Analyze → Plan → Track → Control |
-
----
-
-## Exam Preparation Checklist
-
-- [ ] Can you define risk using the two essential components (uncertainty + loss)?
-- [ ] Can you list the 3 major risk categories with sub-categories?
-- [ ] Can you explain the difference between known, predictable, and unpredictable risks?
-- [ ] Can you state the 7 principles of risk management?
-- [ ] Can you compare reactive vs. proactive strategies?
-- [ ] Can you describe the 5-step proactive process?
-- [ ] Can you draw the risk management paradigm cycle?
-- [ ] Can you explain the 11 questions in the project risk questionnaire?
-- [ ] Can you calculate Risk Exposure using RE = P × C?
-- [ ] Can you create a risk table and risk documentation card?
-- [ ] Can you describe the 4 risk mitigation strategies?
+| Mistake | Correct Understanding |
+|---|---|
+| Confusing risk with a problem | A problem has already occurred; a risk is a future uncertainty |
+| Confusing risk with a constraint | A constraint is 100% certain (e.g., a hard deadline); a risk has P < 100% |
+| Thinking risk management is one-time | It is a continuous cycle (Identify -> Analyze -> Plan -> Track -> Control) |
+| Ignoring low-probability risks entirely | Retain and track them; they may grow beyond the threshold |
+| Confusing RE formula units | RE = P x C where C is in monetary cost, not impact scale (1-5) |
+| Mixing up risk categories | Know the 7 categories: Product size, Business impact, Customer, Process, Environment, Technology, Staff |
+| Thinking mitigation is a one-time event | Mitigation is continuous throughout the project |
+| Equating "reactive" with "proactive" | Reactive = wait for failure; Proactive = plan ahead |
+| Forgetting the risk table columns | Risk Summary, Category, Probability, Impact, RMMM |
+| Treating all risks equally | Risks must be prioritized (sorted by probability x impact) |
 
 ---
-
-## Common Mistakes
-
-| Mistake | Correction |
-|---------|------------|
-| Confusing risk with certainty | A risk is uncertain — if it's guaranteed to happen, it's a plan, not a risk |
-| Thinking reactive is best practice | Proactive is best practice — prevention is cheaper than cure |
-| Forgetting that risk management is iterative | It's a continuous cycle, not a one-time activity |
-| Confusing probability with impact | Probability = likelihood; Impact = consequence if it occurs |
-| Assuming all risks are technical | Risks also include project (schedule/budget) and business (market/viability) categories |
-
-## Exam Traps
-
-| Trap | Why It's Tricky | Correct Answer |
-|------|----------------|----------------|
-| "Risk exposure = probability + cost" | Risk exposure is MULTIPLICATION, not addition | RE = P × C |
-| "Known risks can't be managed proactively" | Known risks are the EASIEST to manage proactively | Known risks are identified and planned for upfront |
-| "Risk identification happens once at the start" | Risk identification is continuous throughout the project | New risks emerge as the project evolves |
 
 ## Active Recall Questions
 
-1. What are the two essential components of risk?
-2. What are the 3 major risk categories?
-3. State the 7 principles of risk management.
-4. Calculate RE if P=0.4 and C=$50,000.
-5. What are the 5 steps in the proactive risk management process?
-6. What are the 4 risk mitigation strategies?
-7. What is the difference between reactive and proactive strategies?
-8. What are the 4 risk components used in impact assessment?
+1. What are the two essential characteristics of any risk?
+2. What is the difference between a risk, a problem, and a constraint?
+3. Write the risk exposure formula and explain each term.
+4. List the five steps of the Risk Management Paradigm in order.
+5. What are the seven principles of risk management?
+6. Name the seven risk categories used in risk identification.
+7. What is the difference between generic risks and product-specific risks?
+8. List the four risk projection steps.
+9. What are the four risk components? (Performance, Cost, Support, Schedule)
+10. What is the difference between reactive and proactive risk management?
+11. What is risk retention and when would you use it?
+12. What does RMMM stand for and what does each part involve?
+13. Describe the impact levels: Catastrophic, Critical, Marginal, Negligible.
+14. What is risk refinement and why is it important?
+15. How does the number of negative responses to the risk questionnaire relate to project risk?
+
+---
 
 ## Potential Exam Questions
 
-1. Define risk and explain its two essential components.
-2. Compare reactive and proactive risk strategies with examples.
-3. Calculate the risk exposure for 3 given risks and prioritize them.
-4. Describe the 5-step proactive risk management process.
-5. Explain the 7 risk item checklist categories with examples.
-6. Why is risk management considered a continuous cycle?
+1. **Calculation**: A risk has a 65% probability of occurring. If it occurs, the cost will be $45,000. What is the risk exposure (RE)?
+
+2. **Short answer**: Explain the difference between "Mitigation" and "Management" in the context of RMMM.
+
+3. **Scenario**: Your team is building a mobile app using a new cross-platform framework that no one on the team has used before. Which risk categories are relevant? Describe at least three specific risks.
+
+4. **Compare/Contrast**: Compare reactive and proactive risk management strategies. When might a reactive approach be acceptable?
+
+5. **List/Describe**: List the seven principles of risk management and explain why "Encourage open communication" is critical.
+
+6. **Application**: Given a risk table with five risks, show how you would sort it, identify which risks need an RMMM plan, and explain why.
+
+7. **Diagram**: Draw the Risk Management Paradigm cycle and explain what happens at each step.
+
+8. **Essay**: "Risk management is more expensive than crisis management." Argue for or against this statement.
+
+9. **Classification**: For each of the following, classify as Known, Predictable, or Unpredictable risk: (a) unrealistic delivery date, (b) past staff turnover patterns, (c) a new government regulation passed last night.
+
+10. **Analysis**: A risk with P = 90% and C = $1,000 has RE = $900. Another risk has P = 10% and C = $100,000 has RE = $10,000. Which should you prioritize? Explain.
+
+---
 
 ## Topic Summary
 
-Risk is defined by two essential components: uncertainty and loss. Risks fall into three categories: project risks (schedule, budget, scope), technical risks (performance, reliability, technology), and business risks (market, strategic, financial). Known, predictable, and unpredictable risks form a spectrum of knowability. Seven principles guide risk management: communication, early identification, analysis, iterative analysis, best information, responsibility, and organization. Reactive strategies fight fires after they occur; proactive strategies prevent fires. The 5-step proactive process is: identify, analyze, plan, track, and control. Risk exposure is calculated as RE = P times C. Risk mitigation strategies include avoidance, reduction, transfer, and acceptance. Risk management is a continuous cycle, not a one-time activity.
+- **Risk** = uncertainty + loss. Not a problem, not a constraint.
+- **Reactive** = wait for failure; **Proactive** = plan ahead (far better).
+- **Seven Principles**: Global perspective, forward-looking, open communication, integrate, continuous process, shared vision, teamwork.
+- **Paradigm**: Identify -> Analyze -> Plan -> Track -> Control (continuous cycle).
+- **Seven Categories** for risk identification: Product size, Business impact, Customer characteristics, Process definition, Development environment, Technology, Staff.
+- **Projection**: RE = P x C. Four steps: scale, delineate consequences, estimate impact, note accuracy.
+- **Risk Table**: Risk Summary | Category | Probability | Impact | RMMM. Sorted by severity.
+- **RMMM**: Mitigation (avoid/reduce), Monitoring (track), Management (contingency).
+- **Refinement**: Dig deeper into causes as the project evolves.
+- **Retention**: Low-risk items are kept but tracked; if they cross threshold, act.
+
+**Bottom line**: The goal of risk management is not to eliminate all risk -- that is impossible. The goal is to know what the risks are, understand their potential impact, and have a plan ready. This turns uncertainty from a threat into a managed variable.

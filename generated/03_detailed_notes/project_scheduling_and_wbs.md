@@ -1,621 +1,421 @@
-# Project Scheduling and Work Breakdown Structure — Detailed Notes
-
-## The Story of Scheduling
-
-A software project without a schedule is like a road trip without a map — you might eventually arrive somewhere, but it won't be where you intended, and it will cost far more than planned. Project scheduling transforms estimates into a **concrete timeline** with specific activities, dependencies, and milestones. At its heart lies the **Work Breakdown Structure (WBS)** — the tool that decomposes a complex project into manageable, trackable pieces. This chapter tells the story of how we go from "we need to build this" to "here's exactly what happens, when, and by whom."
+# Project Scheduling & Work Breakdown Structure (WBS) — Detailed Notes
 
 ---
 
-## Planning vs. Estimating vs. Scheduling — Understanding the Differences
+## Topic Overview
 
-These three terms are often confused, but they serve distinct purposes:
+This topic covers two fundamental pillars of software project management: **Work Breakdown Structure (WBS)** and **Project Scheduling**. WBS is the process of decomposing a project into manageable deliverables and work packages. Project scheduling builds on the WBS to assign time, resources, dependencies, and calendar dates to each task. Together, they form the backbone of project planning, estimation, tracking, and control.
 
-| Activity | Purpose | Question Answered | When |
-|----------|---------|-------------------|------|
-| **Planning** | Define WHAT will be done and HOW | "What activities are needed? What's the approach?" | Early in project |
-| **Estimating** | Determine HOW MUCH (effort, cost, size) | "How many person-days? How much money?" | During planning |
-| **Scheduling** | Determine WHEN and WHO | "When will each activity happen? Who will do it?" | After estimating |
-
-```
-Planning → Estimating → Scheduling
-   (What)     (How much)    (When/Who)
-```
-
-> **Key Insight:** You can't schedule before you estimate, and you can't estimate before you plan. They form a **sequential dependency chain**.
+Key techniques include Critical Path Method (CPM) for identifying the longest path through a network of dependent activities, resource leveling to smooth demand, and Earned Value Management (EVM) for tracking project health.
 
 ---
 
-## The Work Breakdown Structure (WBS)
+## Why This Topic Exists
+
+- **Without decomposition**, large projects become unmanageable — tasks are forgotten, started late, or allocated to multiple people with no clear ownership.
+- **Without scheduling**, there is no way to predict delivery dates, identify bottlenecks, or track progress against a baseline.
+- **Ballpark estimates become targets** if not grounded in a structured WBS.
+- **Two main causes of project failure**: forgetting something critical, and treating rough estimates as hard targets.
+- Scheduling provides the mechanism to detect delays early, manage dependencies, and make trade-off decisions between time, cost, and scope.
+
+---
+
+## Core Concepts & Definitions
+
+| Concept | Definition |
+|---------|-----------|
+| **Plan** | Identifies activities. No specific start/end dates. |
+| **Estimate** | Predicting effort, time, and cost (size and duration of activities). |
+| **Schedule** | Adds specific start/end dates, relationships, and resources. |
+| **Work Package** | A group of related tasks defined at the same level within a WBS. |
+| **Critical Path** | The longest path through an activity network; determines minimum project duration. |
+| **Float (Slack)** | Amount of time an activity can be delayed without affecting the project (total float) or the next activity (free float). |
+| **EVM** | Earned Value Management — compares planned vs actual performance using PV, EV, AC. |
+
+---
+
+## Work Breakdown Structure (WBS)
 
 ### Definition
 
-The **Work Breakdown Structure (WBS)** is a hierarchical decomposition of the total scope of work to be carried out by the project team. It breaks down the project into smaller, more manageable components called **work packages**.
+A **Work Breakdown Structure** is a deliverable-oriented hierarchical decomposition of a project into smaller components. Each element may be a product, data, a service, or any combination. The WBS provides the framework for detailed cost estimating, schedule development, and control.
 
-### Purpose of WBS
+### WBS Levels
 
-The WBS serves multiple critical purposes:
+| Level | Name | Used By | Purpose |
+|-------|------|---------|---------|
+| 1 | Total Program | Customer/Exec | Authorizations |
+| 2 | Project | Customer/Exec | Budgeting |
+| 3 | Task | Customer/Exec | High-level tracking/reporting |
+| 4 | Subtask | PM & Team | Detailed planning |
+| 5 | Work Package | PM & Team | Lowest-level tracking, estimates |
+| 6 | Level of Effort | PM & Team | Support activities |
 
-| Purpose | Description |
+- **Contract WBS (CWBS)**: First 2–3 levels, used for client discussions.
+- **Project WBS (PWBS)**: Defined by PM and team, tied to deliverables, lowest-level tracking.
+
+### WBS Formats
+
+**1. Outline (Indented Format):**
+
+```
+0.0 Retail Web Site
+  1.0 Project Management
+  2.0 Requirements Gathering
+  3.0 Analysis & Design
+  4.0 Site Software Development
+    4.1 HTML Design and Creation
+    4.2 Backend Software
+      4.2.1 Database Implementation
+      4.2.2 Middleware Development
+      4.2.3 Security Subsystems
+      4.2.4 Catalog Engine
+      4.2.5 Transaction Processing
+    4.3 Graphics and Interface
+    4.4 Content Creation
+  5.0 Testing and Production
+```
+
+**2. Graphical Tree (Organizational Chart):**
+
+```
+             [0.0 Retail Web Site]
+              /     |      |      \
+             /      |      |       \
+      [1.0 PM] [2.0 Req] [3.0 Design] [4.0 Dev] [5.0 Test]
+                                        /    |     \
+                                       /     |      \
+                                  [4.1 HTML] [4.2 Backend] [4.3 Graphics]
+                                              /    |    |    \      \
+                                             /     |    |     \      \
+                                    [4.2.1 DB] [4.2.2 MW] [4.2.3 Sec] [4.2.4 Cat] [4.2.5 Trans]
+```
+
+### WBS Guidelines
+
+- Must be accurate and readable.
+- Assign clear responsibilities to the project team.
+- Indicate milestones and control points.
+- Enable cost, time, and risk estimation.
+- Include **three types of work**:
+  - **Product** — physical deliverables.
+  - **Integration** — bringing products together.
+  - **Support** — administration, LOE, expenses.
+- Break down until you can generate accurate time and cost estimates (work packages ~80 hours).
+- Each element must correspond to a deliverable.
+- What hurts most is what's **missing**.
+
+### WBS Pitfalls
+
+| Pitfall | Explanation |
 |---------|-------------|
-| **Scope definition** | Clearly defines all work that must be done (and nothing that doesn't) |
-| **Organization** | Provides a structured framework for organizing project activities |
-| **Estimation** | Enables accurate effort and cost estimation at the work package level |
-| **Assignment** | Makes it possible to assign responsibility for specific pieces of work |
-| **Tracking** | Allows progress to be monitored at a granular level |
-| **Communication** | Provides a common language for discussing project scope |
+| **Wrong level of detail** | Too coarse (loses accuracy) or too fine (overwhelming overhead). |
+| **Deliverables vs Activities** | WBS is deliverable-oriented, not activity-oriented. |
+| **WBS is not a plan/schedule** | It shows *what*, not *when* or *who*. |
+| **WBS updates need change control** | Scope changes must be formally managed. |
+| **WBS is not org hierarchy** | Don't confuse it with a company org chart. |
 
-### WBS Concepts, Goals, and Benefits
+### WBS Dictionary
 
-#### Concepts
-- **Decomposition**: Breaking larger elements into smaller pieces
-- **Hierarchy**: Each level represents a more detailed description of the work
-- **100% Rule**: The WBS must include 100% of the work defined by the project scope
-- **Mutual Exclusivity**: Each element appears in only one place in the WBS
-
-#### Goals
-- Ensure all project work is identified and accounted for
-- Provide a framework for scheduling and budgeting
-- Enable assignment of responsibility
-- Facilitate progress tracking and reporting
-
-#### Benefits
-- Reduces the chance of missing important work
-- Makes large projects manageable
-- Improves estimation accuracy
-- Enhances team understanding of project scope
-- Provides clear assignment of responsibility
-
-### When to Develop the WBS
-
-The WBS should be developed:
-- **During early planning** — as soon as project scope is reasonably well understood
-- **Before estimating** — because estimates are created for work packages
-- **Before scheduling** — because the WBS defines what activities need scheduling
-- **Iteratively** — it may be refined as more is learned about the project
+A companion document describing each WBS element:
+- Statement of work
+- List of associated activities
+- Milestones
+- Responsible organization
+- Start/end dates
+- Resources required
 
 ---
 
-## Steps to Build a WBS — The 9-Step Process
+## Project Scheduling
 
-| # | Step | Description |
-|---|------|-------------|
-| 1 | **Identify major deliverables** | List the primary outputs or components of the project |
-| 2 | **Define work packages** | Break each deliverable into smaller, manageable pieces |
-| 3 | **Identify activities** | Determine the specific tasks needed to complete each work package |
-| 4 | **Verify the decomposition** | Ensure each piece is appropriately sized and well-defined |
-| 5 | **Assign identifiers** | Give each element a unique ID/code for tracking |
-| 6 | **Define milestones** | Identify key checkpoints and decision points |
-| 7 | **Verify scope completeness** | Apply the 100% rule — does the WBS cover all scope? |
-| 8 | **Review with stakeholders** | Get agreement from the team and customers |
-| 9 | **Document assumptions** | Record any assumptions made during decomposition |
+### Purpose
 
-> **Key Rule — The 100% Rule:** The child elements at each level must account for 100% of the work represented by the parent element. Nothing can be missing, and nothing can be extra.
+- Split project into tasks.
+- Estimate time and resources for each task.
+- Organize tasks concurrently for optimal workforce use.
+- Minimize task dependencies to avoid delays.
+- Create bar charts (Gantt charts) and activity networks.
 
----
-
-## WBS Formats
-
-There are two primary formats for representing a WBS:
-
-### 1. Outline Format (Hierarchical List)
+### Scheduling Process
 
 ```
-1.0 Chat Application
-    1.1 Requirements
-        1.1.1 User requirements
-        1.1.2 System requirements
-        1.1.3 Requirements review
-    1.2 Design
-        1.2.1 Architecture design
-        1.2.2 Database design
-        1.2.3 UI design
-    1.3 Implementation
-        1.3.1 Frontend development
-        1.3.2 Backend development
-        1.3.3 Database implementation
-    1.4 Testing
-        1.4.1 Unit testing
-        1.4.2 Integration testing
-        1.4.3 System testing
-    1.5 Deployment
-        1.5.1 Installation
-        1.5.2 User training
-        1.5.3 Documentation
+Identify Activities
+       |
+       v
+Identify Possible Dependencies
+       |
+       v
+Estimate Resources
+       |
+       v
+Assign People
+       |
+       v
+Create Activity Network and Bar Charts
 ```
 
-### 2. Graphical Tree Format
+### Scheduling Problems
 
-```
-                    Chat Application (1.0)
-                    /        |        \        \
-              Requirements  Design  Implementation  Testing  Deployment
-              (1.1)       (1.2)      (1.3)         (1.4)     (1.5)
-              / | \       / | \      / | \         / | \      / | \
-           User Sys  Arch DB  UI  FE  BE  DB    Unit Int Sys Inst Train Doc
-          Req  Req   Des  Des Des Dev Dev Impl  Test Test Test
-```
-
-> **Exam Tip:** Be comfortable converting between outline and tree formats.
-
----
-
-## WBS Example: Retail Web Site
-
-Here's a complete WBS example for developing a **Retail Web Site**:
-
-```
-1.0 Retail Web Site
-├── 1.1 Planning
-│   ├── 1.1.1 Project charter
-│   ├── 1.1.2 Stakeholder analysis
-│   ├── 1.1.3 Project plan
-│   └── 1.1.4 Requirements gathering
-├── 1.2 Design
-│   ├── 1.2.1 Site architecture
-│   ├── 1.2.2 Database design
-│   ├── 1.2.3 UI/UX design
-│   ├── 1.2.4 Security design
-│   └── 1.2.5 Design review
-├── 1.3 Development
-│   ├── 1.3.1 Product catalog module
-│   ├── 1.3.2 Shopping cart module
-│   ├── 1.3.3 Payment processing module
-│   ├── 1.3.4 User account module
-│   ├── 1.3.5 Admin panel
-│   └── 1.3.6 API integration
-├── 1.4 Testing
-│   ├── 1.4.1 Unit testing
-│   ├── 1.4.2 Integration testing
-│   ├── 1.4.3 Performance testing
-│   ├── 1.4.4 Security testing
-│   └── 1.4.5 User acceptance testing
-├── 1.5 Deployment
-│   ├── 1.5.1 Server setup
-│   ├── 1.5.2 Production deployment
-│   ├── 1.5.3 DNS configuration
-│   └── 1.5.4 SSL certificate installation
-└── 1.6 Documentation & Training
-    ├── 1.6.1 Technical documentation
-    ├── 1.6.2 User manual
-    ├── 1.6.3 Admin guide
-    └── 1.6.4 Training sessions
-```
-
----
-
-## WBS Levels: CWBS vs. PWBS
-
-| Level | Name | Description | Typical Depth |
-|-------|------|-------------|---------------|
-| **CWBS** (Contract WBS) | Contract-level | Defines the work to be delivered under a contract; used for external agreements | 3-4 levels |
-| **PWBS** (Project WBS) | Project-level | Defines the internal project organization; used for managing work within the organization | 4-6 levels |
-
-### Key Differences
-
-| Aspect | CWBS | PWBS |
-|--------|------|------|
-| **Audience** | External stakeholders (customers, contractors) | Internal team members |
-| **Detail Level** | Higher-level (what will be delivered) | Lower-level (how it will be done) |
-| **Focus** | Deliverables and milestones | Activities and tasks |
-| **Ownership** | Contract manager | Project manager |
-
----
-
-## WBS Dictionary
-
-The WBS dictionary provides **detailed descriptions** of each WBS element. Without it, the WBS codes are just labels — the dictionary gives them meaning.
-
-### WBS Dictionary Entry Example
-
-```
-┌─────────────────────────────────────────────────────┐
-│ WBS CODE: 1.3.2                                     │
-│ TITLE: Shopping Cart Module                         │
-│─────────────────────────────────────────────────────│
-│ Description:                                        │
-│ Development of the shopping cart functionality      │
-│ including add/remove items, quantity updates,       │
-│ price calculations, and session persistence.        │
-│─────────────────────────────────────────────────────│
-│ Responsible: Senior Developer                       │
-│ Estimated Effort: 120 person-hours                  │
-│ Estimated Cost: $9,600                              │
-│ Dependencies: 1.3.1 (Product Catalog), 1.2.2 (DB) │
-│ Milestone: Cart module complete by Week 6           │
-│ Deliverables: Source code, unit tests, documentation│
-│ Acceptance Criteria: All cart operations functional │
-│─────────────────────────────────────────────────────│
-│ Assumptions: Payment module available as external   │
-│ API. Session management framework in place.         │
-└─────────────────────────────────────────────────────┘
-```
-
----
-
-## Common WBS Pitfalls
-
-| Pitfall | Description | Consequence |
-|---------|-------------|-------------|
-| **Too much detail** | Decomposing to the task level (hours of work) | Overwhelming complexity, micromanagement |
-| **Too little detail** | Not decomposing enough | Work packages too large to estimate or track |
-| **Missing work** | Not capturing all scope items | Scope creep, untracked work |
-| **Duplicate entries** | Same work appearing in multiple places | Confusion about responsibility, double-counting |
-| **Output-focused decomposition** | Breaking down by outputs rather than work | Difficulty assigning and tracking |
-| **Action-oriented decomposition** | Breaking down by actions/work needed | Better for estimation and assignment |
-
-> **Best Practice:** Decompose until work packages are **small enough to estimate reliably** (typically 8-80 hours of effort) but **large enough to be manageable**.
-
----
-
-## The Scheduling Process
-
-Scheduling transforms the WBS into a **time-ordered plan**. It answers: "When will each piece of work happen?"
-
-### The 5-Step Scheduling Process
-
-```
-Step 1: IDENTIFY ACTIVITIES
-   (What work needs to be done? - from WBS)
-        ↓
-Step 2: DETERMINE DEPENDENCIES
-   (Which activities depend on which?)
-        ↓
-Step 3: ESTIMATE RESOURCES
-   (Who/what is needed for each activity?)
-        ↓
-Step 4: ASSIGN RESOURCES & DURATION
-   (How long will each activity take? Who will do it?)
-        ↓
-Step 5: CREATE SCHEDULING CHARTS
-   (Bar charts, network diagrams, Gantt charts)
-```
-
-### Scheduling Problems: Brooks's Law
-
-**Brooks's Law** states:
-
-> "Adding manpower to a late software project makes it later."
-
-This counter-intuitive law exists because:
-1. **New people need training** — existing team members must stop working to train them
-2. **Communication overhead** increases exponentially with team size
-3. **Task decomposition limits** — not all tasks can be divided among more people
-4. **Ramp-up time** — new people become productive only after understanding the codebase
-
-| Team Size | Communication Channels (n(n-1)/2) |
-|-----------|----------------------------------|
-| 3 | 3 |
-| 5 | 10 |
-| 10 | 45 |
-| 15 | 105 |
-| 20 | 190 |
-
-> **Key Insight:** Communication overhead grows **quadratically** with team size, while productivity grows only **linearly** (at best). This is why throwing more people at a late project often makes it worse.
-
----
-
-## Bar Charts (Gantt Charts)
-
-Bar charts (Gantt charts) are the most common scheduling visualization. They show:
-- **Tasks** on the vertical axis
-- **Time** on the horizontal axis
-- **Bars** representing the duration of each task
-- **Dependencies** shown as arrows between bars
-- **Milestones** shown as diamonds or special markers
-
-### Example Gantt Chart
-
-```
-Week:       1    2    3    4    5    6    7    8
-            |    |    |    |    |    |    |    |
-Requirements ████
-Design            ██████
-Backend Dev              ████████████
-Frontend Dev               ████████████
-Testing                              ████████
-Deployment                                   ████
-            |    |    |    |    |    |    |    |
-Milestones: ◆         ◆              ◆         ◆
-           Start   Design        Code       Release
-                   Complete     Complete
-```
-
----
-
-## Activity Network Diagrams — CPM and PERT
-
-Activity network diagrams show the **sequence and dependencies** of activities. The two main techniques are:
-
-### CPM (Critical Path Method)
-- Uses **deterministic** time estimates (one estimate per activity)
-- Focuses on finding the **critical path** — the longest path through the network
-- Activities on the critical path **cannot be delayed** without delaying the project
-
-### PERT (Program Evaluation and Review Technique)
-- Uses **probabilistic** time estimates (three estimates: optimistic, most likely, pessimistic)
-- Better for projects with **high uncertainty**
-- Provides probability of completing by a specific date
-
-### Rules for Network Creation
-
-When building a network diagram:
-1. Each activity is represented by a **node** (box or circle)
-2. **Arrows** represent dependencies (direction shows sequence)
-3. **No loops** — the network must be a directed acyclic graph (DAG)
-4. **Start and end nodes** must be clearly identified
-5. Each activity has **one predecessor** (except start) and **one successor** (except end)
-6. Dependencies must be **logical**, not arbitrary
-
----
-
-## Activity Network Example — Complete Worked Problem
-
-### Activity Data Table
-
-| Activity | Description | Duration (days) | Predecessors |
-|----------|-------------|-----------------|--------------|
-| A | Requirements gathering | 5 | — |
-| B | System design | 4 | A |
-| C | Database design | 3 | A |
-| D | Frontend development | 6 | B |
-| E | Backend development | 7 | B, C |
-| F | Integration | 4 | D, E |
-| G | Testing | 5 | F |
-| H | Deployment | 2 | G |
-
-### Network Diagram
-
-```
-        ┌─────── B(4) ──────── D(6) ───────┐
-        │                    ↓              │
-A(5) ───┤                    ↓              ├──→ F(4) ──→ G(5) ──→ H(2)
-        │                    ↓              │
-        └─────── C(3) ──── E(7) ───────────┘
-```
-
-### Forward Pass — Calculating ES and EF
-
-**Forward Pass** determines the **Earliest Start (ES)** and **Earliest Finish (EF)** for each activity.
-
-```
-ES = max(EF of all predecessors)
-EF = ES + Duration
-```
-
-| Activity | ES | EF |
-|----------|----|----|
-| A | 0 | 5 |
-| B | 5 | 9 |
-| C | 5 | 8 |
-| D | 9 | 15 |
-| E | max(9,8) = 9 | 16 |
-| F | max(15,16) = 16 | 20 |
-| G | 20 | 25 |
-| H | 25 | 27 |
-
-**Project Duration = 27 days**
-
-### Backward Pass — Calculating LS and LF
-
-**Backward Pass** determines the **Latest Start (LS)** and **Latest Finish (LF)** for each activity.
-
-```
-LF = min(LS of all successors)
-LS = LF - Duration
-```
-
-Starting from the end (LF of H = 27):
-
-| Activity | LF | LS |
-|----------|----|----|
-| H | 27 | 25 |
-| G | 25 | 20 |
-| F | 20 | 16 |
-| E | 16 | 9 |
-| D | 16 | 10 |
-| C | 9 | 6 |
-| B | min(10,9) = 9 | 5 |
-| A | min(5,6) = 5 | 0 |
-
-### Critical Path Identification
-
-The **critical path** is the longest path through the network where **Total Float = 0**.
-
-```
-Total Float = LS - ES = LF - EF
-```
-
-| Activity | ES | EF | LS | LF | Total Float | Critical? |
-|----------|----|----|----|----|-------------|-----------|
-| A | 0 | 5 | 0 | 5 | 0 | **YES** |
-| B | 5 | 9 | 5 | 9 | 0 | **YES** |
-| C | 5 | 8 | 6 | 9 | 1 | No |
-| D | 9 | 15 | 10 | 16 | 1 | No |
-| E | 9 | 16 | 9 | 16 | 0 | **YES** |
-| F | 16 | 20 | 16 | 20 | 0 | **YES** |
-| G | 20 | 25 | 20 | 25 | 0 | **YES** |
-| H | 25 | 27 | 25 | 27 | 0 | **YES** |
-
-**Critical Path: A → B → E → F → G → H (27 days)**
-
-### Float Analysis
-
-```
-Total Float = LS - ES    (or LF - EF)
-Free Float = ES(successor) - EF(current)
-```
-
-**Total Float**: How much an activity can be delayed without delaying the **project**.
-
-**Free Float**: How much an activity can be delayed without delaying the **next activity**.
-
-#### Free Float Calculations
-
-| Activity | ES of Successor | EF | Free Float |
-|----------|----------------|----|-----------|
-| A | 5 | 5 | 0 |
-| B | min(9,9)=9 | 9 | 0 |
-| C | 9 | 8 | 1 |
-| D | 16 | 15 | 1 |
-| E | 16 | 16 | 0 |
-| F | 20 | 20 | 0 |
-| G | 25 | 25 | 0 |
-| H | — | 27 | 0 |
-
-> **Key Insight:** Activities on the critical path have **zero total float AND zero free float**. Non-critical activities have float — this is "slack time" that can absorb delays.
-
----
-
-## Second Example Problem
-
-### Activity Data Table
-
-| Activity | Duration (days) | Predecessors |
-|----------|-----------------|--------------|
-| A | 3 | — |
-| B | 4 | A |
-| C | 6 | A |
-| D | 5 | B |
-| E | 8 | B, C |
-| F | 3 | D, E |
-| G | 4 | F |
-| H | 2 | G |
-
-### Forward Pass
-
-| Activity | ES | EF |
-|----------|----|----|
-| A | 0 | 3 |
-| B | 3 | 7 |
-| C | 3 | 9 |
-| D | 7 | 12 |
-| E | max(7,9)=9 | 17 |
-| F | max(12,17)=17 | 20 |
-| G | 20 | 24 |
-| H | 24 | 26 |
-
-**Project Duration = 26 days**
-
-### Backward Pass
-
-| Activity | LF | LS |
-|----------|----|----|
-| H | 26 | 24 |
-| G | 24 | 20 |
-| F | 20 | 17 |
-| E | 17 | 9 |
-| D | 17 | 12 |
-| C | 9 | 3 |
-| B | min(12,9)=9 | 5 |
-| A | min(5,3)=3 | 0 |
-
-### Complete Analysis
-
-| Activity | ES | EF | LS | LF | Total Float | Critical? |
-|----------|----|----|----|----|-------------|-----------|
-| A | 0 | 3 | 0 | 3 | 0 | **YES** |
-| B | 3 | 7 | 5 | 9 | 2 | No |
-| C | 3 | 9 | 3 | 9 | 0 | **YES** |
-| D | 7 | 12 | 12 | 17 | 5 | No |
-| E | 9 | 17 | 9 | 17 | 0 | **YES** |
-| F | 17 | 20 | 17 | 20 | 0 | **YES** |
-| G | 20 | 24 | 20 | 24 | 0 | **YES** |
-| H | 24 | 26 | 24 | 26 | 0 | **YES** |
-
-**Critical Path: A → C → E → F → G → H (26 days)**
-
-> **Note:** In this example, Activity B has a total float of 2 days, meaning it can be delayed by up to 2 days without affecting the project end date. Activity D has 5 days of float.
-
----
-
-## Summary: From WBS to Schedule
-
-```
-WBS (What needs to be done?)
-    ↓
-Activity List (Specific tasks)
-    ↓
-Dependencies (What depends on what?)
-    ↓
-Duration Estimates (How long each takes?)
-    ↓
-Network Diagram (Visual sequence)
-    ↓
-Critical Path Analysis (ES/EF/LS/LF/Float)
-    ↓
-Schedule (Gantt chart with milestones)
-```
-
----
-
-## Quick Reference: Key Formulas
-
-| Formula | Description |
+| Problem | Description |
 |---------|-------------|
-| `EF = ES + Duration` | Earliest Finish |
-| `ES = max(EF of predecessors)` | Earliest Start |
-| `LS = LF - Duration` | Latest Start |
-| `LF = min(LS of successors)` | Latest Finish |
-| `Total Float = LS - ES` | How much an activity can be delayed |
-| `Free Float = ES(successor) - EF(current)` | Delay without affecting next activity |
-| `Communication Channels = n(n-1)/2` | Brooks's Law context |
+| Estimating difficulty | Predicting cost and effort is inherently challenging. |
+| Brooks' Law | Adding people to a late project makes it later (communication overhead). |
+| The unexpected | Always allow contingency in planning. |
+
+### Types of Schedules
+
+| Type | Description |
+|------|-------------|
+| Milestone Schedule | Key events only |
+| Gantt Chart | Bar chart showing tasks over time |
+| Network Diagram | Shows dependencies between tasks |
+
+### Bar Charts (Gantt Charts)
+
+- Tasks listed on left, time on top.
+- Horizontal bars represent duration.
+- Overlapping bars show parallel work.
+- Easy to visualize against calendar time.
+
+### Activity Network Diagrams
+
+Model project activities and their relationships as a network. Two best-known techniques:
+
+1. **CPM (Critical Path Method)** / **CPA (Critical Path Analysis)**
+2. **PERT (Program Evaluation Review Technique)**
+
+Both use **Activity-on-Arrow** approach: activities drawn as arrows, nodes represent start/completion events.
+
+### Rules for Activity Network Creation
+
+1. Flow from left to right.
+2. Activity cannot begin until all predecessors are done.
+3. Arrows can cross (show flow).
+4. Every activity must have an ID.
+5. No looping.
+6. Activity ID > preceding activity ID.
 
 ---
 
-## Common Mistakes
+## Critical Path Method (CPM) — Detailed Worked Example
 
-| Mistake | Correction |
-|---------|------------|
-| Confusing total float with free float | Total float = delay without delaying project; Free float = delay without delaying next activity |
-| Forgetting that critical path has zero float | Activities on the critical path ALWAYS have zero float |
-| Assuming adding people always speeds up a project | Brooks's Law: adding people to a late project makes it later |
-| Confusing CWBS with PWBS | CWBS = contract-level (external); PWBS = project-level (internal) |
+### Example Data
 
-## Exam Traps
+| Activity | Predecessor | Duration (days) |
+|----------|-------------|-----------------|
+| A | — | 3 |
+| B | A | 4 |
+| C | A | 2 |
+| D | B | 5 |
+| E | C | 1 |
+| F | C | 2 |
+| G | D, E | 4 |
+| H | F, G | 3 |
 
-| Trap | Why It's Tricky | Correct Answer |
-|------|----------------|----------------|
-| "Critical path is the shortest path" | It's the LONGEST path — determines minimum project duration | Longest path = shortest possible project duration |
-| "Float = 0 means the activity is late" | Float = 0 means the activity has NO slack — it's on the critical path | It's not late, it's critical |
+### Step 1: Identify All Paths and Lengths
+
+| Path | Activities | Duration |
+|------|------------|----------|
+| Path 1 | A → B → D → G → H | 3 + 4 + 5 + 4 + 3 = **19** |
+| Path 2 | A → C → E → G → H | 3 + 2 + 1 + 4 + 3 = **13** |
+| Path 3 | A → C → F → H | 3 + 2 + 2 + 3 = **10** |
+
+**Critical Path = A → B → D → G → H (19 days)** — the longest path.
+
+### Step 2: Forward Pass (ES & EF)
+
+- **ES (Early Start)**: Earliest an activity can start.
+- **EF (Early Finish)** = ES + Duration.
+
+| Activity | Duration | ES | EF | Calculation |
+|----------|----------|----|----|-------------|
+| A | 3 | 0 | 3 | ES = 0, EF = 0+3 |
+| B | 4 | 3 | 7 | ES = EF of A |
+| C | 2 | 3 | 5 | ES = EF of A |
+| D | 5 | 7 | 12 | ES = EF of B |
+| E | 1 | 5 | 6 | ES = EF of C |
+| F | 2 | 5 | 7 | ES = EF of C |
+| G | 4 | 12 | 16 | ES = max(EF of D=12, EF of E=6) = 12 |
+| H | 3 | 16 | 19 | ES = max(EF of F=7, EF of G=16) = 16 |
+
+### Step 3: Backward Pass (LS & LF)
+
+- **LF (Late Finish)**: Latest an activity can finish without delaying the project.
+- **LS (Late Start)** = LF − Duration.
+- Project finish = 19 (EF of last activity H).
+
+| Activity | Duration | LF | LS | Calculation |
+|----------|----------|----|----|-------------|
+| H | 3 | 19 | 16 | LF = project finish, LS = 19−3 |
+| G | 4 | 16 | 12 | LF = LS of H |
+| F | 2 | 16 | 14 | LF = LS of H |
+| D | 5 | 12 | 7 | LF = LS of G |
+| E | 1 | 12 | 11 | LF = LS of G |
+| B | 4 | 7 | 3 | LF = LS of D |
+| C | 2 | 11 | 9 | LF = min(LS of E=11, LS of F=14) = 11 |
+| A | 3 | 3 | 0 | LF = min(LS of B=3, LS of C=9) = 3 |
+
+### Step 4: Calculate Float / Slack
+
+- **Total Float (TF)** = LF − EF (or LS − ES)
+- **Free Float (FF)** = min(ES of successors) − ES of activity − Duration
+
+| Activity | ES | EF | LS | LF | TF | FF | Critical? |
+|----------|----|----|----|----|----|----|-----------|
+| A | 0 | 3 | 0 | 3 | 0 | 0 | Yes |
+| B | 3 | 7 | 3 | 7 | 0 | 0 | Yes |
+| C | 3 | 5 | 9 | 11 | 6 | 0 | No |
+| D | 7 | 12 | 7 | 12 | 0 | 0 | Yes |
+| E | 5 | 6 | 11 | 12 | 6 | 5 | No |
+| F | 5 | 7 | 14 | 16 | 9 | 9 | No |
+| G | 12 | 16 | 12 | 16 | 0 | 0 | Yes |
+| H | 16 | 19 | 16 | 19 | 0 | 0 | Yes |
+
+**Critical path activities**: A, B, D, G, H (TF = 0).
+
+### Second CPM Example (Practice)
+
+| Activity | Predecessor | Duration |
+|----------|-------------|----------|
+| A | — | 5 |
+| B | A | 4 |
+| C | A | 5 |
+| D | B | 6 |
+| E | C | 3 |
+| F | D, E | 4 |
+
+**Paths:**
+- A → B → D → F = 5 + 4 + 6 + 4 = **19** (Critical)
+- A → C → E → F = 5 + 5 + 3 + 4 = **17**
+
+---
+
+## Resource Leveling
+
+- **Goal**: Resolve resource conflicts, balance usage, smooth demand.
+- **Techniques**: Delay non-critical activities (use float), split tasks, add resources.
+- **Trade-offs**: May extend project duration and increase cost.
+- **Key insight**: If you have more tasks than people at any point, use the float on non-critical path activities to shift work.
+
+---
+
+## Earned Value Management (EVM) Basics
+
+| Term | Meaning |
+|------|---------|
+| **PV (Planned Value)** | Budgeted cost of work scheduled (what you planned to have done by now). |
+| **EV (Earned Value)** | Budgeted cost of work performed (what you actually completed, in budget terms). |
+| **AC (Actual Cost)** | Actual cost incurred for work performed. |
+| **SV (Schedule Variance)** | EV − PV (positive = ahead of schedule). |
+| **CV (Cost Variance)** | EV − AC (positive = under budget). |
+
+EVM enables objective tracking of whether a project is on schedule and on budget.
+
+---
+
+## Relationships Between Concepts
+
+```
+Project Scope Statement
+         |
+         v
+    Work Breakdown Structure (What)
+         |
+         v
+    Activity Definition & Sequencing
+         |
+         v
+    Resource Estimation & Duration Estimation
+         |
+         v
+    Schedule Development (When)
+         |
+         v
+    CPM / Critical Path Analysis
+         |
+         v
+    Resource Leveling (if needed)
+         |
+         v
+    Baseline Schedule + EVM Tracking
+```
+
+- Without WBS, estimates are guesswork.
+- Without CPM, you don't know which tasks drive the deadline.
+- Without resource leveling, your schedule may be infeasible.
+- Without EVM, you can't objectively tell if you're on track.
+
+---
+
+## Common Mistakes / Exam Traps
+
+| Trap | Correction |
+|------|------------|
+| Confusing WBS with a schedule | WBS is deliverable hierarchy, not a timeline. |
+| Forgetting support activities in WBS | Include PM, admin, training, etc. |
+| Making work packages too large (>80 hrs) | Break down further for accurate estimates. |
+| Using activities instead of deliverables in WBS | WBS nodes are deliverables, not actions. |
+| Incorrect forward pass | ES of successor = max(EF of all predecessors). |
+| Forgetting to check all predecessors on merge points | Activity G depends on BOTH D and E — use max EF. |
+| Misidentifying critical path | Path with longest total duration, not most activities. |
+| TF = 0 automatically means critical | Yes — but also check that the path is continuous. |
+| Thinking all float is usable without risk | Free float is safer to use; using total float may affect successors. |
+| Confusing ES/EF forward pass with LS/LF backward pass | Forward = earliest; backward = latest. |
+| Not allowing contingency | "The unexpected always happens." |
+
+---
 
 ## Active Recall Questions
 
-1. What is the difference between planning, estimating, and scheduling?
-2. What is the 100% rule for WBS?
-3. State Brooks's Law.
-4. What is the formula for total float?
-5. What are the 3 types of WBS levels?
-6. How do you calculate free float?
-7. What are the rules for creating network diagrams?
-8. What is the difference between CWBS and PWBS?
+1. What are the three types of work that must be included in a WBS?
+2. What is the difference between Contract WBS and Project WBS?
+3. What is the 80-hour rule for work packages?
+4. Why can't a WBS be used as a schedule?
+5. Calculate ES, EF, LS, LF for all activities in the second CPM example (A=5, B=4, C=5, D=6, E=3, F=4).
+6. What is the difference between Total Float and Free Float?
+7. What is Brooks' Law and how does it relate to scheduling?
+8. Name three EVM metrics and what they measure.
+9. What happens to the project duration after resource leveling?
+10. List five rules for creating an activity network diagram.
 
-## Exam Preparation Checklist
+**Answers:**
+1. Product, Integration, Support.
+2. CWBS = first 2–3 levels, used for client reporting; PWBS = defined by PM team, lowest-level tracking.
+3. Work packages should be no larger than ~80 hours of effort for accurate estimation.
+4. WBS shows deliverables, not time-dependent activities with dates and dependencies.
+5. Critical path = A→B→D→F = 19. (A: ES=0, EF=5; B: ES=5, EF=9, D: ES=9, EF=15; F: ES=15, EF=19; C: ES=5, EF=10; E: ES=10, EF=13; C/E have float.)
+6. Total Float = LF−EF (delay without affecting project end); Free Float = min(ES successor) − ES − Duration (delay without affecting next activity).
+7. Adding people to a late project makes it later due to communication overhead.
+8. PV (Planned Value), EV (Earned Value), AC (Actual Cost). SV = EV−PV, CV = EV−AC.
+9. It typically extends the project duration.
+10. Flow left to right, predecessors must finish, arrows can cross, each activity has an ID, no looping, IDs increase.
 
-- [ ] Can you explain the difference between planning, estimating, and scheduling?
-- [ ] Can you define WBS and its purpose?
-- [ ] Can you list the 9 steps to build a WBS?
-- [ ] Can you draw a WBS in both outline and tree format?
-- [ ] Can you explain the 100% rule for WBS?
-- [ ] Can you identify common WBS pitfalls?
-- [ ] Can you describe Brooks's Law and why it's true?
-- [ ] Can you create a Gantt chart from a schedule?
-- [ ] Can you draw an activity network diagram?
-- [ ] Can you perform forward and backward passes?
-- [ ] Can you calculate Total Float and Free Float?
-- [ ] Can you identify the critical path?
-- [ ] Can you solve both example problems completely?
+---
 
 ## Potential Exam Questions
 
-1. Explain the difference between planning, estimating, and scheduling with examples.
-2. What is a WBS and why is it important? Describe the 100% rule.
-3. Compare CWBS and PWBS.
-4. Describe Brooks's Law and explain why it is true.
-5. Perform a forward and backward pass on a given network diagram and identify the critical path.
-6. Calculate total float and free float for given activities.
-7. What are common WBS pitfalls and how can they be avoided?
-8. Draw a Gantt chart from a given activity list and dependencies.
+1. **Draw** an activity network diagram for a given set of activities with predecessors and durations.
+2. **Calculate** the critical path, ES, EF, LS, LF, Total Float, and Free Float for all activities.
+3. **Explain** the difference between a WBS and a project schedule using examples.
+4. **Describe** the three types of work in a WBS and why each is important.
+5. **Discuss** how the Wideband Delphi technique improves estimation accuracy.
+6. **Analyze** a scenario where resource leveling is needed and describe the trade-offs involved.
+7. **Compare** CPM and PERT approaches to activity networks.
+8. **Given EVM data** (PV, EV, AC), calculate SV and CV and interpret whether the project is ahead/behind schedule and under/over budget.
+9. **Identify** and **correct** errors in a faulty WBS or activity network.
+10. **Explain** why the WBS must be developed before scheduling can begin.
+
+---
 
 ## Topic Summary
 
-Project scheduling transforms estimates into a concrete timeline. The Work Breakdown Structure (WBS) decomposes project scope into manageable work packages using the 100% rule. WBS comes in outline and graphical tree formats, with CWBS (contract-level) and PWBS (project-level) variants. The 9-step WBS building process ensures completeness. Scheduling follows 5 steps: identify activities, determine dependencies, estimate resources, assign resources and duration, create charts. Brooks's Law states adding people to a late project makes it later due to communication overhead growing quadratically. Gantt charts show tasks over time. CPM uses deterministic estimates; PERT uses probabilistic estimates. Forward pass calculates ES and EF; backward pass calculates LS and LF. Total Float = LS - ES; Free Float = ES(successor) - EF. Critical path has zero float and determines minimum project duration.
+- **WBS** decomposes the project into deliverable-oriented hierarchical components, enabling accurate estimation, clear ownership, and scope control.
+- **WBS formats**: Outline (indented) and Graphical Tree. Both should include product, integration, and support work.
+- **WBS pitfalls**: Wrong detail level, using activities instead of deliverables, treating WBS as a schedule.
+- **Project scheduling** converts the plan into a timeline with dependencies, resources, and dates using Gantt charts and activity networks.
+- **CPM** identifies the critical path (longest duration path). Activities on this path have zero total float and cannot be delayed without extending the project.
+- **Forward pass** computes ES and EF. **Backward pass** computes LS and LF. **Float** = LS−ES or LF−EF.
+- **Resource leveling** resolves conflicts but may extend duration.
+- **EVM** uses PV, EV, AC to compute Schedule Variance (SV) and Cost Variance (CV) for objective progress tracking.
+- The WBS is the **foundation** — without it, scheduling, estimation, and control are unreliable.

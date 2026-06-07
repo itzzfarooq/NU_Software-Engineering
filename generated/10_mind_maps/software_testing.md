@@ -1,192 +1,139 @@
-```
-╔══════════════════════════════════════════════════════════════════╗
-║                         SOFTWARE TESTING                         ║
-╠══════════════════════════════════════════════════════════════════╣
-║  Evaluating and verifying software quality and correctness      ║
-╚══════════════════════════════════════════════════════════════════╝
+╔══════════════════════════════════════════════════════════════════════════════════╗
+║                         SOFTWARE TESTING — MIND MAP                           ║
+╚══════════════════════════════════════════════════════════════════════════════════╝
 
-  │
-  ├── Testing Goals ───────────────────────────────────────────────
-  │   ├── Verification (are we building the product right?)
-  │   ├── Validation (are we building the right product?)
-  │   └── Objectives (find defects, gain confidence, compliance)
-  │
-  ├── V&V (Verification & Validation) ─────────────────────────────
-  │   ├── Static V&V (reviews, inspections, static analysis)
-  │   ├── Dynamic V&V (unit, integration, system, acceptance)
-  │   └── V-Model (maps each development phase to a test phase)
-  │
-  ├── Inspections and Reviews ─────────────────────────────────────
-  │   ├── Types (informal, technical, walkthrough, formal)
-  │   ├── Process (planning, overview, preparation, meeting, rework)
-  │   ├── Roles (author, moderator, inspector, reader, scribe)
-  │   └── Benefits (early defect detection, reduced rework)
-  │
-  ├── Testing Stages ──────────────────────────────────────────────
-  │   ├── Unit Testing (individual components, white-box)
-  │   ├── Integration Testing (interactions, top-down/bottom-up)
-  │   ├── System Testing (complete system, functional + non-functional)
-  │   └── Acceptance Testing (UAT, alpha, beta, contract)
-  │
-  ├── Path Testing ────────────────────────────────────────────────
-  │   ├── White-Box Testing (internal structure, code-based)
-  │   ├── Basis Path Testing (cyclomatic complexity, independent paths)
-  │   ├── Control Flow Testing (statement, branch, condition coverage)
-  │   └── Test Case Design (identify paths, design, execute)
-  │
-  ├── Test Types ──────────────────────────────────────────────────
-  │   ├── Functional Testing (unit, integration, system, acceptance)
-  │   ├── Non-Functional (performance, security, usability)
-  │   ├── Regression Testing (retest after changes)
-  │   └── Defect Testing (find failures, identify causes)
-  │
-  └── Test Automation ─────────────────────────────────────────────
-      ├── Benefits (repeatability, speed, consistency)
-      ├── Tools (frameworks, management, performance, GUI)
-      └── Challenges (investment, maintenance, skill requirements)
-```
- 
-# Software Testing - Mind Map
+                                 SOFTWARE TESTING
+                                      │
+        ┌─────────────────────────────┼──────────────────────────────────────────┐
+        │                             │                                          │
+    [GOALS]                    [V & V FOUNDATION]                         [PROCESS]
+        │                             │                                          │
+    ┌───┴───┐                   ┌─────┴─────┐                             ┌─────┴──────┐
+    │       │                   │           │                             │            │
+  VALID.  DEFECT           VERIFICATION  VALIDATION                 TEST PLAN    TEST CASE
+    │       │                   │           │                             │         SPEC.
+    │       │             "Built right?"  "Right                         │            │
+  Demonstrate           ┌─────┤       product?"                    What/When/    Inputs/
+  requirements     Conforms to   │                              Who/Resources  Expected
+  are met          specification │                              │            outputs
+    │                      │     Meets user     TEST PLAN      │            │
+  Successful           Inspections  needs      Schedule    RUN PROGRAM  COMPARE TO
+  test = no            │               │       Resources        │      EXPECTATIONS
+  failure          Static analysis  User test.  │               │            │
+    │                            Acceptance    Process      TEST RESULTS  TEST REPORTS
+  DEFECT TESTING                testing
+    │
+  Discover faults              │
+    │                    INSPECTIONS
+  Successful test                 │
+  = finds defect       Static (no execution)
+                          │
+  ┌───────────────────────┤
+  │        │              │
+  Can catch  Catches      Broader quality
+  spec gaps  interactions  (portability,
+             between       maintainability)
+             errors
 
-```
-Software Testing
-├── Testing Goals
-│   ├── Verification
-│   │   ├── Are we building the product right
-│   │   ├── Conformance to specifications
-│   │   └── Static testing
-│   ├── Validation
-│   │   ├── Are we building the right product
-│   │   ├── Meets user needs
-│   │   └── Dynamic testing
-│   └── Objectives
-│       ├── Find defects
-│       ├── Prevent defects
-│       ├── Gain confidence
-│       ├── Provide information
-│       ├── Conform to requirements
-│       └── Compliance with standards
-├── V&V Verification and Validation
-│   ├── Static V&V
-│   │   ├── Requirements reviews
-│   │   ├── Design reviews
-│   │   ├── Code inspections
-│   │   └── Static analysis
-│   ├── Dynamic V&V
-│   │   ├── Unit testing
-│   │   ├── Integration testing
-│   │   ├── System testing
-│   │   └── Acceptance testing
-│   └── V-Model
-│       ├── Requirements ↔ Acceptance testing
-│       ├── Architecture ↔ System testing
-│       ├── Design ↔ Integration testing
-│       └── Code ↔ Unit testing
-├── Inspections and Reviews
-│   ├── Types of Reviews
-│   │   ├── Informal review
-│   │   ├── Technical review
-│   │   ├── Walkthrough
-│   │   └── Inspection formal
-│   ├── Inspection Process
-│   │   ├── Planning
-│   │   ├── Overview meeting
-│   │   ├── Preparation
-│   │   ├── Inspection meeting
-│   │   ├── Rework
-│   │   └── Follow-up
-│   ├── Roles
-│   │   ├── Author
-│   │   ├── Moderator
-│   │   ├── Inspector
-│   │   ├── Reader
-│   │   └── Scribe
-│   ├── Checklists
-│   │   ├── Requirements checklist
-│   │   ├── Design checklist
-│   │   └── Code checklist
-│   └── Benefits
-│       ├── Early defect detection
-│       ├── Reduced rework
-│       ├── Knowledge sharing
-│       └── Process improvement
-├── Testing Stages
-│   ├── Unit Testing
-│   │   ├── Test individual components
-│   │   ├── Developer testing
-│   │   ├── White-box testing
-│   │   └── Test coverage
-│   ├── Integration Testing
-│   │   ├── Test component interactions
-│   │   ├── Top-down integration
-│   │   ├── Bottom-up integration
-│   │   ├── Big-bang integration
-│   │   └── Sandwich approach
-│   ├── System Testing
-│   │   ├── Test complete system
-│   │   ├── Functional testing
-│   │   ├── Non-functional testing
-│   │   └── Regression testing
-│   └── Acceptance Testing
-│       ├── User acceptance testing UAT
-│       ├── Alpha testing
-│       ├── Beta testing
-│       ├── Contract acceptance testing
-│       └── Regulatory acceptance testing
-├── Path Testing
-│   ├── White-Box Testing
-│   │   ├── Test internal structure
-│   │   ├── Code-based testing
-│   │   └── Requires code access
-│   ├── Basis Path Testing
-│   │   ├── McCabe's cyclomatic complexity
-│   │   ├── V G = E - N + 2P
-│   │   ├── Independent paths
-│   │   └── Graph theory
-│   ├── Control Flow Testing
-│   │   ├── Statement coverage
-│   │   ├── Branch coverage
-│   │   ├── Condition coverage
-│   │   └── Path coverage
-│   └── Test Case Design
-│       ├── Identify independent paths
-│       ├── Design test cases for each path
-│       └── Execute and verify results
-├── Test Types
-│   ├── Functional Testing
-│   │   ├── Unit testing
-│   │   ├── Integration testing
-│   │   ├── System testing
-│   │   └── Acceptance testing
-│   ├── Non-Functional Testing
-│   │   ├── Performance testing
-│   │   ├── Load testing
-│   │   ├── Stress testing
-│   │   ├── Security testing
-│   │   ├── Usability testing
-│   │   └── Compatibility testing
-│   ├── Regression Testing
-│   │   ├── Retest after changes
-│   │   ├── Automated testing
-│   │   └── Test suite maintenance
-│   └── Defect Testing
-│       ├── Find failures
-│       ├── Identify causes
-│       └── Debugging
-└── Test Automation
-    ├── Benefits
-    │   ├── Repeatability
-    │   ├── Speed
-    │   ├── Consistency
-    │   └── Early detection
-    ├── Tools
-    │   ├── Unit test frameworks
-    │   ├── Test management tools
-    │   ├── Performance testing tools
-    │   └── GUI testing tools
-    └── Challenges
-        ├── Initial investment
-        ├── Maintenance
-        ├── False positives
-        └── Skill requirements
-```
+        │
+        │
+        ├──────────────────────────────────────────────────────────────────────────┐
+        │                                                                          │
+    [TESTING LEVELS]                                                       [TECHNIQUES]
+        │                                                                          │
+    ┌───┴───────────────────────────────┐                              ┌───────────┴─────────────────┐
+    │                                   │                              │                             │
+  DEVELOPMENT TESTING            USER TESTING                    BLACK-BOX                  WHITE-BOX
+    │                                   │                              │                             │
+  ┌──┴───┬────────┬──────┐        ┌─────┴──────┐                No code access           Full code access
+  │      │        │      │        │            │                       │                         │
+ UNIT COMPONENT SYSTEM  │     ALPHA  BETA  ACCEPTANCE          Derived from spec        Derived from logic
+  │      │        │     │        │      │      │                       │                         │
+Single Integrate  Whole  │   At dev.  At user Formal             Equivalence             Statement
+unit   units     system │   site     site    sign-off           partitioning             coverage
+  │      │        │     │        │      │      │                       │                         │
+Defect Interface Interact│  Controll. Real   Contract           Boundary value          Branch coverage
+focus  focus     focus   │  environ.  world  based               analysis                      │
+                          │                                                                    │
+                          │                                                            Path coverage
+                          │                                                                    │
+                      RELEASE TESTING                                                  PATH TESTING (Basis)
+                          │                                                                    │
+                    ┌─────┴──────┐                                                   ┌─────────┴──────────┐
+                Separate team    │                                             Control flow       Cyclomatic
+                Black-box     Scenario-                                       graph (nodes/edges)  complexity
+                Validation    based                                         Independent paths    M = E - N + 2
+                focus         │                                             Dynamic program      M = predicate
+                              │                                             analyzer checks     nodes + 1
+                         [RELEASE CANDIDATE]                                path execution
+                              │
+                    ┌─────────┼──────────┐
+                    │         │          │
+                Test      Test       Test
+              function-  reliabil-  perfor-
+              ality      ity        mance
+                              │
+                         [CUSTOMER USAGE]
+
+                          │
+                          │                 ┌───────────────────────────────┐
+                          │                 │                               │
+                                          ERROR GUESSING          PENETRATION TESTING
+                                               │                         │
+                                        Experience-based          Security-focused
+                                               │                         │
+                                          Common weak spots:     Exploit vulnerabilities
+                                           - Zero inputs          - Software weaknesses
+                                           - Large numbers        - Hardware weaknesses
+                                           - Alpha in numeric     - Organisational
+                                           - Empty arrays           weaknesses
+                                               │                         │
+                                          Complements formal     Cannot prove security
+                                          techniques
+
+                          │
+                          │
+                      [TDD — TEST-DRIVEN DEVELOPMENT]
+                          │
+                    ┌─────┴──────────────────────────┐
+                    │                                │
+              RED-GREEN-REFACTOR                   BENEFITS
+                    │                                │
+            ┌───────┼───────┐              ┌─────────┼─────────┐
+            │       │       │              │         │         │
+          Write   Implement  Refactor    Code     Regression  Simplif.  Living
+          test (= run test,    code     coverage  test suite  debug.   doc.
+          fails)   pass                         (grows with  (bug in
+                                            code base)   recent code)
+
+                          │
+                      [RELATED TOPICS]
+                          │
+        ┌─────────────────┼─────────────────┬──────────────────┐
+        │                 │                 │                  │
+  Requirements      Software Design    Quality Mgmt       Risk Mgmt
+  (source of        (guides system      (QA activity,      (risk-based
+  validation tests)  & component tests)  inspections)       test priority)
+
+    ┌───────────────────┬───────────────────┬────────────────────┐
+    │                   │                   │                    │
+  SAFETY TESTING    RELIABILITY       INFORMATION         EMBEDDED
+    │               TESTING           SYSTEMS TESTING    SYSTEMS TESTING
+    │                   │                   │                    │
+  Safety case        Operational        Database-          Platform reuse
+  must demonstrate   profile (usage     centered           strategy
+  no unrecoverable   model)             (no data loss)     Integration
+  errors              │                                       testing
+                    MTTF, POFOD,       User interaction     Limited
+                    Failure intensity  intensive (GUI       debugging
+                                       testing hard)
+
+                          │
+                      [KEY PRINCIPLES]
+                          │
+    ┌─────────────────────┼─────────────────────────┐
+    │                     │                         │
+Testing reveals      Absence of evidence        Inspections and
+presence of         is not evidence of          testing are
+errors, NOT         absence (passing            complementary
+their absence       tests ≠ no bugs)            (static + dynamic)

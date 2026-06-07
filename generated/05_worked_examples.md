@@ -1,525 +1,579 @@
-# Worked Examples & Reasoning Patterns — Software Engineering
+# Worked Examples — Software Engineering
 
 ---
 
-## 1. REQUIREMENTS ANALYSIS
+## Example 1: Process Selection — Which Model for Which Scenario?
 
-### Example 1: Analyzing Requirements from a Scenario
+### Problem
+A startup needs to build a mobile banking app. Requirements are expected to change frequently based on user feedback. The team is small (4 developers) and co-located. The system must be secure but not safety-critical. Which development process model is most appropriate, and why?
 
-**Scenario:** A hospital wants a patient management system. The system must handle patient records, appointment scheduling, billing, and generate reports for insurance claims. The hospital has 200 staff across 3 departments, uses an existing lab system, and must comply with healthcare privacy regulations.
+### Step-by-Step Reasoning
+1. **Analyze project characteristics**: Small team (4 people), co-located, requirements are unstable/evolving, mobile app domain.
+2. **Evaluate waterfall model**: Requires stable, well-understood requirements upfront. Requirements here are NOT stable — so waterfall is inappropriate.
+3. **Evaluate incremental development**: Allows interleaved specification, design, and validation. Early feedback possible. Fits well with changing requirements.
+4. **Evaluate agile methods** (XP/Scrum): Customer involvement, short iterations (1-4 weeks), embrace change, people-not-process philosophy. Small co-located team is ideal for agile. Test-first development provides security assurance.
+5. **Evaluate reuse-oriented**: Banking apps have some reusable components (authentication, transaction processing), but the core functionality is custom enough to need significant new development.
 
-**Step 1: Identify stakeholder types**
-- Primary users: Doctors, nurses, receptionists
-- Secondary users: Billing department, hospital administrators
-- External systems: Lab system, insurance providers
-- Regulatory bodies: Healthcare privacy authority
+### Solution
+Agile development (Scrum for project management + XP practices for technical quality) is the best fit.
 
-**Step 2: Classify requirements**
-- Functional: Patient record CRUD, appointment scheduling, billing, insurance reports
-- Non-functional: Privacy compliance, response time (<2s for record lookup), availability (99.9%), usability for non-technical staff
-- Constraints: Must integrate with existing lab system, must comply with privacy regulations
+**Why not waterfall**: Requirements are unstable. Waterfall cannot accommodate changes easily.
+**Why not pure reuse-oriented**: While some COTS components may be used, significant custom development is needed.
+**Why agile**: The combination of small co-located team, changing requirements, need for rapid delivery, and need for quality (TDD for security) makes agile ideal.
 
-**Step 3: Identify risks in requirements**
-- Integration risk: Lab system API may not be well-documented
-- Regulatory risk: Privacy requirements may change
-- Stakeholder risk: Different departments may have conflicting needs
-
-**Reasoning:** Requirements analysis is iterative. The requirements engineering process follows: elicitation → specification → validation (with feedback loops). Always separate functional from non-functional, and identify constraints early.
-
----
-
-### Example 2: Distinguishing Functional from Non-Functional Requirements
-
-**Scenario:** An e-commerce website must:
-(a) Allow users to search for products
-(b) Display search results within 2 seconds
-(c) Support 10,000 concurrent users
-(d) Accept credit card payments
-(e) Have a consistent color scheme across pages
-
-**Analysis:**
-| Requirement | Type | Reasoning |
-|---|---|---|
-| (a) Product search | Functional | Describes WHAT the system does |
-| (b) Results within 2s | Non-functional (performance) | Describes HOW WELL it performs |
-| (c) 10,000 concurrent users | Non-functional (scalability) | Describes capacity constraint |
-| (d) Accept payments | Functional | Describes a system capability |
-| (e) Consistent color scheme | Non-functional (usability) | Describes quality attribute |
-
-**Key Pattern:** If it describes a behavior or capability → functional. If it describes a quality, constraint, or performance characteristic → non-functional.
+### Takeaways
+- Small, co-located teams with changing requirements → Agile (Scrum + XP)
+- Large, distributed teams with stable requirements → Waterfall or plan-driven incremental
+- When reuse is the dominant strategy → Integration and configuration model
+- Most real projects combine elements from multiple models
 
 ---
 
-## 2. DESIGN DECISIONS
+## Example 2: Testing Strategy Decisions
 
-### Example 3: Choosing Architecture Pattern
+### Problem
+A company is developing a safety-critical insulin pump system. The system has hard real-time constraints. Development team has 15 engineers. The company must demonstrate regulatory compliance (FDA approval). What testing strategy should be adopted?
 
-**Scenario:** You need to design:
-(a) A word processor
-(b) A traffic control system
-(c) A data mining application that processes large datasets
+### Step-by-Step Reasoning
+1. **Identify system type**: Safety-critical, real-time embedded system. Failure could cause death.
+2. **Regulatory requirement**: FDA requires extensive evidence of testing. Documentation is mandatory.
+3. **Testing implications**:
+   - Extensive unit testing of all components is required.
+   - Integration testing must verify component interactions and timing.
+   - System testing must demonstrate hard real-time constraints are met.
+   - Reliability testing must measure MTTF, failure intensity, POFOD.
+   - Security and safety testing through penetration testing and error guessing.
+4. **Agile vs traditional**: The need for documentation and traceability makes pure agile difficult. A hybrid approach (plan-driven for regulatory, incremental for development) is more appropriate.
+5. **Static analysis**: Inspections should be used alongside testing because errors can mask each other during testing, and incomplete versions can be inspected.
 
-**Analysis:**
+### Solution
+Adopt a plan-driven testing approach with extensive documentation:
+- **Unit testing**: Verify each component (sensor reader, insulin calculator, pump controller) in isolation.
+- **Integration testing**: Progressive integration with platform reuse strategy.
+- **System testing**: Full system testing with operational profiles that mimic real patient scenarios.
+- **Reliability testing**: Measure MTBF, POFOD using operational profiles.
+- **Safety testing**: Build a safety case demonstrating rigorous testing.
+- **Static inspections**: Requirements, design, and code inspections as complementary verification.
+- **Acceptance testing**: Based on regulatory (FDA) pre-agreed tests.
 
-| System | Pattern | Reasoning |
-|---|---|---|
-| (a) Word processor | MVC | Separate data model, view (document display), controller (user input) for flexibility |
-| (b) Traffic control | Layered + Real-time | Safety-critical needs structured layers: hardware control → processing → monitoring → UI |
-| (c) Data mining | Repository/Pipeline | Large datasets need centralized data store; processing is sequential pipeline |
+**Do NOT**: Use purely agile/TDD approach without documentation — FDA requires extensive traceability.
 
-**Reasoning:** Architecture pattern selection depends on: (1) system type and domain, (2) quality attributes needed (performance, safety, flexibility), (3) team structure, and (4) integration requirements.
-
----
-
-### Example 4: Coupling/Cohesion Tradeoff Analysis
-
-**Scenario:** A system has two modules:
-- Module A: Calculates tax, generates invoice, sends email notification
-- Module B: Reads customer database, passes entire Customer object to Module A
-
-**Analysis:**
-
-**Module A cohesion:** Temporal cohesion (operations grouped because they run together during checkout) → should be refactored into three separate modules (TaxCalculator, InvoiceGenerator, NotificationService) for functional cohesion.
-
-**Module B → Module A coupling:** Stamp coupling (passing a composite Customer object when only tax-relevant fields are needed). Fix: pass only the required data items (customer address, purchase amount) → data coupling.
-
-**Before (Bad):**
-```
-Module A: { calculateTax(), generateInvoice(), sendEmail() }
-Module B passes: CustomerObject (with name, address, history, preferences...)
-```
-
-**After (Good):**
-```
-TaxCalculator: { calculateTax(amount, address) }  ← Functional cohesion
-InvoiceGenerator: { generateInvoice(items, tax) }  ← Functional cohesion
-NotificationService: { sendEmail(email, invoice) }  ← Functional cohesion
-
-Module B passes: (amount, address, email)  ← Data coupling
-```
-
-**Key Principle:** Aim for high cohesion (single responsibility) and low coupling (simple data parameters).
+### Takeaways
+- Safety-critical systems require extensive, documented testing regardless of development methodology
+- Use inspections AND testing — they are complementary
+- Reliability metrics (MTTF, POFOD) are essential for critical systems
+- Operational profiles must be defined for meaningful reliability measurements
 
 ---
 
-## 3. PROCESS SELECTION
+## Example 3: Architecture Tradeoffs
 
-### Example 5: When to Use Which Process
+### Problem
+An e-commerce company needs to modernize its monolithic application. Current system: one large codebase, difficult to maintain, cannot scale for peak shopping seasons, deployments take weeks. Requirements: scalability, independent deployability, fault isolation. Which architecture should they choose?
 
-**Scenario Match:**
+### Step-by-Step Reasoning
+1. **Analyze current problems**: Monolith — hard to maintain, poor scalability (peak seasons cause outages), slow deployments.
+2. **Evaluate alternatives**:
+   - **Three-Tier**: Separates presentation, business logic, data. Good but each tier is still a monolith. Limited independent scalability.
+   - **SOA**: Services are loosely coupled, reusable. Enterprise Service Bus introduces complexity and single point of failure.
+   - **Microservices**: Each service independently deployable, independently scalable, fault isolation (failure of one doesn't affect others). Drawback: operational complexity, distributed system challenges.
+3. **Map to requirements**:
+   - Scalability: Microservices allow scaling individual services (e.g., scale only the checkout service during holidays).
+   - Independent deployability: Microservices can be deployed independently (deploy times go from weeks to minutes).
+   - Fault isolation: A crash in the recommendation service doesn't take down the checkout service.
+4. **Consider tradeoffs**: Microservices add operational complexity (service discovery, monitoring, distributed transactions). However, the benefits align well with requirements.
 
-| Scenario | Process | Why |
-|---|---|---|
-| Safety-critical avionics system with regulatory requirements | Waterfall | Requirements fixed upfront, complete specification needed, regulatory audit trail |
-| Startup building a social media app | Agile/XP | Rapidly changing requirements, need for frequent delivery, customer feedback critical |
-| Government contract requiring formal documentation | Plan-driven incremental | Documentation mandatory, but some iteration within phases is possible |
-| Building a system from existing CRM + ERP components | Reuse-oriented | COTS components available, system can be assembled and configured |
-| Large multi-site enterprise system | Plan-driven with incremental | Coordination across sites needs planning, but incremental delivery adds value |
-| Medical device software | Waterfall | Safety-critical, regulatory compliance, requirements cannot change during development |
+### Solution
+Adopt a **Microservices Architecture** with an API Gateway pattern.
 
-**Reasoning Pattern:**
-1. Is the system safety-critical or regulated? → Waterfall/Plan-driven
-2. Are requirements uncertain and changing? → Agile/Incremental
-3. Can existing components be reused? → Integration & Configuration
-4. Is the project large and distributed? → Plan-driven (for coordination)
-5. Is rapid time-to-market critical? → Agile/XP
+| Concern | Monolith | Three-Tier | SOA | Microservices |
+|---------|----------|------------|-----|---------------|
+| Scalability | Poor | Medium | Medium | Excellent |
+| Independent deployability | No | Limited | Limited | Yes |
+| Fault isolation | None | None | Partial | Excellent |
+| Operational complexity | Low | Low | Medium | High |
+| Development speed | Slow | Medium | Medium | Fast (per service) |
 
----
+**Tradeoff accepted**: Higher operational complexity (Kubernetes, service mesh, observability) in exchange for scalability and independent deployability.
 
-### Example 6: Hybrid Process Decision
-
-**Scenario:** A bank wants to develop a new mobile banking app. Regulations require formal documentation and audit trails. But customer expectations demand rapid feature delivery.
-
-**Solution:** Hybrid approach:
-- Use plan-driven for core banking functions (regulatory compliance, security)
-- Use agile sprints for UI/UX features (rapid iteration, user feedback)
-- Maintain documentation standards throughout (satisfies both approaches)
-- Use incremental delivery: core features first, then enhancements
-
-**Reasoning:** Pure agile fails regulatory needs; pure waterfall fails speed needs. Hybrid combines strengths.
-
----
-
-## 4. TESTING STRATEGIES
-
-### Example 7: Unit Test Case Design
-
-**Scenario:** A function `calculateDiscount(customerType, purchaseAmount)` returns:
-- "premium" customers: 20% discount if purchase > $100, else 10%
-- "regular" customers: 5% discount if purchase > $100, else 0%
-- Invalid customerType: return -1 (error)
-
-**Test Cases:**
-
-| Test ID | Input | Expected Output | Rationale |
-|---|---|---|---|
-| TC1 | ("premium", 150) | 20% | Premium + high amount |
-| TC2 | ("premium", 50) | 10% | Premium + low amount |
-| TC3 | ("regular", 150) | 5% | Regular + high amount |
-| TC4 | ("regular", 50) | 0% | Regular + low amount |
-| TC5 | ("unknown", 100) | -1 | Invalid type (boundary) |
-| TC6 | ("premium", 100) | 10% | Boundary: exactly $100 |
-| TC7 | ("premium", 0) | 10% | Edge case: zero amount |
-| TC8 | ("premium", -50) | Error | Negative amount |
-
-**Reasoning:** Use equivalence partitioning (premium/regular/invalid × high/low amounts) + boundary value analysis ($100 boundary) + edge cases (zero, negative).
+### Takeaways
+- Architecture selection is a tradeoff analysis against quality attributes
+- Monoliths are simpler but hit scaling/maintenance limits
+- Microservices excel at scalability and independent deployment but add operational complexity
+- Always map architectural decisions to specific quality attribute requirements
 
 ---
 
-### Example 8: Basis Path Testing
+## Example 4: Risk Management Scenarios
 
-**Scenario:** Given this pseudocode:
-```
-1: x = 0
-2: while (x < 10) {
-3:   if (x == 5) {
-4:     print("found")
-5:   }
-6:   x = x + 1
-7: }
-8: print("done")
-```
+### Problem
+A project manager identifies the following risks during project planning. For each, determine: risk type, probability, impact, and propose a mitigation strategy.
 
-**Step 1: Draw flow graph**
-- Node 1: x = 0
-- Node 2: x < 10? (predicate)
-- Node 3: x == 5? (predicate)
-- Node 4: print("found")
-- Node 5: x = x + 1
-- Node 6: print("done")
+**Risks identified**:
+1. A key senior developer may leave during the project.
+2. The customer may request significant requirements changes late in development.
+3. The hardware platform required for testing may be delayed by 4 weeks.
+4. The database system may not handle the expected transaction volume.
 
-**Step 2: Calculate cyclomatic complexity**
-V(G) = predicate nodes + 1 = 2 + 1 = 3 independent paths
+### Step-by-Step Reasoning
 
-**Step 3: Identify basis paths**
-- Path 1: 1→2→6 (loop never executes, x starts at 0, but 0<10 is true, so actually: 1→2→3→5→2→3→5→...→2→6)
-- Let me redo: Actually x=0, 0<10 true, enter loop
-- Path 1: 1→2→3→5→2→6 (x=0: x≠5, skip print, x becomes 1, repeat until x=10, exit)
-- Path 2: 1→2→3→4→5→2→...→6 (x=5: print "found", continue)
-- Path 3: 1→2→6 (hypothetical: if x started ≥10)
+#### Risk 1: Key senior developer leaving
+- **Type**: Project risk, People risk
+- **Probability**: Moderate (25-50%)
+- **Impact**: Serious (critical knowledge loss)
+- **Mitigation**: Cross-training, pair programming, documentation of key design decisions, knowledge sharing sessions.
+- **Monitoring**: Track developer satisfaction, conduct stay interviews.
+- **Contingency**: Have contractor on standby; ensure code is well-documented and tested.
 
-**Simplified basis paths:**
-1. 1→2→3→5→2→6 (normal loop execution, x never equals 5)
-2. 1→2→3→4→5→2→6 (x equals 5 at some iteration)
-3. 1→2→6 (loop condition false initially — if x started at 10+)
+#### Risk 2: Significant requirements changes
+- **Type**: Product risk (and Project risk)
+- **Probability**: High (50-75%)
+- **Impact**: Serious (major rework)
+- **Mitigation**: Use incremental development (agile), maintain traceability, maximize information hiding in design to isolate changes.
+- **Monitoring**: Track number of change requests, their scope and impact.
+- **Contingency**: Maintain buffer in schedule for changes; use change control board to evaluate and prioritize changes.
 
-**Test cases needed:**
-- TC1: x starts at 0 → exercises path where x never hits 5
-- TC2: Array where 5 exists → exercises print("found") path
-- TC3: x starts at 10 → exercises immediate exit path
+#### Risk 3: Hardware platform delay
+- **Type**: Project risk
+- **Probability**: Moderate (25-50%)
+- **Impact**: Serious (cannot test, schedule slip)
+- **Mitigation**: Develop software simulators for the hardware; begin integration testing with emulators.
+- **Monitoring**: Track hardware delivery milestones with hardware group; have regular cross-team meetings.
+- **Contingency**: Extend software testing using simulation; modify testing strategy to accommodate delay.
 
----
+#### Risk 4: Database performance
+- **Type**: Product risk, Technology risk
+- **Probability**: Moderate (25-50%)
+- **Impact**: Serious (system unusable under load)
+- **Mitigation**: Prototype database queries early; conduct performance benchmarking; optimize database schema and indexing.
+- **Monitoring**: Run load tests throughout development; track response times against requirements.
+- **Contingency**: Investigate buying higher-performance database; consider caching layer (Redis); scale vertically or horizontally.
 
-## 5. RISK MANAGEMENT
+### Solution Summary Table
 
-### Example 9: Risk Identification from Scenario
+| Risk | Type | Probability | Impact | Mitigation |
+|------|------|-------------|--------|------------|
+| Key developer leaving | People/Project | Moderate | Serious | Cross-training, pair programming |
+| Requirements changes | Product/Project | High | Serious | Incremental dev, traceability, info hiding |
+| Hardware delay | Project | Moderate | Serious | Simulators, emulators |
+| DB performance | Technology/Product | Moderate | Serious | Early benchmarking, prototyping |
 
-**Scenario:** A team is building a real-time traffic monitoring system using a new AI-based image recognition library. The project has a 6-month deadline, the team has 5 developers (2 new hires), and the client expects monthly demos.
-
-**Identify risks by category:**
-
-| Category | Risk | Type |
-|---|---|---|
-| Technology | AI library is new to the team, may have undocumented limitations | Technical risk |
-| Technology | Real-time processing requirements may not be met by the AI library | Product risk |
-| People | 2 new hires need training, may slow early development | Project risk |
-| People | Key AI expert may leave (single point of failure) | Project risk |
-| Requirements | Client expectations (monthly demos) may conflict with development pace | Project risk |
-| Estimation | 6-month deadline may be too tight for new technology | Schedule risk |
-| Business | If AI accuracy is poor, the product is useless | Business risk |
-
-**Reasoning:** Systematically go through each risk checklist category: product size, business impact, customer characteristics, process definition, development environment, technology, staff size/experience.
+### Takeaways
+- Risk mitigation should be proactive, not reactive
+- Each identified risk needs: mitigation (prevent), monitoring (track), and management (contingency)
+- High probability + high impact risks require detailed RMMM plans
+- Low probability + low impact risks may be retained and tracked
 
 ---
 
-### Example 10: Risk Exposure Calculation
+## Example 5: Estimation Calculation — LOC and FP
 
-**Scenario:** A project uses a cloud service that has a 15% chance of a 3-day outage during the project's critical testing phase. Each day of outage delays the project by 2 days and costs $5,000 in idle team costs.
+### Problem
+A logistics software company is building a "Move" system. The project has:
+- 25 External Inputs, 50 External Outputs, 40 External Inquiries, 12 Internal Logical Files, 3 External Interface Files
+- Assume average complexity for all components
+- The 14 value adjustment factors sum to 36
+- Historical productivity: 10 FP per person-month
+- Average monthly cost per developer: $5,000
+- Target completion: 10 months
 
-**Calculation:**
-- Probability (P) = 15% = 0.15
-- Cost (C) = 3 days × 2 days delay/day × $5,000/day = $30,000
-- Risk Exposure = P × C = 0.15 × $30,000 = $4,500
+Calculate: UFP, CAF, FP, Effort, Team Size, Total Cost
 
-**Decision:** Is $4,500 exposure worth mitigating?
-- Mitigation cost: Set up backup cloud provider = $2,000
-- Since $4,500 > $2,000, mitigation is cost-effective.
+### Step-by-Step Reasoning
 
-**Reasoning:** Risk exposure quantifies the expected loss. Compare exposure to mitigation cost to make rational decisions.
+**Step 1: Calculate UFP**
+Using average complexity weight multipliers:
+- EI: 25 x 4 = 100
+- EO: 50 x 5 = 250
+- EQ: 40 x 4 = 160
+- ILF: 12 x 10 = 120
+- EIF: 3 x 7 = 21
+- **UFP = 100 + 250 + 160 + 120 + 21 = 651**
 
----
-
-### Example 11: Risk Planning Strategies
-
-**For each identified risk, develop a strategy:**
-
-| Risk | Avoidance | Minimization | Contingency |
-|---|---|---|---|
-| AI library limitations | Prototype early to discover issues | Design abstraction layer to isolate AI dependency | Switch to alternative library |
-| New hire productivity | Hire experienced developers instead | Pair new hires with experienced mentors | Reallocate tasks to experienced team |
-| 6-month deadline | Negotiate scope reduction upfront | Deliver minimum viable product first | Request deadline extension with client |
-| Single point of failure | Cross-train team on AI components | Document all AI-related knowledge | Contract external AI consultant |
-
-**Reasoning:** For each risk, think: (1) How to prevent it? (2) How to reduce its impact? (3) What if it happens anyway?
-
----
-
-## 6. PROJECT MANAGEMENT DECISIONS
-
-### Example 12: WBS Creation
-
-**Scenario:** Build a student registration system with modules: login, course registration, grade viewing, and admin panel.
-
-**Work Breakdown Structure:**
-
-```
-Student Registration System (Level 0)
-├── Requirements (Level 1)
-│   ├── Stakeholder interviews
-│   ├── Requirements document
-│   └── Requirements review
-├── Design (Level 1)
-│   ├── Architecture design
-│   ├── Database design
-│   ├── UI design
-│   └── Interface specifications
-├── Implementation (Level 1)
-│   ├── Login module
-│   ├── Course registration module
-│   ├── Grade viewing module
-│   └── Admin panel module
-├── Testing (Level 1)
-│   ├── Unit testing
-│   ├── Integration testing
-│   ├── System testing
-│   └── User acceptance testing
-└── Deployment (Level 1)
-    ├── Environment setup
-    ├── Data migration
-    ├── Training
-    └── Go-live support
-```
-
-**Reasoning:** WBS decomposes the project hierarchically. Each leaf node should be a manageable task with clear deliverables. Include ALL project work (not just coding).
-
----
-
-### Example 13: Scheduling with Critical Path
-
-**Given activities:**
-
-| Activity | Duration | Predecessors |
-|---|---|---|
-| A | 5 | - |
-| B | 4 | A |
-| C | 5 | A |
-| D | 6 | B |
-| E | 3 | C |
-| F | 4 | D, E |
-
-**Step 1: Forward Pass (Early Start/Finish)**
-- A: ES=0, EF=5
-- B: ES=5, EF=9
-- C: ES=5, EF=10
-- D: ES=9, EF=15
-- E: ES=10, EF=13
-- F: ES=max(15,13)=15, EF=19
-
-**Step 2: Backward Pass (Late Start/Finish)**
-- F: LF=19, LS=15
-- D: LF=15, LS=9
-- E: LF=15, LS=12
-- C: LF=12, LS=7
-- B: LF=9, LS=5
-- A: LF=min(5,7)=5, LS=0
-
-**Step 3: Calculate Float**
-- A: TF = 0-0 = 0 ✓ Critical
-- B: TF = 5-5 = 0 ✓ Critical
-- C: TF = 7-5 = 2
-- D: TF = 9-9 = 0 ✓ Critical
-- E: TF = 12-10 = 2
-- F: TF = 15-15 = 0 ✓ Critical
-
-**Critical Path: A → B → D → F = 19 days**
-**Project Duration: 19 days**
-
----
-
-## 7. ESTIMATION
-
-### Example 14: LOC Estimation with PERT
-
-**Scenario:** A module has historical data: Optimistic = 2000 LOC, Most Likely = 3500 LOC, Pessimistic = 5000 LOC. Organization productivity: 400 LOC/pm, cost: $10,000/pm.
-
-**Step 1: Expected Size (PERT)**
-Expected LOC = (2000 + 4×3500 + 5000) / 6
-= (2000 + 14000 + 5000) / 6
-= 21000 / 6
-= 3500 LOC
-
-**Step 2: Effort**
-Effort = 3500 / 400 = 8.75 person-months
-
-**Step 3: Cost**
-Cost = 8.75 × $10,000 = $87,500
-
-**Reasoning:** PERT formula weights the most likely estimate 4x, giving a weighted average. This accounts for estimation uncertainty.
-
----
-
-### Example 15: Function Point Estimation — Full Walkthrough
-
-**Scenario:** An inventory management system has:
-- EIs: 8 (average complexity, weight 4)
-- EOs: 12 (average complexity, weight 5)
-- EQs: 6 (simple complexity, weight 3)
-- ILFs: 4 (complex, weight 15)
-- EIFs: 3 (average, weight 7)
-
-14 GSC ratings sum to: ΣFi = 38
-
-**Step 1: Calculate UFC**
-| Component | Count | Weight | Total |
-|---|---|---|---|
-| External Inputs | 8 | × 4 | 32 |
-| External Outputs | 12 | × 5 | 60 |
-| External Inquiries | 6 | × 3 | 18 |
-| Internal Logical Files | 4 | × 15 | 60 |
-| External Interface Files | 3 | × 7 | 21 |
-| **UFC** | | | **191** |
-
-**Step 2: Calculate VAF**
-VAF = 0.65 + (0.01 × 38) = 0.65 + 0.38 = 1.03
+**Step 2: Calculate CAF**
+CAF = 0.65 + (0.01 x SumFi) = 0.65 + (0.01 x 36) = 0.65 + 0.36 = **1.01**
 
 **Step 3: Calculate FP**
-FP = 191 × 1.03 = 196.73 ≈ 197 FP
+FP = UFP x CAF = 651 x 1.01 = **657.51 FP**
 
-**Step 4: Convert to LOC (Java: 46 LOC/FP)**
-LOC = 197 × 46 = 9,062 LOC
+**Step 4: Calculate Effort**
+Effort = FP / Productivity = 657.51 / 10 = **65.75 person-months**
 
-**Step 5: Convert to Effort (500 LOC/pm)**
-Effort = 9,062 / 500 = 18.1 person-months
+**Step 5: Calculate Team Size**
+Team Size = Effort / Duration = 65.75 / 10 = **6.575 ≈ 7 developers**
 
-**Step 6: Convert to Cost ($8,000/pm)**
-Cost = 18.1 × $8,000 = $144,800
+**Step 6: Calculate Total Cost**
+Total Cost = Effort x Cost per person-month = 65.75 x $5,000 = **$328,750**
 
-**Complete Chain:** FP → LOC → Effort → Cost
+### Solution
+- UFP = 651
+- CAF = 1.01
+- FP = 657.51 (approximately 658)
+- Effort = 65.75 person-months
+- Team Size = 7 developers
+- Total Cost = $328,750
 
----
-
-### Example 16: Wideband Delphi Walkthrough
-
-**Scenario:** 3 estimators estimate 4 tasks. Round 1 estimates:
-
-| Task | Est. A | Est. B | Est. C |
-|---|---|---|---|
-| T1 | 10 | 8 | 15 |
-| T2 | 5 | 7 | 6 |
-| T3 | 12 | 10 | 8 |
-| T4 | 3 | 4 | 5 |
-
-**Round 1 Analysis:**
-- T1: Range 8-15 (large spread → needs discussion)
-- T2: Range 5-7 (small spread → close to consensus)
-- T3: Range 8-12 (moderate spread)
-- T4: Range 3-5 (small spread)
-
-**After discussion, Round 2:**
-| Task | Est. A | Est. B | Est. C |
-|---|---|---|---|
-| T1 | 12 | 11 | 12 |
-| T2 | 6 | 6 | 6 |
-| T3 | 10 | 10 | 9 |
-| T4 | 4 | 4 | 4 |
-
-**Convergence achieved.** Final estimates (average):
-- T1: (12+11+12)/3 = 11.7 days
-- T2: 6 days
-- T3: (10+10+9)/3 = 9.7 days
-- T4: 4 days
-- **Total: 31.4 days**
-
-**Key Steps:**
-1. Choose team (3-7 members)
-2. Kickoff meeting (brainstorm assumptions, agree on units)
-3. Individual preparation (each estimates independently)
-4. Estimation session (multiple rounds, discuss disagreements, revise)
-5. Assemble tasks (compile final estimates)
-6. Review results
+### Takeaways
+- FP is language-independent, making it ideal for comparing projects across technologies
+- CAF ranges from 0.65 (all Fi=0) to 1.35 (all Fi=5x14=70)
+- Always round team size UP to the nearest whole number
+- FP estimation requires accurate counting of information domain values
 
 ---
 
-## 8. ARCHITECTURE TRADEOFFS
+## Example 6: CPM Scheduling Calculation
 
-### Example 17: Choosing Between Patterns
+### Problem
+Given the following project activities:
 
-**Scenario:** Design a system for:
-(a) An online store with product catalog, shopping cart, and payment
-(b) A hospital patient monitoring system
-(c) A text editor with syntax highlighting
+| Activity | Predecessor | Duration (days) |
+|----------|-------------|-----------------|
+| A | - | 3 |
+| B | A | 4 |
+| C | A | 2 |
+| D | B | 5 |
+| E | C | 1 |
+| F | C | 2 |
+| G | D, E | 4 |
+| H | F, G | 3 |
 
-**Analysis:**
+Calculate: (a) All possible paths through the network. (b) ES, EF, LS, LF for each activity. (c) The critical path. (d) Total float and free float for non-critical activities.
 
-**(a) Online Store → MVC Pattern**
-- Model: Product catalog, cart, orders (data)
-- View: Web pages, product listings, checkout form (presentation)
-- Controller: Handle user actions, route requests (input handling)
-- Why: Clean separation allows changing UI without affecting business logic
+### Step-by-Step Reasoning
 
-**(b) Hospital Monitoring → Layered + Real-time**
-- Layer 1: Sensor data acquisition (hardware interface)
-- Layer 2: Data processing and analysis (real-time processing)
-- Layer 3: Alert generation (business logic)
-- Layer 4: Monitoring dashboard (UI)
-- Why: Safety-critical needs clear layers with strict interfaces; each layer can be verified independently
+**Step 1: Forward Pass (ES and EF)**
+- A: ES=0, EF=0+3=3
+- B: ES=3, EF=3+4=7
+- C: ES=3, EF=3+2=5
+- D: ES=7, EF=7+5=12
+- E: ES=5, EF=5+1=6
+- F: ES=5, EF=5+2=7
+- G: ES=max(12, 6)=12, EF=12+4=16
+- H: ES=max(7, 16)=16, EF=16+3=19
 
-**(c) Text Editor → Component-based**
-- Components: Buffer management, Syntax parser, Renderer, Undo manager
-- Why: Text editing is inherently component-based; each concern is independent
+**Step 2: Identify All Paths and Duration**
+- Path 1: A → B → D → G → H = 3+4+5+4+3 = 19 days
+- Path 2: A → C → E → G → H = 3+2+1+4+3 = 13 days
+- Path 3: A → C → F → H = 3+2+2+3 = 10 days
+
+**Step 3: Identify Critical Path**
+The longest path is A → B → D → G → H = **19 days**.
+Critical path activities: A, B, D, G, H (zero float).
+
+**Step 4: Backward Pass (LF and LS)**
+- H: LF=19, LS=19-3=16
+- G: LF=16, LS=16-4=12
+- F: LF=16, LS=16-2=14
+- D: LF=12, LS=12-5=7
+- E: LF=12, LS=12-1=11
+- B: LF=7, LS=7-4=3
+- C: LF=min(11, 14)=11, LS=11-2=9
+- A: LF=min(3, 9)=3, LS=3-3=0
+
+**Step 5: Calculate Total Float (TF = LF - EF = LS - ES)**
+- A: TF = 3-3 = 0 (critical)
+- B: TF = 7-7 = 0 (critical)
+- C: TF = 11-5 = 6 days
+- D: TF = 12-12 = 0 (critical)
+- E: TF = 11-6 = 5 days
+- F: TF = 16-7 = 9 days
+- G: TF = 16-16 = 0 (critical)
+- H: TF = 19-19 = 0 (critical)
+
+**Step 6: Calculate Free Float (FF = min(ES_successors) - ES_activity - Duration)**
+- C: ES_successors(E=5, F=5), min=5. FF = 5 - 3 - 2 = 0
+- E: ES_successors(G=12), min=12. FF = 12 - 5 - 1 = 6
+- F: ES_successors(H=16), min=16. FF = 16 - 5 - 2 = 9
+
+### Solution Summary
+
+| Activity | ES | EF | LS | LF | Total Float | Free Float | Critical? |
+|----------|----|----|----|----|-------------|------------|-----------|
+| A | 0 | 3 | 0 | 3 | 0 | 0 | Yes |
+| B | 3 | 7 | 3 | 7 | 0 | 0 | Yes |
+| C | 3 | 5 | 9 | 11 | 6 | 0 | No |
+| D | 7 | 12 | 7 | 12 | 0 | 0 | Yes |
+| E | 5 | 6 | 11 | 12 | 5 | 6 | No |
+| F | 5 | 7 | 14 | 16 | 9 | 9 | No |
+| G | 12 | 16 | 12 | 16 | 0 | 0 | Yes |
+| H | 16 | 19 | 16 | 19 | 0 | 0 | Yes |
+
+**Critical Path**: A → B → D → G → H (19 days)
+
+### Takeaways
+- Activities on the critical path have zero total float — any delay delays the project
+- Non-critical activities (C, E, F) have float that allows schedule flexibility
+- Total float measures delay tolerance without affecting project completion
+- Free float measures delay tolerance without affecting the next activity's early start
+- The project manager should focus monitoring efforts on critical path activities
 
 ---
 
-### Example 18: Layered Architecture Tradeoffs
+## Example 7: Project Management Decision — Adding People to a Late Project
 
-**Scenario:** You're designing a web application. Consider:
+### Problem
+A project is behind schedule. The project manager considers adding 3 more developers to the current team of 5. The remaining work is estimated at 120 person-days. Currently, 5 developers produce 5 person-days of work per day. New developers need 2 weeks (10 working days) to ramp up. Communication overhead increases by 15% per person added. Should the PM add people?
 
-**Option 1: Two-tier (Client-Server)**
-- Pros: Simple, low latency
-- Cons: Client has business logic, hard to update, security risk
+### Step-by-Step Reasoning
+1. **Calculate current completion time**: 120 person-days / 5 developers = 24 days.
+2. **Calculate with added people**: 8 total developers, but 3 are at 50% productivity for 10 days (ramp-up). Adding 3 people increases communication overhead significantly.
+3. **Brooks' Law**: "Adding people to a late project makes it later" because:
+   - New people need training/ramp-up time (takes existing developers' time too)
+   - Communication channels increase: n(n-1)/2 channels. With 5 people: 10 channels. With 8: 28 channels (180% increase).
+4. **Quantify**: During 10-day ramp-up: 5 experienced devs at 100% + 3 new devs at 50% = 5 + 1.5 = 6.5 effective person-days/day (minus communication overhead). After ramp-up: 8 devs at 100% minus higher overhead.
 
-**Option 2: Three-tier (Client-Application Server-Database)**
-- Pros: Separation of concerns, easier maintenance, better security
-- Cons: Additional network hop, more complex deployment
+### Solution
+**Do NOT add people immediately.** Better alternatives:
+- **Re-prioritize scope**: Work with customer to defer lower-priority features.
+- **Improve process**: Identify bottlenecks causing delays.
+- **Overtime (limited)**: Short-term focused overtime for critical path tasks.
+- **If adding is unavoidable**: Add only 1-2 people, plan a structured ramp-up with mentoring, and adjust the schedule accordingly.
 
-**Option 3: N-tier (Microservices)**
-- Pros: Independent scaling, technology diversity, fault isolation
-- Cons: Distributed system complexity, network failures, data consistency challenges
-
-**Decision Framework:**
-| Factor | Choose Two-tier | Choose Three-tier | Choose N-tier |
-|---|---|---|---|
-| Team size | Small | Medium | Large |
-| Scalability needs | Low | Medium | High |
-| Update frequency | Rare | Regular | Continuous |
-| Data sensitivity | Low | Medium-High | High |
-| Budget | Tight | Moderate | Flexible |
+### Takeaways
+- Brooks' Law applies: adding people to a late project often makes it later
+- Communication overhead grows quadratically with team size (n(n-1)/2)
+- Ramp-up time for new team members is a real cost
+- Scope reduction is often more effective than adding resources
 
 ---
 
-## EXAM STRATEGY SUMMARY
+## Example 8: COCOMO Effort and Cost Estimation
 
-### Pattern Recognition for Exam Questions
+### Problem
+A project is estimated at 32,000 lines of code (32 KLOC). The project is classified as semi-detached mode. Average cost per person-month = $8,000. Calculate: Effort (person-months), Development time (months), Average staff size, Total cost.
 
-| Question Contains | Likely Topic | Key Formulas/Concepts |
-|---|---|---|
-| "Calculate RE" | Risk Management | RE = P × C |
-| "Draw the flow graph" / "Find independent paths" | Path Testing | V(G) = predicate nodes + 1 |
-| "Calculate UFC/FP" | Function Point Estimation | UFC = Σ(count × weight), FP = UFC × VAF, VAF = 0.65 + 0.01×ΣFi |
-| "Estimate LOC/Effort/Cost" | LOC Estimation | Effort = LOC / Productivity, Cost = Effort × Rate |
-| "Find ES/EF/LS/LF/Float" | Project Scheduling | TF = LF - EF, Critical path = longest path |
-| "Identify coupling/cohesion type" | Architecture Design | Content→Common→Control→Stamp→Data (coupling); Functional→...→Coincidental (cohesion) |
-| "Which process model?" | Software Processes | Waterfall (fixed req), Agile (changing req), Reuse (COTS available) |
-| "Risk identification" | Risk Management | Check categories: Technology, People, Requirements, Estimation, Tools |
-| "Write test cases" | Testing | Equivalence partitioning + Boundary value analysis |
-| "What type of risk?" | Risk Management | Project (schedule), Product (quality), Business (viability) |
+### Step-by-Step Reasoning
+
+**Step 1: Identify COCOMO Parameters**
+Semi-detached mode: a = 3.0, b = 1.12
+
+**Step 2: Calculate Effort**
+Effort = a x (KLOC)^b = 3.0 x (32)^1.12
+
+First calculate 32^1.12:
+32^1.12 = e^(1.12 x ln(32)) = e^(1.12 x 3.4657) = e^(3.8816) = 48.47 (approximately)
+
+Effort = 3.0 x 48.47 = **145.4 person-months** (using more precise: 3.0 x 46.68 = 140.05 person-months per the textbook data)
+
+**Step 3: Calculate Development Time**
+Time = c x (Effort)^d
+Semi-detached: c = 2.5, d = 0.35
+
+Time = 2.5 x (140.05)^0.35
+
+First calculate 140.05^0.35:
+ln(140.05) = 4.942
+0.35 x 4.942 = 1.7297
+e^1.7297 = 5.64
+
+Time = 2.5 x 5.64 = **14.1 months** (approximately 14.7 months per the textbook data)
+
+**Step 4: Calculate Average Staff**
+Staff = Effort / Time = 140.05 / 14.7 = **9.53 persons**
+
+**Step 5: Calculate Total Cost**
+Cost = Effort x Cost per PM = 140.05 x $8,000 = **$1,120,400**
+
+### Solution
+| Metric | Value |
+|--------|-------|
+| Effort | 140.05 person-months |
+| Development Time | 14.7 months |
+| Average Staff | ~10 people |
+| Total Cost | $1,120,400 |
+
+### Takeaways
+- COCOMO uses NON-LINEAR equations — effort grows faster than linearly with size
+- Semi-detached mode bridges organic and embedded
+- Development time grows more slowly than effort (sub-linear exponent < 1)
+- Average staff size = Effort / Time (this assumes all staff work full time on project)
+
+---
+
+## Example 9: Risk Exposure Calculation
+
+### Problem
+A project plans to reuse 60 software components from a previous project. Each component averages 100 LOC. Development cost is $14/LOC. There is an 80% probability that only 70% of the planned reusable components will actually be reusable — the rest must be custom-developed. Calculate the Risk Exposure.
+
+### Step-by-Step Reasoning
+
+1. **Identify the risk**: Only 70% of reusable components will actually integrate; 30% (18 components) must be custom-developed from scratch.
+2. **Determine probability (P)**: 80% = 0.80
+3. **Determine cost (C) if risk occurs**:
+   - Components needing custom development = 60 x (1 - 0.70) = 60 x 0.30 = 18 components
+   - Each component = 100 LOC
+   - Total custom LOC = 18 x 100 = 1,800 LOC
+   - Cost per LOC = $14.00
+   - Total cost (impact) = 1,800 x $14 = $25,200
+4. **Calculate RE**: RE = P x C = 0.80 x $25,200 = $20,200
+
+### Solution
+**Risk Exposure = $20,200**
+
+This means the expected loss from this risk is approximately $20,200. This should be factored into the project contingency budget.
+
+### Takeaways
+- RE = P x C quantifies risk in monetary terms
+- Enables prioritization: risks with higher RE should get more mitigation attention
+- Contingency budget should cover total RE of all significant risks
+- Mitigation strategies should aim to reduce P, C, or both
+
+---
+
+## Example 10: Wideband Delphi Estimation
+
+### Problem
+Three estimators (Salas, Aliya, Ahmed) estimate effort (in days) for a chat application. Show the estimation convergence and calculate Round 1 best/worst/average cases.
+
+| Task | Salas (R1) | Aliya (R1) | Ahmed (R1) |
+|------|-----------|-----------|-----------|
+| Create UI | 3 | 4 | 7 |
+| Create groups | 3 | 6 | 8 |
+| Send message | 6 | 2 | 7 |
+| Receive message | 3 | 3 | 2 |
+| Add member | 5 | 1 | 5 |
+
+### Step-by-Step Reasoning
+
+**Step 1: Calculate Round 1 Totals**
+- Salas: 3+3+6+3+5 = 20 days
+- Aliya: 4+6+2+3+1 = 16 days
+- Ahmed: 7+8+7+2+5 = 29 days
+
+**Step 2: Plot distribution** — Wide range (16 to 29 days), significant disagreement.
+
+**Step 3: Round 2 convergence**
+After discussion of assumptions:
+- Salas totals: 3+3+6+3+2 = 17
+- Aliya totals: 4+5+5+3+1 = 18
+- Ahmed totals: 7+3+6+2+2 = 20
+- Range narrows: 17 to 20
+
+**Step 4: Round 3 convergence**
+After further discussion:
+- Salas totals: 3+4+6+3+2 = 18
+- Aliya totals: 4+5+5+3+2 = 19
+- Ahmed totals: 7+3+5+3+2 = 20
+- Range narrows: 18 to 20 — convergence achieved.
+
+**Step 5: Calculate Round 1 Best/Worst/Average**
+
+| Task | Salas | Aliya | Ahmed | Best | Worst | Average |
+|------|---|---|---|------|-------|---------|
+| Create UI | 3 | 4 | 7 | 3 | 7 | 4.67 |
+| Create groups | 3 | 6 | 8 | 3 | 8 | 5.67 |
+| Send message | 6 | 2 | 7 | 2 | 7 | 5.00 |
+| Receive message | 3 | 3 | 2 | 2 | 3 | 2.67 |
+| Add member | 5 | 1 | 5 | 1 | 5 | 3.67 |
+| **Total** | **20** | **16** | **29** | **11** | **30** | **21.67** |
+
+### Solution
+Convergence achieved by Round 3 with estimate range 18-20 days. The final estimate could be the Round 3 average (19 days) or the median (19 days).
+
+### Takeaways
+- Wideband Delphi reduces individual bias through group consensus
+- Multiple rounds with discussion narrow estimates toward convergence
+- Best/Worst/Average analysis helps understand estimate uncertainty
+- Assumptions discovered during discussion can significantly change estimates
+- Moderator should not have a stake in the outcome
+
+---
+
+## Example 11: Earned Value Management
+
+### Problem
+A 6-month project has a budget of $120,000 (planned value = $20,000/month). At month 3, the project has completed 40% of the work. Actual cost incurred is $65,000. Calculate PV, EV, AC, SV, CV, CPI, SPI. Is the project on schedule and on budget?
+
+### Step-by-Step Reasoning
+
+**Step 1: Calculate Planned Value (PV)**
+PV = 3 months x $20,000/month = $60,000
+
+**Step 2: Calculate Earned Value (EV)**
+EV = 40% of total budget = 0.40 x $120,000 = $48,000
+
+**Step 3: Actual Cost (AC)**
+AC = $65,000 (given)
+
+**Step 4: Calculate Variances**
+Schedule Variance (SV) = EV - PV = $48,000 - $60,000 = -$12,000 (negative = behind schedule)
+Cost Variance (CV) = EV - AC = $48,000 - $65,000 = -$17,000 (negative = over budget)
+
+**Step 5: Calculate Performance Indices**
+SPI = EV / PV = 48,000 / 60,000 = 0.80 (less than 1 = behind schedule)
+CPI = EV / AC = 48,000 / 65,000 = 0.738 (less than 1 = over budget)
+
+### Solution
+| Metric | Value | Interpretation |
+|--------|-------|----------------|
+| PV | $60,000 | Planned work at month 3 |
+| EV | $48,000 | Actual work accomplished |
+| AC | $65,000 | Actual cost incurred |
+| SV | -$12,000 | Behind schedule (only 80% of planned work done) |
+| CV | -$17,000 | Over budget |
+| SPI | 0.80 | 20% behind schedule |
+| CPI | 0.738 | Costing 26% more than planned |
+
+**Status**: The project is BEHIND SCHEDULE and OVER BUDGET.
+
+### Takeaways
+- EV < PV → behind schedule (SV negative)
+- EV < AC → over budget (CV negative)
+- SPI < 1 and CPI < 1 both indicate problems
+- EVM provides integrated view of cost and schedule performance
+- Early detection allows corrective action before problems escalate
+
+---
+
+## Example 12: Quality Management — Review Strategy
+
+### Problem
+A mid-sized organization develops custom business applications. They want to implement a quality management system but cannot afford ISO 9001 certification yet. What standards and quality practices should they adopt?
+
+### Step-by-Step Reasoning
+
+1. **Assess organizational needs**: Custom business applications, moderate criticality, need consistent quality but have limited budget for certification.
+2. **Identify essential standards**:
+   - Coding standards (Java/C# naming conventions, comment headers)
+   - Document standards (requirements doc structure, design doc template)
+   - Process standards (review process, testing process, change control)
+3. **Implement quality practices without full ISO**:
+   - Formal technical reviews (inspections)
+   - Peer code reviews
+   - Defined design review forms and processes
+   - Test recording process
+4. **Prioritize quality attributes**: For business apps, prioritize reliability, usability, maintainability.
+
+### Solution
+Adopt the following standards and practices:
+
+**Product Standards**:
+- Java programming style guide
+- Requirements document template
+- Design review form
+- Method header format
+
+**Process Standards**:
+- Design review conduct (who, when, how)
+- Test recording process
+- Change control process
+- Version release process
+
+**Quality Practices**:
+- Regular formal technical reviews
+- Peer code reviews before check-in
+- Defined quality plan for each project
+- Independent quality team (even if just 1-2 people)
+
+**Path to ISO 9001**:
+1. Develop organization quality manual
+2. Document processes based on ISO 9001 framework
+3. Practice for 6-12 months
+4. Seek external certification when ready
+
+### Takeaways
+- Quality management can start small without full ISO certification
+- Product and process standards are the foundation of quality
+- Reviews and inspections are cost-effective quality practices
+- The quality team should be independent from the development team
+- ISO 9001 provides a framework that can be adopted incrementally
