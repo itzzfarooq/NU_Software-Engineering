@@ -19,15 +19,15 @@
          |                     +====================+         |        |        |
          |                                                    v        v        v
          +--------------------------------------------------->+   +--------+  +--------+
-                                                              |   | 4. TG   |  | 5. SAM  |
-                                                              |   +--------+  +--------+
-                                                              |   Thread Grp  | Samplers |
-                                                              |   - # threads | HTTP Req |
-                                                              |   - ramp-up   | GET/POST|
-                                                              |   - loop cnt  | Server  |
-                                                              |               | Path    |
-                                                              |               +---------+
-                                                              |
+                                                               |   | 4. TG   |  | 5. SAM  |
+                                                               |   +--------+  +--------+
+                                                               |   Thread Grp  | Samplers |
+                                                               |   - # threads | HTTP Req |
+                                                               |   - ramp-up   | GET/POST|
+                                                               |   - loop cnt  | Server  |
+                                                               |               | Path    |
+                                                               |               +---------+
+                                                               |
                                               +---------------+---------------+
                                               |               |               |
                                               v               v               v
@@ -126,3 +126,4 @@
 |   |   |-- View Results in Table (Listener)                                  |
 |   |   |-- Graph Results (Listener)                                          |
 +=============================================================================+
+```

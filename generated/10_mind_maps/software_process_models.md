@@ -17,8 +17,8 @@
 |  sequential)       |  | (Spec, dev, validation   |  |                    |  |  iterative)        |  |  model to clarify   |
 |                    |  |  interleaved)             |  | (Assembled from    |  |                    |  |  requirements)      |
 +====================+  +=========================+  |  existing COTS     |  +====================+  +====================+
-         |                           |               |  components)        |            |                       |
-         v                           v               +====================+            v                       v
+          |                           |               |  components)        |            |                       |
+          v                           v               +====================+            v                       v
 +====================+  +=========================+          |               +====================+  +====================+
 | PHASES:            |  | BENEFITS:                |          v               | QUADRANTS (each     |  | TYPES:              |
 | - Requirements     |  | - Reduced cost of        |  +====================+  | loop):              |  | - Throw-away        |
@@ -40,7 +40,7 @@
 | - Slow delivery    |  | - Agile                  |          v               +====================+  |                     |
 |                    |  +=========================+  | ADVANTAGES:            |           |          | PROBLEMS:            |
 | APPROPRIATE FOR:   |                          | - Reduced costs       |           v          | - Users think        |
-| - Stable reqs      |                          |   & risks             |  GUIDS DECISIONS:    |   prototype is       |
+| - Stable reqs      |                          |   & risks             |  GUIDES DECISIONS:   |   prototype is       |
 | - Large, multi-    |                          | - Faster delivery     |  - Risk analysis     |   final system       |
 |   site projects    |                          | - Proven components   |    in every loop     | - Seen as wasted     |
 | - Safety-critical  |                          |   (more reliable)     |  - Each loop adds    |   effort (throw-     |
@@ -96,23 +96,6 @@
 |                                                          +---------------------------------------------------+  |
 |                                                                                                                  |
 +==================================================================================================================+
-```
-
-## Mind Map Legend
-
-```
-+====================+  =  Root/Model Node (Major topic)
-|                    |
-+====================+
-
-+--------------------+  =  Sub-node (Properties, categories)
-|                    |
-+--------------------+
-
-TEXT = Description / Details
-
-v  =  Hierarchical connection (parent -> child)
-|  =  Vertical continuation
 ```
 
 ## Quick Reference: Selecting a Process Model

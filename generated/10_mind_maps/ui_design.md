@@ -13,7 +13,7 @@
 |    GOLDEN RULES        |   |      UI DESIGN MODELS       |   |    UI DESIGN PROCESS         |
 | (Theo Mandel)          |   |                             |   |    (Iterative / Spiral)      |
 +------------------------+   +-----------------------------+   +-----------------------------+
-  |                         |                                 |                               |
+  |                         |                                 |
   |  +------------------+   |  +--------------------------+   |  +-------------------------+ |
   |  | 1. User Control   |   |  | User Model               |   |  | Phase 1: Analysis        | |
   |  |                   |   |  | - End user profile       |   |  | - User analysis          | |
@@ -38,7 +38,7 @@
   |  | | Defaults      | |   |  | - Manuals, help, docs     |   |  | - Use-case scenarios   | |
   |  | | Shortcuts     | |   |  +--------------------------+   |  +-------------------------+ |
   |  | | Real-world    | |   |                                 |            |                  |
-  |  | |   metaphor    | |   |  GOAL: Mental Model ≈          |            v                  |
+  |  | |   metaphor    | |   |  GOAL: Mental Model approx     |            v                  |
   |  | | Progressive   | |   |  Implementation Model          |  +-------------------------+ |
   |  | |   disclosure  | |   |                                 |  | Phase 4: Validation     | |
   |  | +---------------+ |   |                                 |  | - Task accommodation   | |
@@ -94,7 +94,7 @@
   |  | -> Effective ->    | |     |  | 6. Internationaliz.  |  |     |  | +-----+ |              |
   |  | Archived           | |     |  |    - Multi-language   |  |     |  +---------+              |
   |  +--------------------+ |     |  |    - Global standards  |  |     |                           |
-  +---------------------------+     |    - Cultural respect  |  |     +---------------------------+
++---------------------------+     |    - Cultural respect  |  |     +-----------------------------+
                                     +-----------------------+  |
                                     +---------------------------+
              |
@@ -102,19 +102,19 @@
 +---------------------------------------+
 |       AESTHETIC DESIGN                |
 +---------------------------------------+
-  |  +-------------------------------+  |
-  |  | White space — reduces clutter |  |
-  |  | Emphasize content             |  |
-  |  | Top-left to bottom-right      |  |
-  |  | Group elements geographically  |  |
-  |  | Minimize scrolling            |  |
-  |  | Consider resolution/browser   |  |
-  +-----------------------------------+  |
-+---------------------------------------+
+  |  +-------------------------------+
+  |  | White space — reduces clutter |
+  |  | Emphasize content             |
+  |  | Top-left to bottom-right      |
+  |  | Group elements geographically  |
+  |  | Minimize scrolling            |
+  |  | Consider resolution/browser   |
+  |  +-------------------------------+
+  +-----------------------------------+
 
-===============================
++================================+
         COMMON MISTAKES
-===============================
++================================+
   |
   +-- UI is just "making it pretty"
   +-- Ignoring user diversity
@@ -126,9 +126,9 @@
   +-- Ignoring internationalization
   +-- Varying response times
 
-===============================
++================================+
      KEY RELATIONSHIPS
-===============================
++================================+
   |
   +-- User Model informs Design Model
   +-- Design Model built as Implementation Model
@@ -139,5 +139,3 @@
   +-- Prototyping enables Validation
   +-- Validation feedback goes back to Analysis
 ```
-
-*End of Mind Map*
